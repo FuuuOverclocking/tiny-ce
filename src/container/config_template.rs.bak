@@ -1,6 +1,6 @@
-use super::types::Container::Config;
-use super::types::Container::ConfigTypes::NamespaceType::*;
-use super::types::Container::ConfigTypes::*;
+use super::types::container::Config;
+use super::types::container::ConfigTypes::NamespaceType::*;
+use super::types::container::ConfigTypes::*;
 
 impl Config {
     pub fn new_template() -> Box<Config> {

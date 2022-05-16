@@ -1,4 +1,5 @@
-mod config_template;
+mod config;
 mod types;
 
-pub use types::Container;
+pub use config::ContainerConfig;
+pub use types::*;

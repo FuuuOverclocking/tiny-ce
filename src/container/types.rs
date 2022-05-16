@@ -1,87 +1,50 @@
-pub mod Container {
-    pub struct Instance {
-        pub config: Config,
-        pub state: State,
-    }
+use serde::{Deserialize, Serialize};
+use std::{collections::HashMap, io::Write, path::Path};
 
-    pub struct State {
-        pub id: String,
-        pub status: ContainerStatus,
-        pub pid: Option<usize>,
-        pub bundle: String,
-    }
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ContainerState {
+    pub id: String,
+    pub status: ContainerStatus,
+    pub pid: Option<usize>,
+    pub bundle: String,
+    pub annotations: Option<HashMap<String, String>>,
+}
 
-    pub enum ContainerStatus {
-        Creating,
-        Created,
-        Running,
-        Stopped,
-    }
-
-    pub struct Config {
-        pub root: ConfigTypes::Root,
-        pub process: ConfigTypes::Process,
-        pub hostname: Option<String>,
-        pub namespaces: Vec<ConfigTypes::Namespace>,
-        pub uid_mappings: Option<Vec<ConfigTypes::UgidMapping>>,
-        pub gid_mappings: Option<Vec<ConfigTypes::UgidMapping>>,
-        pub cgroups_path: Option<String>,
-        pub resources: ConfigTypes::Resources,
-    }
-
-    pub mod ConfigTypes {
-        pub struct Root {
-            pub path: String,
-        }
-
-        pub struct Process {
-            pub cwd: String,
-            pub env: Option<Vec<String>>,
-            pub args: Option<Vec<String>>,
-            pub user: ProcessUser,
-        }
-
-        pub struct ProcessUser {
-            pub uid: usize,
-            pub gid: usize,
-        }
-
-        pub struct Namespace {
-            pub r#type: NamespaceType,
-            pub path: Option<String>,
-        }
-
-        pub enum NamespaceType {
-            Pid,
-            Network,
-            Mount,
-            Ipc,
-            Uts,
-            User,
-            Cgroup,
-        }
-
-        pub struct UgidMapping {
-            pub container_id: usize,
-            pub host_id: usize,
-            pub size: usize,
-        }
-
-        pub struct Resources {
-            pub memory: ResourcesMemory,
-            pub cpu: ResourcesCPU,
-        }
-
-        pub struct ResourcesMemory {
-            pub limit: i64,
-            pub reservation: i64,
-            pub swap: i64,
-        }
-
-        pub struct ResourcesCPU {
-            pub shares: u64,
-            pub quota: i64,
-            pub period: u64,
+impl ContainerState {
+    pub fn new(id: &String, pid: Option<usize>, bundle: &String) -> Self {
+        ContainerState {
+            id: id.clone(),
+            status: ContainerStatus::Creating,
+            pid,
+            bundle: Path::new(bundle)
+                .canonicalize()
+                .unwrap()
+                .to_string_lossy()
+                .to_string(),
+            annotations: Some(HashMap::<String, String>::new()),
         }
     }
+
+    pub fn save_to(&self, root_path: &Path) {
+        std::fs::create_dir_all(root_path).unwrap();
+
+        let mut state_file = std::fs::OpenOptions::new()
+            .write(true)
+            .create(true)
+            .open(root_path.join("state.json"))
+            .expect("无法打开 state.json");
+        state_file
+            .write_all(serde_json::to_string(self).unwrap().as_bytes())
+            .expect("写入 state.json 失败");
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub enum ContainerStatus {
+    Creating,
+    Created,
+    Running,
+    Stopped,
 }

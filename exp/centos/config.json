@@ -1,0 +1,54 @@
+{
+    "root": {
+        "path": "rootfs"
+    },
+    "process": {
+        "cwd": "/",
+        "env": [
+            "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+        ],
+        "args": ["bash"],
+        "user": {
+            "uid": 0,
+            "gid": 0
+        }
+    },
+    "hostname": "fu-asus",
+    "linux": {
+        "namespaces": [
+            {
+                "type": "pid"
+            },
+            {
+                "type": "network"
+            },
+            {
+                "type": "mount"
+            },
+            {
+                "type": "ipc"
+            },
+            {
+                "type": "uts"
+            },
+            {
+                "type": "user"
+            },
+            {
+                "type": "cgroup"
+            }
+        ],
+        "resources": {
+            "memory": {
+                "limit": 536870912,
+                "reservation": 536870912,
+                "swap": 536870912
+            },
+            "cpu": {
+                "shares": 1024,
+                "quota": 1000000,
+                "period": 500000
+            }
+        }
+    }
+}
