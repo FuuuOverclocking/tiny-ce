@@ -1,4 +1,4 @@
-# Tiny CE (prototype)
+# Tiny CE
 
 ## 目的
 
