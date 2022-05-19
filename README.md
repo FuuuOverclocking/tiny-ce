@@ -40,7 +40,7 @@
 
 1. 利用 `youki/libcgroups` 完成 cgroup 新建/删除 (实际上利用文件系统 mount 和读写)
 2. (不是 OCI 标准的内容) 利用 ip 命令在 `/var/run/netns/` 下创建 net namespace
-3. 用 clone 系统调用, 创建子进程，在创建时指定子进程的命名空间
+3. 用 clone 系统调用, 创建子进程, 在创建时指定子进程的命名空间
 4. 子进程用 setns 系统调用进入 net 和 cgroup 命名空间, 以下都是子进程要干的活
 5. 挂载 rootfs:
    
@@ -137,6 +137,10 @@
 
 ## 参考资料
 
+- OCI 标准
+    - https://github.com/opencontainers/runtime-spec
+- CNI 标准
+    - https://github.com/containernetworking/cni/blob/main/SPEC.md
 - Container Runtime in Rust
     - https://github.com/penumbra23/pura
     - https://itnext.io/container-runtime-in-rust-part-0-7af709415cda
