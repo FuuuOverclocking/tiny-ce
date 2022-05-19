@@ -23,6 +23,118 @@
 
 参见 [docs/tiny-ce-spec.md](docs/oci-runtime-spec-1.1-alpha/index.md).
 
+
+## 关于 create, start 的过程：
+
+### 方法一：
+
+借助 `/bin/unshare` 和  `/bin/cgexec`.
+
+- 容器引擎进程启动 `cgexec`
+    - `cgexec` 启动 `unshare`
+        - `unshare` 启动 `config.process.args[0]` 子进程.
+
+### 方法二：
+
+使用 C 接口的系统调用。
+
+1. 利用 `youki/libcgroups` 完成 cgroup 新建/删除 (实际上利用文件系统 mount 和读写)
+2. (不是 OCI 标准的内容) 利用 ip 命令在 `/var/run/netns/` 下创建 net namespace
+3. 用 clone 系统调用, 创建子进程，在创建时指定子进程的命名空间
+4. 子进程用 setns 系统调用进入 net 和 cgroup 命名空间, 以下都是子进程要干的活
+5. 挂载 rootfs:
+   
+    参考
+    - https://www.cnblogs.com/sparkdev/p/9045563.html
+    - https://man7.org/linux/man-pages/man2/pivot_root.2.html 中的 EXAMPLES
+
+    1. `mount(NULL, "/", NULL, MS_REC | MS_PRIVATE, NULL)`
+    2. `mount(new_root, new_root, NULL, MS_BIND, NULL)`
+6. 用 mknod 系统调用, 在 `rootfs` 下创建 OCI 标准要求的 Linux 默认设备:
+   
+    ```rust
+    vec![
+        Device {
+            path: String::from("/dev/null"),
+            device_type: String::from("c"),
+            major: 1,
+            minor: 3,
+            file_mode: Some(0o066),
+            uid: Some(0),
+            gid: Some(0),
+        },
+        Device {
+            path: String::from("/dev/zero"),
+            device_type: String::from("c"),
+            major: 1,
+            minor: 5,
+            file_mode: Some(0o066),
+            uid: Some(0),
+            gid: Some(0),
+        },
+        Device {
+            path: String::from("/dev/full"),
+            device_type: String::from("c"),
+            major: 1,
+            minor: 7,
+            file_mode: Some(0o066),
+            uid: Some(0),
+            gid: Some(0),
+        },
+        Device {
+            path: String::from("/dev/random"),
+            device_type: String::from("c"),
+            major: 1,
+            minor: 8,
+            file_mode: Some(0o066),
+            uid: Some(0),
+            gid: Some(0),
+        },
+        Device {
+            path: String::from("/dev/urandom"),
+            device_type: String::from("c"),
+            major: 1,
+            minor: 9,
+            file_mode: Some(0o066),
+            uid: Some(0),
+            gid: Some(0),
+        },
+        Device {
+            path: String::from("/dev/tty"),
+            device_type: String::from("c"),
+            major: 5,
+            minor: 0,
+            file_mode: Some(0o066),
+            uid: Some(0),
+            gid: Some(0),
+        },
+        Device {
+            path: String::from("/dev/ptmx"),
+            device_type: String::from("c"),
+            major: 5,
+            minor: 2,
+            file_mode: Some(0o066),
+            uid: Some(0),
+            gid: Some(0),
+        },
+    ]
+    ```
+7. 根据 OCI 标准创建符号链接:
+
+    ```
+    /proc/self/fd   -> rootfs/dev/fd
+    /proc/self/fd/0 -> rootfs/dev/stdin
+    /proc/self/fd/1 -> rootfs/dev/stdout
+    /proc/self/fd/2 -> rootfs/dev/stderr
+    ```
+8. cd rootfs
+9. pivot_root 系统调用
+10. unmount 旧根目录
+11. sethostname 系统调用
+12. 修改环境变量
+13. setuid, setgid 系统调用
+14. 进入 `process.cwd`, 执行 `process.args`
+
 ## 参考资料
 
 - Container Runtime in Rust
