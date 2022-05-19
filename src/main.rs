@@ -1,9 +1,7 @@
-use actions::CreateOptions;
-
 mod container;
 
 fn main() {
-    actions::create(CreateOptions {
+    actions::create(actions::CreateOptions {
         id: "centos-container-id".to_string(),
         bundle: "./exp/centos".to_string(),
     })

@@ -9,7 +9,7 @@ pub struct ContainerConfig {
     pub hostname: Option<String>,
     // pub hooks: Option<Hooks>,
     pub linux: Option<Linux>,
-    pub annotations: Option<HashMap<String, String>>,
+    // pub annotations: Option<HashMap<String, String>>,
 }
 
 impl ContainerConfig {
@@ -28,7 +28,7 @@ pub struct Root {
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Process {
-    pub terminal: Option<bool>,
+    // pub terminal: Option<bool>,
     pub cwd: String,
     pub env: Option<Vec<String>>,
     pub args: Option<Vec<String>>,
@@ -46,8 +46,8 @@ pub struct User {
 #[serde(rename_all = "camelCase")]
 pub struct Linux {
     pub namespaces: Vec<Namespace>,
-    pub uid_mappings: Option<Vec<UgidMapping>>,
-    pub gid_mappings: Option<Vec<UgidMapping>>,
+    // pub uid_mappings: Option<Vec<UgidMapping>>,
+    // pub gid_mappings: Option<Vec<UgidMapping>>,
     pub cgroups_path: Option<String>,
     pub resources: Resources,
 }
@@ -60,15 +60,15 @@ pub struct Namespace {
     pub path: Option<String>,
 }
 
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct UgidMapping {
-    #[serde(rename = "containerID")]
-    pub container_id: i64,
-    #[serde(rename = "hostID")]
-    pub host_id: i64,
-    pub size: i64,
-}
+// #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+// #[serde(rename_all = "camelCase")]
+// pub struct UgidMapping {
+//     #[serde(rename = "containerID")]
+//     pub container_id: i64,
+//     #[serde(rename = "hostID")]
+//     pub host_id: i64,
+//     pub size: i64,
+// }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
