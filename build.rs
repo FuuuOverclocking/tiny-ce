@@ -20,30 +20,43 @@ fn main() {
         .write_to_file(out_path.join("cpp_exports.rs"))
         .expect("Couldn't write bindings!");
 
+    build_cpp_child_process();
+    build_libcgroups();
+    build_libnetns();
+}
+
+fn build_cpp_child_process() {
+    let files = glob("src/cpp/child_process/**/*.cpp")
+        .unwrap()
+        .map(|r| r.unwrap());
+
     cc::Build::new()
         .cpp(true)
-        .files(
-            glob("src/cpp/child_process/**/*.cpp")
-                .unwrap()
-                .map(|r| r.unwrap()),
-        )
+        .flag("-std=c++17")
+        .files(files)
         .compile("child_process.a");
+}
+
+fn build_libcgroups() {
+    let files = glob("src/cpp/libcgroups/**/*.cpp")
+        .unwrap()
+        .map(|r| r.unwrap());
 
     cc::Build::new()
         .cpp(true)
-        .files(
-            glob("src/cpp/libcgroups/**/*.cpp")
-                .unwrap()
-                .map(|r| r.unwrap()),
-        )
+        .flag("-std=c++17")
+        .files(files)
         .compile("libcgroups.a");
+}
+
+fn build_libnetns() {
+    let files = glob("src/cpp/libnetns/**/*.cpp")
+        .unwrap()
+        .map(|r| r.unwrap());
 
     cc::Build::new()
         .cpp(true)
-        .files(
-            glob("src/cpp/libnetns/**/*.cpp")
-                .unwrap()
-                .map(|r| r.unwrap()),
-        )
+        .flag("-std=c++17")
+        .files(files)
         .compile("libnetns.a");
 }
