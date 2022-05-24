@@ -1,8 +1,6 @@
 # Tiny CE
 
-## 目的
-
-用 Linux 操作系统的 Namespace 和 Cgroup 机制, 实现一个简单的容器引擎.
+基于 Linux 的 Namespace 和 Cgroup 实现的一个简单的容器引擎.
 
 ## 需求
 
@@ -11,18 +9,18 @@
 - 能够实现同一操作系统下两个容器之间的网络通信
 - 能够为容器分配定量的 CPU 和内存资源
 
-## OCI Runtime 标准翻译
+
+## Tiny CE 的规范
+
+Tiny CE 的规范是 OCI 规范的一个很小的子集, 参见 [docs/tiny-ce-spec.md](docs/oci-runtime-spec-1.1-alpha/index.md).
+
+### OCI Runtime 标准翻译
 
 翻译自: https://github.com/opencontainers/runtime-spec/commit/27924127bf391ea7691924c6dcb01f3369d69fe2
 
 只翻译了感兴趣的部分, 好累..
 
 参见 [docs/oci-runtime-spec-1.1-alpha/index.md](docs/oci-runtime-spec-1.1-alpha/index.md).
-
-## Tiny CE 的规范
-
-参见 [docs/tiny-ce-spec.md](docs/oci-runtime-spec-1.1-alpha/index.md).
-
 
 ## 关于 create, start 的过程：
 

@@ -3,6 +3,15 @@ use std::{collections::HashMap, io::Write, path::Path};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+pub enum ContainerStatus {
+    Creating,
+    Created,
+    Running,
+    Stopped,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ContainerState {
     pub id: String,
     pub status: ContainerStatus,
@@ -38,13 +47,4 @@ impl ContainerState {
             .write_all(serde_json::to_string(self).unwrap().as_bytes())
             .expect("写入 state.json 失败");
     }
-}
-
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub enum ContainerStatus {
-    Creating,
-    Created,
-    Running,
-    Stopped,
 }

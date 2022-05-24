@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use std::{collections::HashMap, fs, path::Path};
+use std::{fs, path::Path};
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -13,7 +13,7 @@ pub struct ContainerConfig {
 }
 
 impl ContainerConfig {
-    pub fn read_json_to_config(path: &Path) -> Self {
+    pub fn read_to_config(path: &Path) -> Self {
         let json_text = fs::read_to_string(path).expect("读取 config.json 失败");
         serde_json::from_str(&json_text).expect("config.json 不是有效的配置文件")
     }
