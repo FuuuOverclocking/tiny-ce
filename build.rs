@@ -7,7 +7,7 @@ use std::env;
 use std::path::PathBuf;
 
 fn main() {
-    println!("cargo:rerun-if-changed=src/cpp/exports.hpp");
+    println!("cargo:rerun-if-changed=src/cpp");
 
     let bindings = bindgen::Builder::default()
         .header("src/cpp/exports.hpp")
