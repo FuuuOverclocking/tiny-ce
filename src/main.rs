@@ -1,8 +1,7 @@
-use std::ffi::{CString};
-
+use chrono;
+use std::ffi::CString;
 use tiny_ce::actions::{create, CreateOptions};
 use tiny_ce::cpp_exports;
-use chrono;
 
 fn main() {
     test_cpp_interop();
@@ -28,7 +27,7 @@ fn test_cpp_interop() {
             config_path.as_ptr(),
             init_lock_path.as_ptr(),
             sock_path.as_ptr(),
-            -1
+            -1,
         );
         let exit_code = cpp_exports::child_main();
         println!("child_main(): exit_code={}", exit_code);

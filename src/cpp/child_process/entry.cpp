@@ -1,9 +1,9 @@
-#include "entry.hpp"
-#include "json.hpp"
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
+#include "entry.hpp"
+#include "json.hpp"
 
 using nlohmann::json;
 using std::cout, std::endl;
@@ -49,8 +49,7 @@ int _child_main() {
     }
 
     // 实际上子进程将被替换, 所以不必 return 0, 也不必 delete 什么.
-    // 仅为了避免 linter 的警告
-    return 0;
+    return 0; // 仅为了避免 linter 的警告
 }
 
 char **args_to_argv(json &args) {
