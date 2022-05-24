@@ -2,13 +2,38 @@
 
 基于 Linux 的 Namespace 和 Cgroup 实现的一个简单的容器引擎.
 
-## 需求
+## Quick start
+
+事先确认:
+
+1. 使用常见 Linux 发行版的较新版本, 或 Windows 10/11 WSL
+2. 已安装 Clang 5.0 及以上版本, 指南: https://rust-lang.github.io/rust-bindgen/requirements.html
+3. 已安装 Rust, 指南: https://www.rust-lang.org/tools/install
+
+```bash
+git clone https://github.com/FuuuOverclocking/tiny-ce.git
+cd tiny-ce
+cargo build --release
+
+# tiny-ce 需要 root 权限
+sudo ./target/release/tiny-ce
+```
+
+已确认在以下环境中可用:
+
+- Windows 11 x64, WSL2, Ubuntu 20.04.1
+- rustc 1.60.0
+- cargo 1.60.0
+- gcc 9.4.0
+- clang 10.0.0-4ubuntu1
+- 测试镜像: DockerHub/centos, tag=centos7.9.2009
+
+## Tiny CE 的目标
 
 - 实现进程, 用户, 文件系统, 网络等方面的隔离
 - 能够在 Ubuntu 系统上运行 CentOS 环境
 - 能够实现同一操作系统下两个容器之间的网络通信
 - 能够为容器分配定量的 CPU 和内存资源
-
 
 ## Tiny CE 的规范
 
