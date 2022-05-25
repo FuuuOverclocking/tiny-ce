@@ -1,12 +1,10 @@
+use crate::container::{config::Namespace, ContainerConfig};
+use crate::cpp_exports;
 use nix::{
     sched::{clone, CloneFlags},
     unistd::Pid,
 };
 use std::{ffi::CString, path::PathBuf};
-
-use crate::cpp_exports;
-
-use super::{config::Namespace, ContainerConfig};
 
 pub fn fork_container(
     config: &ContainerConfig,
