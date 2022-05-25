@@ -35,7 +35,7 @@ cd tiny-ce
 
 ## Tiny CE 的规范
 
-Tiny CE 的规范是 OCI 规范的一个较小的子集, 参见 [docs/tiny-ce-spec.md](docs/oci-runtime-spec-1.1-alpha/index.md).
+Tiny CE 的规范是 OCI 规范的一个较小的子集, 参见 [docs/tiny-ce-spec.md](docs/tiny-ce-spec.md).
 
 ### OCI Runtime 标准翻译
 
