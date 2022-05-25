@@ -1,15 +1,18 @@
+#include "entry.hpp"
+#include "json.hpp"
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <unistd.h>
 #include <vector>
-#include "entry.hpp"
-#include "json.hpp"
 
 using nlohmann::json;
 using std::cout, std::endl;
 using std::ifstream;
 using std::string;
 using std::vector;
+using std::filesystem::path;
 
 ChildProcessArgs *args = nullptr;
 
@@ -18,6 +21,7 @@ void _setup_args(const char *config_path, const char *init_lock_path,
     args = new ChildProcessArgs;
 
     ifstream(config_path) >> args->config;
+    args->config_path = config_path;
     args->init_lock_path = init_lock_path;
     args->sock_path = sock_path;
     args->pty_socket = pty_socket;
@@ -26,7 +30,11 @@ void _setup_args(const char *config_path, const char *init_lock_path,
 int _child_main() {
     assert(args != nullptr);
 
+    cout << "C++ 子进程开始运行..." << endl;
+
     auto rootfs = args->config["root"]["path"].get<string>();
+    auto resolved_rootfs = resolve_rootfs(args->config_path, rootfs);
+
     auto process_cwd = args->config["process"]["cwd"].get<string>();
 
     auto process_env = args->config["process"]["env"];
@@ -40,14 +48,16 @@ int _child_main() {
     auto process_argv_len = process_args.size();
 
     cout << "rootfs             = " << rootfs << endl;
-    cout << "process_cwd        = " << process_cwd << endl;
-    cout << "process_env        = " << process_env << endl;
-    cout << "process_command    = " << process_command << endl;
+    cout << "resolved_rootfs    = " << resolved_rootfs << endl;
+    cout << "process.cwd        = " << process_cwd << endl;
+    cout << "process.env        = " << process_env << endl;
+    cout << "process.command    = " << process_command << endl;
 
     for (size_t i = 0; i < process_argv_len; i++) {
         cout << "process_argv[" << i << "]    = " << process_argv[i] << endl;
     }
 
+    // execvp(process_command.c_str(), process_argv);
     // 实际上子进程将被替换, 所以不必 return 0, 也不必 delete 什么.
     return 0; // 仅为了避免 linter 的警告
 }
@@ -75,4 +85,14 @@ char **args_to_argv(json &args) {
     result[args.size()] = nullptr;
 
     return result;
+}
+
+/**
+ * 将 rootfs 解析为绝对路径. rootfs 是相对路径时, 相对于 config_path 所在路径.
+ */
+string resolve_rootfs(const char *config_path, string rootfs) {
+    if (rootfs.at(0) == '/') {
+        return rootfs;
+    }
+    return path(config_path).parent_path().append(rootfs).string();
 }
