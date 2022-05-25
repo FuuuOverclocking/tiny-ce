@@ -29,6 +29,7 @@ void _setup_args(const char *config_path, const char *init_lock_path,
 
 int _child_main() {
     assert(args != nullptr);
+    // debug.curr_debug_level = DebugLevel::Warn; // 令其只打印 warn, error
 
     debug.info("C++ 子进程开始运行...");
 
