@@ -10,20 +10,15 @@ use std::path::{Path, PathBuf};
 
 const CONTAINER_ROOT_PATH: &'static str = "/tmp/tiny-ce";
 
-pub struct CreateOptions {
-    pub id: String,
-    pub bundle: String,
-}
-
-pub fn create(options: CreateOptions) {
-    let bundle = fs::canonicalize(Path::new(&options.bundle)).unwrap();
-    let config_path = bundle.join("config.json");
+pub fn create(id: &String, bundle: &String) {
+    let bundle_path = fs::canonicalize(Path::new(bundle)).unwrap();
+    let config_path = bundle_path.join("config.json");
     let config = ContainerConfig::read_to_config(&config_path);
 
-    let container_path_str = format!("{}/{}", CONTAINER_ROOT_PATH, options.id);
+    let container_path_str = format!("{}/{}", CONTAINER_ROOT_PATH, id);
     let container_path = Path::new(&container_path_str);
 
-    let mut state = ContainerState::new(&options.id, None, &options.bundle);
+    let mut state = ContainerState::new(id, None, bundle);
     println!("state: {:?}", state);
     state.save_to(container_path);
 
@@ -56,11 +51,8 @@ pub fn create(options: CreateOptions) {
     state.save_to(container_path);
 }
 
-pub struct StartOptions {
-    pub id: String,
-}
-pub fn start(options: StartOptions) {
-    let container_path = Path::new(CONTAINER_ROOT_PATH).join(&options.id);
+pub fn start(id: &String) {
+    let container_path = Path::new(CONTAINER_ROOT_PATH).join(id);
     let mut state = ContainerState::try_from(container_path.as_path()).unwrap();
 
     if state.status != ContainerStatus::Created {
@@ -77,11 +69,8 @@ pub fn start(options: StartOptions) {
     state.save_to(container_path.as_path());
 }
 
-pub struct DeleteOptions {
-    pub id: String,
-}
-pub fn delete(options: DeleteOptions) {
-    let container_path = Path::new(CONTAINER_ROOT_PATH).join(&options.id);
+pub fn delete(id: &String) {
+    let container_path = Path::new(CONTAINER_ROOT_PATH).join(id);
 
     let mut state = ContainerState::try_from(container_path.as_path()).unwrap();
 
@@ -94,7 +83,7 @@ pub fn delete(options: DeleteOptions) {
     if state.status != ContainerStatus::Stopped {
         panic!("试图 delete 仍在运行的容器.")
     }
-    if std::fs::remove_dir_all(Path::new(CONTAINER_ROOT_PATH).join(&options.id)).is_err() {
+    if std::fs::remove_dir_all(Path::new(CONTAINER_ROOT_PATH).join(id)).is_err() {
         println!("删除容器失败.");
     }
 }

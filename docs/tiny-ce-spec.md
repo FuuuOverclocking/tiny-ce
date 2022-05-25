@@ -11,37 +11,20 @@
 ```rust
 use chrono;
 use std::{thread, time::Duration};
-use tiny_ce::actions::{
-    create,
-    CreateOptions,
-    start,
-    StartOptions,
-    delete,
-    DeleteOptions,
-};
+use tiny_ce::{create, delete, start};
 
 fn main() {
     let datetime = chrono::offset::Local::now();
     let container_id = format!("container-centos-{}", datetime.format("%m%d-%H%M%S"));
+    let bundle = "./test/centos".to_string();
 
-    // 创建容器
-    create(CreateOptions {
-        id: container_id.clone(),
-        bundle: "./test/centos".to_string(),
-    });
+    create(&container_id, &bundle); // 创建容器
+    start(&container_id); // 启动容器
 
-    // 启动容器
-    start(StartOptions {
-        id: container_id.clone(),
-    });
-
-    // 睡眠 5 秒
+    // Runtime 进程睡眠 5 秒
     thread::sleep(Duration::from_millis(5000));
 
-    // 删除容器
-    delete(DeleteOptions {
-        id: container_id.clone(),
-    });
+    delete(&container_id); // 删除容器
 }
 ```
 

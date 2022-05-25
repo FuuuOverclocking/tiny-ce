@@ -2,26 +2,19 @@
 
 use chrono;
 use std::{thread, time::Duration};
-use tiny_ce::actions::{create, delete, start, CreateOptions, DeleteOptions, StartOptions};
+use tiny_ce::{create, delete, start};
 use tiny_ce::cpp_exports;
 
 fn main() {
-    // delete(DeleteOptions { id: "container-centos-0525-161117".to_string() });
-    // return;
-
     test_cpp_interop();
 
     let datetime = chrono::offset::Local::now();
     let container_id = format!("container-centos-{}", datetime.format("%m%d-%H%M%S"));
+    let bundle = "./test/centos".to_string();
 
-    create(CreateOptions {
-        id: container_id.clone(),
-        bundle: "./test/centos".to_string(),
-    });
-
-    start(StartOptions {
-        id: container_id.clone(),
-    });
+    create(&container_id, &bundle);
+    start(&container_id);
+    // delete(&"container-centos-0525-161117".to_string() });
 }
 
 fn test_cpp_interop() {
