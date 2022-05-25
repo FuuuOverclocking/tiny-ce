@@ -48,5 +48,6 @@ pub fn create(options: CreateOptions) {
 
     state.status = ContainerStatus::Created;
     state.pid = Some(pid.as_raw() as usize);
+    println!("state: {:?}", state);
     state.save_to(container_path);
 }
