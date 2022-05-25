@@ -19,7 +19,7 @@ pub fn create(id: &String, bundle: &String) {
     let container_path = Path::new(&container_path_str);
 
     let mut state = ContainerState::new(id, None, bundle);
-    println!("state: {:?}", state);
+    println!("容器状态: {:?}", state);
     state.save_to(container_path);
 
     let init_lock_path = format!("{}/init.sock", container_path_str);
@@ -47,7 +47,7 @@ pub fn create(id: &String, bundle: &String) {
 
     state.status = ContainerStatus::Created;
     state.pid = Some(pid.as_raw() as usize);
-    println!("state: {:?}", state);
+    println!("容器状态: {:?}", state);
     state.save_to(container_path);
 }
 
@@ -65,7 +65,7 @@ pub fn start(id: &String) {
     ipc_channel.close();
 
     state.status = ContainerStatus::Running;
-    println!("state: {:?}", state);
+    println!("容器状态: {:?}", state);
     state.save_to(container_path.as_path());
 }
 
@@ -83,6 +83,7 @@ pub fn delete(id: &String) {
     if state.status != ContainerStatus::Stopped {
         panic!("试图 delete 仍在运行的容器.")
     }
+    println!("容器状态: {:?}", state);
     if std::fs::remove_dir_all(Path::new(CONTAINER_ROOT_PATH).join(id)).is_err() {
         println!("删除容器失败.");
     }

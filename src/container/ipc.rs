@@ -42,29 +42,29 @@ impl IpcParent {
     }
 }
 
-pub struct IpcChild {
-    fd: i32,
-}
-impl IpcChild {
-    pub fn new(path: &String) -> IpcChild {
-        let socket_raw_fd = socket(
-            AddressFamily::Unix,
-            SockType::SeqPacket,
-            SockFlag::SOCK_CLOEXEC,
-            None,
-        )
-        .unwrap();
-        let sockaddr = SockAddr::new_unix(Path::new(path)).unwrap();
-        connect(socket_raw_fd, &sockaddr).unwrap();
-        IpcChild { fd: socket_raw_fd }
-    }
-    pub fn notify(&self, msg: &String) {
-        write(self.fd, msg.as_bytes()).unwrap();
-    }
-    pub fn close(&self) {
-        close(self.fd).unwrap();
-    }
-}
+// pub struct IpcChild {
+//     fd: i32,
+// }
+// impl IpcChild {
+//     pub fn new(path: &String) -> IpcChild {
+//         let socket_raw_fd = socket(
+//             AddressFamily::Unix,
+//             SockType::SeqPacket,
+//             SockFlag::SOCK_CLOEXEC,
+//             None,
+//         )
+//         .unwrap();
+//         let sockaddr = SockAddr::new_unix(Path::new(path)).unwrap();
+//         connect(socket_raw_fd, &sockaddr).unwrap();
+//         IpcChild { fd: socket_raw_fd }
+//     }
+//     pub fn notify(&self, msg: &String) {
+//         write(self.fd, msg.as_bytes()).unwrap();
+//     }
+//     pub fn close(&self) {
+//         close(self.fd).unwrap();
+//     }
+// }
 
 pub struct IpcChannel {
     fd: i32,
@@ -72,23 +72,23 @@ pub struct IpcChannel {
     _client: Option<i32>,
 }
 impl IpcChannel {
-    pub fn new(path: &String) -> IpcChannel {
-        let socket_raw_fd = socket(
-            AddressFamily::Unix,
-            SockType::SeqPacket,
-            SockFlag::SOCK_CLOEXEC,
-            None,
-        )
-        .unwrap();
-        let sockaddr = SockAddr::new_unix(Path::new(path)).unwrap();
-        bind(socket_raw_fd, &sockaddr).unwrap();
-        listen(socket_raw_fd, 10).unwrap();
-        IpcChannel {
-            fd: socket_raw_fd,
-            sock_path: path.clone(),
-            _client: None,
-        }
-    }
+    // pub fn new(path: &String) -> IpcChannel {
+    //     let socket_raw_fd = socket(
+    //         AddressFamily::Unix,
+    //         SockType::SeqPacket,
+    //         SockFlag::SOCK_CLOEXEC,
+    //         None,
+    //     )
+    //     .unwrap();
+    //     let sockaddr = SockAddr::new_unix(Path::new(path)).unwrap();
+    //     bind(socket_raw_fd, &sockaddr).unwrap();
+    //     listen(socket_raw_fd, 10).unwrap();
+    //     IpcChannel {
+    //         fd: socket_raw_fd,
+    //         sock_path: path.clone(),
+    //         _client: None,
+    //     }
+    // }
 
     pub fn connect(path: &String) -> IpcChannel {
         let socket_raw_fd = socket(
@@ -107,10 +107,10 @@ impl IpcChannel {
         }
     }
 
-    pub fn accept(&mut self) {
-        let child_socket_fd = nix::sys::socket::accept(self.fd).unwrap();
-        self._client = Some(child_socket_fd);
-    }
+    // pub fn accept(&mut self) {
+    //     let child_socket_fd = nix::sys::socket::accept(self.fd).unwrap();
+    //     self._client = Some(child_socket_fd);
+    // }
 
     pub fn send(&self, msg: &str) {
         let fd = match self._client {
