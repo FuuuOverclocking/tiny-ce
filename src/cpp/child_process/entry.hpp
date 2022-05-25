@@ -2,7 +2,7 @@
 #define _CHILD_PROCESS_ENTRY_HPP
 
 #include "exports.hpp"
-#include "json.hpp"
+#include "vendors/json.hpp"
 #include <string>
 
 using nlohmann::json;
