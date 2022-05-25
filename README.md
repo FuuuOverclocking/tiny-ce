@@ -13,10 +13,8 @@
 ```bash
 git clone https://github.com/FuuuOverclocking/tiny-ce.git
 cd tiny-ce
-cargo build --release
 
-# tiny-ce 需要 root 权限
-sudo ./target/release/tiny-ce
+./run.sh  # tiny-ce 需要 root 权限以运行, 将调用 sudo
 ```
 
 已确认在以下环境中可用:
@@ -37,7 +35,7 @@ sudo ./target/release/tiny-ce
 
 ## Tiny CE 的规范
 
-Tiny CE 的规范是 OCI 规范的一个很小的子集, 参见 [docs/tiny-ce-spec.md](docs/oci-runtime-spec-1.1-alpha/index.md).
+Tiny CE 的规范是 OCI 规范的一个较小的子集, 参见 [docs/tiny-ce-spec.md](docs/oci-runtime-spec-1.1-alpha/index.md).
 
 ### OCI Runtime 标准翻译
 
