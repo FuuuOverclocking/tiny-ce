@@ -1,5 +1,5 @@
 use chrono;
-use tiny_ce::actions::{create, CreateOptions};
+use tiny_ce::actions::{create, CreateOptions, start, StartOptions};
 use tiny_ce::cpp_exports;
 
 fn main() {
@@ -9,8 +9,12 @@ fn main() {
     let container_id = format!("container-centos-{}", datetime.format("%m%d-%H%M%S"));
 
     create(CreateOptions {
-        id: container_id,
+        id: container_id.clone(),
         bundle: "./test/centos".to_string(),
+    });
+
+    start(StartOptions {
+        id: container_id.clone(),
     });
 }
 

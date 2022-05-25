@@ -51,3 +51,24 @@ pub fn create(options: CreateOptions) {
     println!("state: {:?}", state);
     state.save_to(container_path);
 }
+
+pub struct StartOptions {
+    pub id: String,
+}
+pub fn start(start: StartOptions) {
+    let container_path = Path::new(CONTAINER_ROOT_PATH).join(&start.id);
+    let mut state = ContainerState::try_from(container_path.as_path()).unwrap();
+
+    if state.status != ContainerStatus::Created {
+        panic!("试图 start 一个状态不是 Created 的容器.");
+    }
+
+    let sock_path = format!("{}/container.sock", container_path.display());
+    let ipc_channel = IpcChannel::connect(&sock_path);
+    ipc_channel.send(&"start".to_string());
+    ipc_channel.close();
+
+    state.status = ContainerStatus::Running;
+    println!("state: {:?}", state);
+    state.save_to(container_path.as_path());
+}
