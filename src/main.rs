@@ -1,8 +1,14 @@
+#![allow(unused)]
+
 use chrono;
-use tiny_ce::actions::{create, CreateOptions, start, StartOptions};
+use std::{thread, time::Duration};
+use tiny_ce::actions::{create, delete, start, CreateOptions, DeleteOptions, StartOptions};
 use tiny_ce::cpp_exports;
 
 fn main() {
+    // delete(DeleteOptions { id: "container-centos-0525-161117".to_string() });
+    // return;
+
     test_cpp_interop();
 
     let datetime = chrono::offset::Local::now();
