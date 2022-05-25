@@ -1,4 +1,5 @@
 #include "entry.hpp"
+#include "debug.hpp"
 #include "vendors/json.hpp"
 #include <filesystem>
 #include <fstream>
@@ -8,7 +9,6 @@
 #include <vector>
 
 using nlohmann::json;
-using std::cout, std::endl;
 using std::ifstream;
 using std::string;
 using std::vector;
@@ -30,7 +30,7 @@ void _setup_args(const char *config_path, const char *init_lock_path,
 int _child_main() {
     assert(args != nullptr);
 
-    cout << "C++ 子进程开始运行..." << endl;
+    debug.info("C++ 子进程开始运行...");
 
     auto rootfs = args->config["root"]["path"].get<string>();
     auto resolved_rootfs = resolve_rootfs(args->config_path, rootfs);
@@ -47,14 +47,14 @@ int _child_main() {
     auto process_argv = args_to_argv(process_args);
     auto process_argv_len = process_args.size();
 
-    cout << "rootfs             = " << rootfs << endl;
-    cout << "resolved_rootfs    = " << resolved_rootfs << endl;
-    cout << "process.cwd        = " << process_cwd << endl;
-    cout << "process.env        = " << process_env << endl;
-    cout << "process.command    = " << process_command << endl;
+    debug.info("rootfs             = ", rootfs);
+    debug.info("resolved_rootfs    = ", resolved_rootfs);
+    debug.info("process.cwd        = ", process_cwd);
+    debug.info("process.env        = ", process_env);
+    debug.info("process.command    = ", process_command);
 
     for (size_t i = 0; i < process_argv_len; i++) {
-        cout << "process_argv[" << i << "]    = " << process_argv[i] << endl;
+        debug.info("process_argv[", i, "]    = ", process_argv[i]);
     }
 
     // execvp(process_command.c_str(), process_argv);
