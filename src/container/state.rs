@@ -48,3 +48,17 @@ impl ContainerState {
             .expect("写入 state.json 失败");
     }
 }
+
+impl TryFrom<&Path> for ContainerState {
+    type Error = String;
+
+    fn try_from(path: &Path) -> core::result::Result<Self, Self::Error> {
+        let state_json = std::fs::read_to_string(path.join("state.json"))
+        .map_err(|err| {
+            format!("未在 {:?} 找到 state.json {}", path, err)
+        })?;
+
+        let state: ContainerState = serde_json::from_str(&state_json).map_err(|_| "序列化 state.json 失败".to_string())?;
+        Ok(state)
+    }
+}
