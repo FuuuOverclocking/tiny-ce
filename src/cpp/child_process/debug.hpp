@@ -11,15 +11,23 @@ enum DebugLevel {
 };
 
 class Debug {
+  private:
+    Debug() {}
+
   public:
+    static Debug &get_instance() {
+        static Debug debug;
+        return debug;
+    }
+
     DebugLevel curr_debug_level = DebugLevel::Info;
 
-    template <typename... Types> void info(const Types &...args);
-    template <typename... Types> void warn(const Types &...args);
-    template <typename... Types> void error(const Types &...args);
+    template <typename... Types> void info(const Types &...args) const;
+    template <typename... Types> void warn(const Types &...args) const;
+    template <typename... Types> void error(const Types &...args) const;
 };
 
-template <typename... Types> void Debug::info(const Types &...args) {
+template <typename... Types> void Debug::info(const Types &...args) const {
     if (DebugLevel::Info < curr_debug_level) {
         return;
     }
@@ -27,7 +35,7 @@ template <typename... Types> void Debug::info(const Types &...args) {
     std::initializer_list<int>{([&args] { std::cout << args; }(), 0)...};
     std::cout << std::endl;
 }
-template <typename... Types> void Debug::warn(const Types &...args) {
+template <typename... Types> void Debug::warn(const Types &...args) const {
     if (DebugLevel::Warn < curr_debug_level) {
         return;
     }
@@ -36,7 +44,7 @@ template <typename... Types> void Debug::warn(const Types &...args) {
     std::initializer_list<int>{([&args] { std::cout << args; }(), 0)...};
     std::cout << std::endl;
 }
-template <typename... Types> void Debug::error(const Types &...args) {
+template <typename... Types> void Debug::error(const Types &...args) const {
     if (DebugLevel::Error < curr_debug_level) {
         return;
     }
@@ -46,6 +54,6 @@ template <typename... Types> void Debug::error(const Types &...args) {
     std::cout << std::endl;
 }
 
-Debug debug;
+const auto debug = Debug::get_instance();
 
 #endif
