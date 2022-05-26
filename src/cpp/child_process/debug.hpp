@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+namespace Fuu {
+
 enum DebugLevel {
     Info,
     Warn,
@@ -20,7 +22,7 @@ class Debug {
         return debug;
     }
 
-    DebugLevel curr_debug_level = DebugLevel::Info;
+    mutable DebugLevel curr_debug_level = DebugLevel::Info;
 
     template <typename... Types> void info(const Types &...args) const;
     template <typename... Types> void warn(const Types &...args) const;
@@ -55,5 +57,5 @@ template <typename... Types> void Debug::error(const Types &...args) const {
 }
 
 const auto debug = Debug::get_instance();
-
+} // namespace Fuu
 #endif
