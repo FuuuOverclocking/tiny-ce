@@ -1,5 +1,8 @@
 #include "entry.hpp"
+#include "child_process_args.hpp"
 #include "debug.hpp"
+#include "hook.hpp"
+#include "utils.hpp"
 #include "vendors/json.hpp"
 #include <filesystem>
 #include <fstream>
@@ -26,6 +29,7 @@ void _setup_args(const char *config_path, const char *init_lock_path,
     args->init_lock_path = init_lock_path;
     args->sock_path = sock_path;
     args->pty_socket = pty_socket;
+    RegisterHook();
 }
 
 int _child_main() {
@@ -59,7 +63,8 @@ int _child_main() {
         debug.info("process_argv[", i, "]    = ", process_argv[i]);
     }
 
-    // execvp(process_command.c_str(), process_argv);
+    ExecuteHook(args);
+    execvp(process_command.c_str(), process_argv);
     // 实际上子进程将被替换, 所以不必 return 0, 也不必 delete 什么.
     return 0; // 仅为了避免 linter 的警告
 }
@@ -87,14 +92,4 @@ char **args_to_argv(json &args) {
     result[args.size()] = nullptr;
 
     return result;
-}
-
-/**
- * 将 rootfs 解析为绝对路径. rootfs 是相对路径时, 相对于 config_path 所在路径.
- */
-string resolve_rootfs(const char *config_path, string rootfs) {
-    if (rootfs.at(0) == '/') {
-        return rootfs;
-    }
-    return path(config_path).parent_path().append(rootfs).string();
 }
