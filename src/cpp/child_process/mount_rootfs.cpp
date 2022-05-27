@@ -3,6 +3,7 @@
 #include "utils.hpp"
 #include "child_process_args.hpp"
 #include <sys/mount.h>
+#include <sched.h>
 
 using Fuu::debug, Fuu::DebugLevel;
 
