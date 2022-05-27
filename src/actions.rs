@@ -8,7 +8,7 @@ use crate::container::{
 use std::fs;
 use std::path::{Path, PathBuf};
 
-const CONTAINER_ROOT_PATH: &'static str = "/tmp/tiny-ce";
+pub const CONTAINER_ROOT_PATH: &'static str = "/tmp/tiny-ce";
 
 pub fn create(id: &String, bundle: &String) {
     let bundle_path = fs::canonicalize(Path::new(bundle)).unwrap();
@@ -71,17 +71,16 @@ pub fn start(id: &String) {
 
 pub fn delete(id: &String) {
     let container_path = Path::new(CONTAINER_ROOT_PATH).join(id);
-
     let mut state = ContainerState::try_from(container_path.as_path()).unwrap();
 
     if state.status != ContainerStatus::Running && state.status != ContainerStatus::Stopped {
-        panic!("试图 delete 尚未创建或运行的容器.")
+        panic!("试图 delete 尚未创建或运行的容器.");
     }
 
     check_stopped(&mut state, &container_path);
 
     if state.status != ContainerStatus::Stopped {
-        panic!("试图 delete 仍在运行的容器.")
+        panic!("试图 delete 仍在运行的容器.");
     }
     println!("容器状态: {:?}", state);
     if std::fs::remove_dir_all(Path::new(CONTAINER_ROOT_PATH).join(id)).is_err() {
@@ -90,7 +89,10 @@ pub fn delete(id: &String) {
 }
 
 fn check_stopped(state: &mut ContainerState, container_path: &PathBuf) {
-    match waitpid(Pid::from_raw(state.pid.unwrap() as i32), Some(WaitPidFlag::WNOHANG)) {
+    match waitpid(
+        Pid::from_raw(state.pid.unwrap() as i32),
+        Some(WaitPidFlag::WNOHANG),
+    ) {
         Ok(res) => match res {
             WaitStatus::Exited(_, _) | WaitStatus::Signaled(_, _, _) => {
                 state.status = ContainerStatus::Stopped;

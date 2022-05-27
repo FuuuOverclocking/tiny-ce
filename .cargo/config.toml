@@ -1,0 +1,3 @@
+# tiny-ce 的运行需要 root 权限
+[target.x86_64-unknown-linux-gnu]
+runner = 'sudo -E'

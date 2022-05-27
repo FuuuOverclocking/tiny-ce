@@ -2,7 +2,7 @@
 
 基于 Linux 的 Namespace 和 Cgroup 实现的一个简单的容器引擎.
 
-## Quick start
+## 安装
 
 事先确认:
 
@@ -13,8 +13,6 @@
 ```bash
 git clone https://github.com/FuuuOverclocking/tiny-ce.git
 cd tiny-ce
-
-./run.sh  # tiny-ce 需要 root 权限以运行, 将调用 sudo
 ```
 
 已确认在以下环境中可用:
@@ -25,6 +23,31 @@ cd tiny-ce
 - gcc 9.4.0
 - clang 10.0.0-4ubuntu1
 - 测试镜像: DockerHub/centos, tag=centos7.9.2009
+
+## 测试一下
+
+我们在 [test/centos/](test/centos/) 下提供了一个测试容器, 运行以下命令可测试.
+
+⚠️ 需要 root 权限以运行, 将调用 sudo.
+
+```bash
+# 创建并启动一个容器 (若未满足测试条件, 将打印帮助)
+cargo test create_start -- --nocapture
+
+# 删除所有容器
+cargo test delete_all -- --nocapture
+```
+
+若要以 Release 模式编译运行测试, 使用以下命令:
+
+```bash
+cargo test --release create_start -- --nocapture
+cargo test --release delete_all -- --nocapture
+```
+
+❔ 发生了什么?
+
+转到 [src/lib.rs](src/lib.rs): `tests::create_start()`, `tests::delete_all()` 查看测试的源码.
 
 ## Tiny CE 的目标
 
