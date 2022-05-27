@@ -2,9 +2,9 @@
 
 ## 支持的操作
 
-- `create(CreateOptions { id, bundle })`
-- `start(StartOptions { id })`
-- `delete(DeleteOptions { id })`
+- `fn create(id: &String, bundle: &String)`
+- `fn start(id: &String)`
+- `fn delete(id: &String)`
 
 用例:
 
