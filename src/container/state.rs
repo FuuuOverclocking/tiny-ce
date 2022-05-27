@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use std::{collections::HashMap, io::Write, path::Path};
+use std::{io::Write, path::Path};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -17,7 +17,6 @@ pub struct ContainerState {
     pub status: ContainerStatus,
     pub pid: Option<usize>,
     pub bundle: String,
-    pub annotations: Option<HashMap<String, String>>,
 }
 
 impl ContainerState {
@@ -31,7 +30,6 @@ impl ContainerState {
                 .unwrap()
                 .to_string_lossy()
                 .to_string(),
-            annotations: Some(HashMap::<String, String>::new()),
         }
     }
 
@@ -54,11 +52,10 @@ impl TryFrom<&Path> for ContainerState {
 
     fn try_from(path: &Path) -> core::result::Result<Self, Self::Error> {
         let state_json = std::fs::read_to_string(path.join("state.json"))
-        .map_err(|err| {
-            format!("未在 {:?} 找到 state.json {}", path, err)
-        })?;
+            .map_err(|err| format!("未在 {:?} 找到 state.json {}", path, err))?;
 
-        let state: ContainerState = serde_json::from_str(&state_json).map_err(|_| "序列化 state.json 失败".to_string())?;
+        let state: ContainerState =
+            serde_json::from_str(&state_json).map_err(|_| "序列化 state.json 失败".to_string())?;
         Ok(state)
     }
 }

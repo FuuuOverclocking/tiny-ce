@@ -57,5 +57,6 @@ template <typename... Types> void Debug::error(const Types &...args) const {
 }
 
 const auto debug = Debug::get_instance();
+
 } // namespace Fuu
 #endif

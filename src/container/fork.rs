@@ -29,12 +29,12 @@ pub fn fork_container(
     let ref mut stack: [u8; STACK_SIZE] = [0; STACK_SIZE];
 
     let namespaces = config.linux.as_ref().unwrap().namespaces.clone();
-    let spec_namespaces = namespaces
+    let clone_flags = namespaces
         .into_iter()
         .map(|ns| to_flags(&ns))
         .reduce(|a, b| a | b);
 
-    let clone_flags = match spec_namespaces {
+    let clone_flags = match clone_flags {
         Some(flags) => flags,
         None => CloneFlags::empty(),
     };

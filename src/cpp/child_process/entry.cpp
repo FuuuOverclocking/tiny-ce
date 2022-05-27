@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <vector>
 
-using Fuu::debug, Fuu::DebugLevel, Fuu::Debug;
+using Fuu::debug, Fuu::DebugLevel;
 using nlohmann::json;
 using std::ifstream;
 using std::string;
