@@ -3,7 +3,7 @@ use nix::sys::wait::{waitpid, WaitPidFlag, WaitStatus};
 use nix::unistd::Pid;
 
 use crate::container::{
-    fork_container, ContainerConfig, ContainerState, ContainerStatus, IpcChannel, IpcParent,
+    fork_container, ipc, userns, ContainerConfig, ContainerState, ContainerStatus,
 };
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -18,12 +18,30 @@ pub fn create(id: &String, bundle: &String) {
     let container_path_str = format!("{}/{}", CONTAINER_ROOT_PATH, id);
     let container_path = Path::new(&container_path_str);
 
-    let mut state = ContainerState::new(id, None, bundle);
+    let mut state = ContainerState::new(id, bundle);
     println!("容器状态: {:?}", state);
     state.save_to(container_path);
 
+    // 将启动 container 子进程, 准备 2 个 Unix socket 用于与之通信:
+    //
+    // - {container_path}/init.sock:
+    //     - server: runtime 进程, client: container 进程
+    //     - 当 container 成功启动, 并开始在 {container_path}/container.sock 上监听时,
+    //       container 发送 "ok"
+    // - {container_path}/container.sock:
+    //     - server: container 进程, client: runtime 进程
+    //     - container 将 accept 两次, 第一次发生在 create() 中, 第二次发生在 start() 中
+    //     - 在 create() 中:
+    //         1. runtime <- container: 若发生错误, 发送 /error:.*/
+    //         2. runtime -> container: 完成 uid/gid mapping 的写入后, 发送 "mapping_did_written"
+    //         3. runtime <- container: 在 pivot_root(2) 之前, 发送 "will_pivot"
+    //         4. runtime -> container: 收到 "will_pivot" 后, 发送 "ok"
+    //         5. runtime <- container: 准备就绪, 可以 start 时, 发送 "ready"
+    //     - 在 start() 中:
+    //         1. runtime -> container: 发送 "start"
+
     let init_lock_path = format!("{}/init.sock", container_path_str);
-    let init_lock = IpcParent::new(&init_lock_path);
+    let init_lock = ipc::IpcParent::new(&init_lock_path);
     let sock_path = format!("{}/container.sock", container_path.display());
 
     let pid = fork_container(&config, &config_path, &init_lock_path, &sock_path);
@@ -34,12 +52,19 @@ pub fn create(id: &String, bundle: &String) {
     }
     init_lock.close();
 
-    let ipc_channel = IpcChannel::connect(&sock_path);
+    let ipc_channel = ipc::IpcChannel::connect(&sock_path);
+
+    if userns::should_setup_mapping(&config) {
+        userns::setup_mapping(&config, &pid);
+        ipc_channel.send("mapping_did_written");
+    }
 
     loop {
         let msg = ipc_channel.recv();
         if msg.starts_with("error") {
-            panic!("子进程发送了 {}", msg);
+            panic!("子进程发生错误: {}", msg);
+        } else if msg.eq("will_pivot") {
+            ipc_channel.send("ok");
         } else if msg.eq("ready") {
             break;
         }
@@ -60,7 +85,7 @@ pub fn start(id: &String) {
     }
 
     let sock_path = format!("{}/container.sock", container_path.display());
-    let ipc_channel = IpcChannel::connect(&sock_path);
+    let ipc_channel = ipc::IpcChannel::connect(&sock_path);
     ipc_channel.send(&"start".to_string());
     ipc_channel.close();
 

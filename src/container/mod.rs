@@ -1,9 +1,9 @@
 mod config;
 mod fork;
-mod ipc;
+pub mod ipc;
 mod state;
+pub mod userns;
 
 pub use config::ContainerConfig;
 pub use fork::*;
-pub use ipc::*;
 pub use state::*;
