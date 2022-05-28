@@ -56,10 +56,8 @@ mod tests {
 
         println!("未在 ./test/centos/rootfs 下找到 CentOS 的根文件目录.");
         println!("执行以下命令以准备 centos 容器的 rootfs:");
-        println!("> docker export $(docker run -d centos:centos7.9.2009) > centos.tar");
-        println!("> mkdir ./test/centos/rootfs");
-        println!("> mv centos.tar ./test/centos/rootfs");
-        println!("> cd ./test/centos/rootfs && tar -xf centos.tar");
+        println!("> cd ./test/centos && mkdir rootfs");
+        println!("> docker export $(docker create centos:centos7.9.2009) | tar -C rootfs -xvf -");
         panic!();
     }
 
