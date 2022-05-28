@@ -13,16 +13,8 @@ enum DebugLevel {
 };
 
 class Debug {
-  private:
-    Debug() {}
-
   public:
-    static Debug &get_instance() {
-        static Debug debug;
-        return debug;
-    }
-
-    mutable DebugLevel curr_debug_level = DebugLevel::Info;
+    DebugLevel curr_debug_level = DebugLevel::Info;
 
     template <typename... Types> void info(const Types &...args) const;
     template <typename... Types> void warn(const Types &...args) const;
@@ -56,7 +48,7 @@ template <typename... Types> void Debug::error(const Types &...args) const {
     std::cout << std::endl;
 }
 
-const auto debug = Debug::get_instance();
+extern Debug debug;
 
 } // namespace Fuu
 #endif
