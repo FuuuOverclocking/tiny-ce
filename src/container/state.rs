@@ -20,11 +20,11 @@ pub struct ContainerState {
 }
 
 impl ContainerState {
-    pub fn new(id: &String, pid: Option<usize>, bundle: &String) -> Self {
+    pub fn new(id: &String, bundle: &String) -> Self {
         ContainerState {
             id: id.clone(),
             status: ContainerStatus::Creating,
-            pid,
+            pid: None,
             bundle: Path::new(bundle)
                 .canonicalize()
                 .unwrap()
@@ -33,13 +33,13 @@ impl ContainerState {
         }
     }
 
-    pub fn save_to(&self, root_path: &Path) {
-        std::fs::create_dir_all(root_path).unwrap();
+    pub fn save_to(&self, container_path: &Path) {
+        std::fs::create_dir_all(container_path).unwrap();
 
         let mut state_file = std::fs::OpenOptions::new()
             .write(true)
             .create(true)
-            .open(root_path.join("state.json"))
+            .open(container_path.join("state.json"))
             .expect("无法打开 state.json");
         state_file
             .write_all(serde_json::to_string(self).unwrap().as_bytes())
