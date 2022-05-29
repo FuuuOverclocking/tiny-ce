@@ -2,6 +2,7 @@
 #include "child_process_args.hpp"
 #include <filesystem>
 #include <string>
+#include <unistd.h>
 
 using std::string;
 using std::filesystem::path;
@@ -25,4 +26,9 @@ path get_container_socket_path(const char *sock_path) {
     return runtime_path;
 }
 
-void report_error(ChildProcessArgs *args) {}
+void report_error(ChildProcessArgs *args, string err) {
+    if (args->container_receive_runtime_sock != -1) {
+        write(args->container_receive_runtime_sock, err.c_str(),
+              strlen(err.c_str()));
+    }
+}

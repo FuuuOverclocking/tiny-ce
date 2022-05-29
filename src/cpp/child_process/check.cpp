@@ -18,8 +18,10 @@ void CheckUserMapping(ChildProcessArgs *args) {
                 auto read_bytes = read(args->container_receive_runtime_sock,
                                        buf, sizeof(buf));
                 assert(read_bytes != -1);
+                report_error(args, "error_test");
             }
             break;
         }
     }
+    report_error(args, "error_test_out");
 }
