@@ -41,8 +41,7 @@ void ContainerSocket(ChildProcessArgs *args) {
     sockaddr_un s_container_un;
     memset(&s_container_un, 0, sizeof(s_container_un));
     s_container_un.sun_family = AF_UNIX;
-    auto container_un_path = get_container_socket_path(args->sock_path);
-    strcpy(s_container_un.sun_path, container_un_path.c_str());
+    strcpy(s_container_un.sun_path, args->sock_path);
     int s_len =
         offsetof(sockaddr_un, sun_path) + strlen(s_container_un.sun_path);
     // set server
