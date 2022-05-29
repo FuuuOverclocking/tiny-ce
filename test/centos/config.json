@@ -15,6 +15,20 @@
     },
     "hostname": "fu-asus",
     "linux": {
+        "uidMappings": [
+            {
+                "hostID": 0,
+                "containerID": 0,
+                "size": 1
+            }
+        ],
+        "gidMappings": [
+            {
+                "hostID": 0,
+                "containerID": 0,
+                "size": 1
+            }
+        ],
         "namespaces": [
             {
                 "type": "pid"
