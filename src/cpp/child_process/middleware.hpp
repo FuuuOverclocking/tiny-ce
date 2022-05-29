@@ -21,4 +21,6 @@ void PrepareSocket(ChildProcessArgs *args);
 
 void ConnectRuntime(ChildProcessArgs *args);
 
+void CheckUserMapping(ChildProcessArgs *args);
+
 #endif
