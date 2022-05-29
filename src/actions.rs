@@ -33,30 +33,35 @@ pub fn create(id: &String, bundle: &String) {
     //     - container 将 accept 两次, 第一次发生在 create() 中, 第二次发生在 start() 中
     //     - 在 create() 中:
     //         1. runtime <- container: 若发生错误, 发送 /error:.*/
-    //         2. runtime -> container: 完成 uid/gid mapping 的写入后, 发送 "mapping_did_written"
+    //         2. runtime -> container: 完成 uid/gid mapping 的写入后, 发送 "mapping_written"
     //         3. runtime <- container: 在 pivot_root(2) 之前, 发送 "will_pivot"
     //         4. runtime -> container: 收到 "will_pivot" 后, 发送 "ok"
     //         5. runtime <- container: 准备就绪, 可以 start 时, 发送 "ready"
     //     - 在 start() 中:
     //         1. runtime -> container: 发送 "start"
 
-    let init_lock_path = format!("{}/init.sock", container_path_str);
-    let init_lock = ipc::IpcParent::new(&init_lock_path);
-    let sock_path = format!("{}/container.sock", container_path.display());
+    let init_lock_path = format!("{container_path_str}/init.sock");
+    let sock_path = format!("{container_path_str}/container.sock");
 
-    let pid = fork_container(&config, &config_path, &init_lock_path, &sock_path);
+    let pid = {
+        let init_lock = ipc::IpcParent::new(&init_lock_path);
 
-    let response = init_lock.wait();
-    if !response.eq("ok") {
-        panic!("子进程未发送 ok, 发送了 {}", response);
-    }
-    init_lock.close();
+        // 通过 clone(2) 启动子进程
+        let pid = fork_container(&config, &config_path, &init_lock_path, &sock_path);
+
+        let msg = init_lock.wait();
+        if !msg.eq("ok") {
+            panic!("子进程未发送 ok, 发送了 {msg}");
+        }
+        init_lock.close();
+        pid
+    };
 
     let ipc_channel = ipc::IpcChannel::connect(&sock_path);
 
     if userns::should_setup_mapping(&config) {
         userns::setup_mapping(&config, &pid);
-        ipc_channel.send("mapping_did_written");
+        ipc_channel.send("mapping_written");
     }
 
     loop {
