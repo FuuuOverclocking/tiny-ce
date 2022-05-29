@@ -19,4 +19,6 @@ void SymlinkDefault(ChildProcessArgs *args);
 
 void PrepareSocket(ChildProcessArgs *args);
 
+void ConnectRuntime(ChildProcessArgs *args);
+
 #endif

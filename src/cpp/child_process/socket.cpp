@@ -58,5 +58,12 @@ void PrepareSocket(ChildProcessArgs *args){
     const char *init_msg="ok";
     auto write_bytes=write(args->init_lock_sock,init_msg,strlen(init_msg));
     assert(write_bytes!=-1);
+    close(args->init_lock_sock);
 }
 
+void ConnectRuntime(ChildProcessArgs *args){
+    sockaddr_un runtime_un;
+    socklen_t accept_un_size=sizeof(runtime_un);
+    args->container_receive_runtime_sock=accept(args->container_sock,(sockaddr *)&runtime_un,&accept_un_size);
+    assert(args->container_receive_runtime_sock!=-1);
+}

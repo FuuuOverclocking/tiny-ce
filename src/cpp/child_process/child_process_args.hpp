@@ -13,6 +13,7 @@ struct ChildProcessArgs {
     int pty_socket;
     int init_lock_sock;
     int container_sock;
+    int container_receive_runtime_sock;
 };
 
 #endif
