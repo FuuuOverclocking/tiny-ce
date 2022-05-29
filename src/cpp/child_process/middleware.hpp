@@ -15,8 +15,6 @@ void MountDevice(ChildProcessArgs *args);
 
 void CreateDevice(ChildProcessArgs *args);
 
-void CreateDefaultDevice(ChildProcessArgs *args);
-
 void SymlinkDefault(ChildProcessArgs *args);
 
 void PrepareSocket(ChildProcessArgs *args);
