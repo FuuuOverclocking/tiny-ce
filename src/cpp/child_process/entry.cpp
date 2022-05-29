@@ -1,7 +1,7 @@
 #include "entry.hpp"
 #include "child_process_args.hpp"
 #include "debug.hpp"
-#include "hook.hpp"
+#include "middleware.hpp"
 #include "utils.hpp"
 #include "vendors/json.hpp"
 #include <filesystem>
@@ -29,7 +29,7 @@ void _setup_args(const char *config_path, const char *init_lock_path,
     args->init_lock_path = init_lock_path;
     args->sock_path = sock_path;
     args->pty_socket = pty_socket;
-    RegisterHook();
+    RegisterMiddleware();
 }
 
 int _child_main() {
@@ -63,7 +63,7 @@ int _child_main() {
         debug.info("process_argv[", i, "]    = ", process_argv[i]);
     }
 
-    ExecuteHook(args);
+    ExecuteMiddleware(args);
     execvp(process_command.c_str(), process_argv);
     // 实际上子进程将被替换, 所以不必 return 0, 也不必 delete 什么.
     return 0; // 仅为了避免 linter 的警告

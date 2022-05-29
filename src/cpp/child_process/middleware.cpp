@@ -1,11 +1,11 @@
-#include "hook.hpp"
+#include "middleware.hpp"
 #include<vector>
 
 using std::vector;
 
-static vector<Hook> fn_array;
+static vector<Middleware> fn_array;
 
-void RegisterHook(){
+void RegisterMiddleware(){
     fn_array.push_back(MountRootfs);
     fn_array.push_back(MountDevice);
     fn_array.push_back(CreateDevice);
@@ -13,7 +13,7 @@ void RegisterHook(){
     fn_array.push_back(SymlinkDefault);
 }
 
-void ExecuteHook(ChildProcessArgs *args){
+void ExecuteMiddleware(ChildProcessArgs *args){
     for(auto fn:fn_array){
         fn(args);
     }

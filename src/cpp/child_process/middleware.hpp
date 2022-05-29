@@ -1,13 +1,13 @@
-#ifndef _CHILD_PROCESS_HOOK_HPP
-#define _CHILD_PROCESS_HOOK_HPP
+#ifndef _CHILD_PROCESS_MIDDLEWARE_HPP
+#define _CHILD_PROCESS_MIDDLEWARE_HPP
 
 #include "child_process_args.hpp"
 
-typedef void (*Hook)(ChildProcessArgs *args);
+typedef void (*Middleware)(ChildProcessArgs *args);
 
-void RegisterHook();
+void RegisterMiddleware();
 
-void ExecuteHook(ChildProcessArgs *args);
+void ExecuteMiddleware(ChildProcessArgs *args);
 
 void MountRootfs(ChildProcessArgs *args);
 
