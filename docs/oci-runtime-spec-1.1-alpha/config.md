@@ -190,11 +190,13 @@
 - **`capabilities`** (object, OPTIONAL) 是一个包含数组的对象，指定进程的能力集。
     有效的值在 [capabilities(7)][capabilities.7] man page 中定义，例如 `CAP_CHOWN`。
     任何不能被映射到相关的内核接口的值，或者不能被授予
-    的值必须被运行时[记录为警告]（runtime.md#warnings）。
-    运行时[logged as a warning](runtime.md#warnings)。如果容器配置要求的功能不能被授予，运行时不应该失败。
+    的值必须被运行时[记录为警告](runtime.md#warnings)。
+    如果容器配置要求的功能不能被授予，运行时不应该失败。
     容器配置要求的功能不能被授予，例如，如果运行时是在一个有一套有限的限制性环境中运行的
     例如，如果运行时在一个能力有限的环境中运行，就不会失败。
     `capabilities`包含以下属性。
+
+    > 译者注: 中文可参考 https://www.cnblogs.com/nf01/articles/10418141.html
 
     - **`effective`** （string[]，OPTIONAL） `effective`字段是为进程保留的有效能力数组。
     - **`bounding`** (string[], OPTIONAL) `bounding`字段是为进程保留的边界能力数组。
