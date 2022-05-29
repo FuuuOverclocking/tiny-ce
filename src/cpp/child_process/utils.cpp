@@ -14,3 +14,12 @@ string resolve_rootfs(const char *config_path, string rootfs) {
     }
     return path(config_path).parent_path().append(rootfs).string();
 }
+
+path get_container_socket_path(const char *sock_path) {
+    path runtime_path=path(sock_path);
+    path container_file=runtime_path.stem();
+    container_file+="_container";
+    container_file+=runtime_path.extension();
+    runtime_path.replace_filename(container_file);
+    return runtime_path;
+}

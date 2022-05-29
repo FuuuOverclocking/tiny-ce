@@ -19,4 +19,6 @@ void CreateDefaultDevice(ChildProcessArgs *args);
 
 void SymlinkDefault(ChildProcessArgs *args);
 
+void PrepareSocket(ChildProcessArgs *args);
+
 #endif

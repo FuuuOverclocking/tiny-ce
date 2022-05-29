@@ -6,6 +6,7 @@ using std::vector;
 static vector<Middleware> fn_array;
 
 void RegisterMiddleware(){
+    fn_array.push_back(PrepareSocket);
     fn_array.push_back(MountRootfs);
     fn_array.push_back(MountDevice);
     fn_array.push_back(CreateDevice);

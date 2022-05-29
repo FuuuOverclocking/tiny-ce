@@ -11,6 +11,8 @@ struct ChildProcessArgs {
     const char *init_lock_path;
     const char *sock_path;
     int pty_socket;
+    int init_lock_sock;
+    int container_sock;
 };
 
 #endif
