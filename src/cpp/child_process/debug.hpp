@@ -3,6 +3,11 @@
 
 #include <iostream>
 
+#define expect(expr, args...)                                                  \
+    (static_cast<bool>(expr) ? void(0)                                         \
+                             : Fuu::debug.panic(#expr, __FILE__, __LINE__,     \
+                                                __ASSERT_FUNCTION, args))
+
 namespace Fuu {
 
 enum DebugLevel {
@@ -19,6 +24,9 @@ class Debug {
     template <typename... Types> void info(const Types &...args) const;
     template <typename... Types> void warn(const Types &...args) const;
     template <typename... Types> void error(const Types &...args) const;
+    template <typename... Types>
+    void panic(const char *assertion, const char *file, unsigned int line,
+               const char *function, const Types &...args) const;
 };
 
 template <typename... Types> void Debug::info(const Types &...args) const {
@@ -46,6 +54,17 @@ template <typename... Types> void Debug::error(const Types &...args) const {
         << "\u001b[1m\u001b[31m[ERROR][child_process]\u001b[39m\u001b[22m: ";
     std::initializer_list<int>{([&args] { std::cout << args; }(), 0)...};
     std::cout << std::endl;
+}
+template <typename... Types>
+void Debug::panic(const char *assertion, const char *file, unsigned int line,
+                  const char *function, const Types &...args) const {
+    std::cout
+        << "\u001b[1m\u001b[31m[PANIC][child_process]\u001b[39m\u001b[22m:\n";
+    std::cout << "  [" << file << ":" << line << "]: " << function << std::endl;
+    std::cout << "    断言 `" << assertion << "` 失败, ";
+    std::initializer_list<int>{([&args] { std::cout << args; }(), 0)...};
+    std::cout << std::endl;
+    exit(-1);
 }
 
 extern Debug debug;
