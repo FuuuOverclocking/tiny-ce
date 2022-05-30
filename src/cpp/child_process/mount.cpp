@@ -11,12 +11,9 @@ using Fuu::debug, Fuu::DebugLevel;
 void MountRootfs(ChildProcessArgs *args) {
     auto err = mount(NULL, "/", NULL, MS_REC | MS_PRIVATE, NULL);
     assert(err == 0);
-    auto rootfs = args->config["root"]["path"].get<string>();
-    auto resolved_rootfs = resolve_rootfs(args->config_path, rootfs);
 
-    // err = mount(resolved_rootfs.c_str(), resolved_rootfs.c_str(), NULL,
-    // MS_BIND,
-    //             NULL);
+    // err = mount(args->resolved_rootfs.c_str(), args->resolved_rootfs.c_str(),
+    //             NULL, MS_BIND, NULL);
     // assert(err==0);
     // assert_perror(errno);
     // report_error(args->container_receive_runtime_sock, "error_test");
@@ -28,6 +25,7 @@ void MountDevice(ChildProcessArgs *args) {
         for (auto &entry : mounts) {
             assert(!entry["destination"].is_null());
             auto dest = entry["destination"].get<string>();
+            dest = args->resolved_rootfs + dest;
             unsigned long flag = 0;
             if (entry["type"].get<string>() == "bind") {
                 flag |= MS_BIND;

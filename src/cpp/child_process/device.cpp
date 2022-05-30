@@ -5,5 +5,6 @@
 
 using Fuu::debug, Fuu::DebugLevel;
 
-// TODO: 对config中linux中device做映射
+void CreateSingleDevice() {}
+
 void CreateDevice(ChildProcessArgs *args) {}
