@@ -1,4 +1,5 @@
 #include "child_process_args.hpp"
+#include "debug.hpp"
 #include "middleware.hpp"
 #include "utils.hpp"
 #include "vendors/json.hpp"
@@ -17,7 +18,9 @@ void CheckUserMapping(ChildProcessArgs *args) {
                 char *buf = new char[BUF_LEN];
                 auto read_bytes = read(args->container_receive_runtime_sock,
                                        buf, sizeof(buf));
-                assert(read_bytes != -1);
+                expect(read_bytes != -1, "read container.sock 时发生错误");
+                expect(strcmp(buf, "mapped") == 0,
+                       "期望从 container.sock 接收到 mapped, 意外接收到 ", buf);
             }
             break;
         }
