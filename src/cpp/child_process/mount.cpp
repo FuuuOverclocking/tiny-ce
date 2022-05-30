@@ -23,7 +23,6 @@ void MountDevice(ChildProcessArgs *args) {
     auto mounts = args->config["mounts"];
     if (mounts.is_array()) {
         for (auto &entry : mounts) {
-            assert(!entry["destination"].is_null());
             auto dest = entry["destination"].get<string>();
             dest = args->resolved_rootfs + dest;
             unsigned long flag = 0;

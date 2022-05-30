@@ -6,10 +6,7 @@
 
 void SetProcessId(ChildProcessArgs *args) {
     auto process = args->config["process"];
-    assert(!process.is_null());
     auto user = process["user"];
-    assert(!user.is_null());
-    assert(!(user["uid"].is_null() || user["gid"].is_null()));
     auto uid = user["uid"].get<uid_t>();
     auto gid = user["gid"].get<uid_t>();
     auto err = setuid(uid);
