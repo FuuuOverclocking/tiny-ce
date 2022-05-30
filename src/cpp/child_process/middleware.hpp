@@ -25,4 +25,6 @@ void CheckUserMapping(ChildProcessArgs *args);
 
 void SetProcessId(ChildProcessArgs *args);
 
+void MountDevice(ChildProcessArgs *args);
+
 #endif
