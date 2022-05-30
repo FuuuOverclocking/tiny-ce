@@ -9,6 +9,7 @@ void RegisterMiddleware() {
     fn_array.push_back(PrepareSocket);
     fn_array.push_back(ConnectRuntime);
     fn_array.push_back(CheckUserMapping);
+    fn_array.push_back(SetProcessId);
     fn_array.push_back(MountRootfs);
     fn_array.push_back(MountDevice);
     fn_array.push_back(CreateDevice);

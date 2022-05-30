@@ -12,6 +12,6 @@ string resolve_rootfs(const char *config_path, string rootfs);
 
 path get_container_socket_path(const char *sock_path);
 
-void report_error(ChildProcessArgs *args, string err);
+void report_error(int sock, string err);
 
 #endif

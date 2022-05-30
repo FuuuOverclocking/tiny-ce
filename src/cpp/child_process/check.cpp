@@ -1,11 +1,12 @@
 #include "child_process_args.hpp"
 #include "debug.hpp"
 #include "middleware.hpp"
-#include "utils.hpp"
 #include "vendors/json.hpp"
+#include <string>
 #include <unistd.h>
 
 using nlohmann::json;
+using std::string;
 
 const int BUF_LEN = 200;
 

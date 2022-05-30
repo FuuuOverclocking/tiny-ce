@@ -12,8 +12,9 @@ void MountRootfs(ChildProcessArgs *args) {
     assert(err == 0);
     auto rootfs = args->config["root"]["path"].get<string>();
     auto resolved_rootfs = resolve_rootfs(args->config_path, rootfs);
-    // auto
-    // err=mount(resolved_rootfs.c_str(),resolved_rootfs.c_str(),NULL,MS_BIND,NULL);
+    // err = mount(resolved_rootfs.c_str(), resolved_rootfs.c_str(), NULL,
+    // MS_BIND, NULL);
     // assert(err==0);
     // assert_perror(errno);
+    // report_error(args->container_receive_runtime_sock, "error_test");
 }

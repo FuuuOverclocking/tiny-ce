@@ -23,4 +23,6 @@ void ConnectRuntime(ChildProcessArgs *args);
 
 void CheckUserMapping(ChildProcessArgs *args);
 
+void SetProcessId(ChildProcessArgs *args);
+
 #endif
