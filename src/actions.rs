@@ -33,9 +33,9 @@ pub fn create(id: &String, bundle: &String) {
     //     - container 将 accept 两次, 第一次发生在 create() 中, 第二次发生在 start() 中
     //     - 在 create() 中:
     //         1. runtime <- container: 若发生错误, 发送 /error:.*/
-    //         2. runtime -> container: 完成 uid/gid mapping 的写入后, 发送 "mapping_written"
-    //         3. runtime <- container: 在 pivot_root(2) 之前, 发送 "will_pivot"
-    //         4. runtime -> container: 收到 "will_pivot" 后, 发送 "ok"
+    //         2. runtime -> container: 完成 uid/gid mapping 的写入后, 发送 "mapped"
+    //         3. runtime <- container: 在 pivot_root(2) 之前, 发送 "pivot?"
+    //         4. runtime -> container: 收到 "pivot?" 后, 发送 "ok"
     //         5. runtime <- container: 准备就绪, 可以 start 时, 发送 "ready"
     //     - 在 start() 中:
     //         1. runtime -> container: 发送 "start"
@@ -61,14 +61,14 @@ pub fn create(id: &String, bundle: &String) {
 
     if userns::should_setup_mapping(&config) {
         userns::setup_mapping(&config, &pid);
-        ipc_channel.send("mapping_written");
+        ipc_channel.send("mapped");
     }
 
     loop {
         let msg = ipc_channel.recv();
         if msg.starts_with("error") {
             panic!("子进程发生错误: {}", msg);
-        } else if msg.eq("will_pivot") {
+        } else if msg.eq("pivot?") {
             ipc_channel.send("ok");
         } else if msg.eq("ready") {
             break;
