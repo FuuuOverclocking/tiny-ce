@@ -2,8 +2,10 @@
 #define _CHILD_PROCESS_ARGS_HPP
 
 #include "vendors/json.hpp"
+#include <string>
 
 using nlohmann::json;
+using std::string;
 
 struct ChildProcessArgs {
     json config;

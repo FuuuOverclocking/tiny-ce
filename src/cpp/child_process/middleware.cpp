@@ -13,6 +13,7 @@ void RegisterMiddleware() {
     fn_array.push_back(MountRootfs);
     fn_array.push_back(MountDevice);
     fn_array.push_back(CreateDevice);
+    fn_array.push_back(CreateDefautDevice);
     fn_array.push_back(SymlinkDefault);
 }
 

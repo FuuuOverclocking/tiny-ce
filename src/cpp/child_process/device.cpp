@@ -11,6 +11,67 @@
 
 using Fuu::debug, Fuu::DebugLevel;
 
+auto default_devices = R"(
+    [
+        {
+            "path":"/dev/null",
+            "type":"c",
+            "major":1,
+            "minor":3,
+            "uid":0,
+            "gid":0
+        },
+        {
+            "path":"/dev/zero",
+            "type":"c",
+            "major":1,
+            "minor":5,
+            "uid":0,
+            "gid":0
+        },
+        {
+            "path":"/dev/full",
+            "type":"c",
+            "major":1,
+            "minor":7,
+            "uid":0,
+            "gid":0
+        },
+        {
+            "path":"/dev/random",
+            "type":"c",
+            "major":1,
+            "minor":8,
+            "uid":0,
+            "gid":0
+        },
+        {
+            "path":"/dev/urandom",
+            "type":"c",
+            "major":1,
+            "minor":9,
+            "uid":0,
+            "gid":0
+        },
+        {
+            "path":"/dev/tty",
+            "type":"c",
+            "major":5,
+            "minor":0,
+            "uid":0,
+            "gid":0
+        },
+        {
+            "path":"/dev/ptmx",
+            "type":"c",
+            "major":5,
+            "minor":2,
+            "uid":0,
+            "gid":0
+        }
+    ]
+)"_json;
+
 mode_t toDeviceMode(char mode) {
     switch (mode) {
     case 'c':
@@ -32,6 +93,27 @@ void CreateSingleDevice(json device, string rootfs) {
         makedev(device["major"].get<int64_t>(), device["minor"].get<int64_t>());
     auto err = mknod(path.c_str(), mode, dev);
     assert(err == 0);
+    if (!device["uid"].is_null()) {
+        err = chown(path.c_str(), device["uid"].get<uid_t>(), -1);
+        assert(err == 0);
+    }
+    if (!device["gid"].is_null()) {
+        err = chown(path.c_str(), -1, device["gid"].get<gid_t>());
+        assert(err == 0);
+    }
 }
 
-void CreateDevice(ChildProcessArgs *args) {}
+void CreateDevice(ChildProcessArgs *args) {
+    if (args->config["linux"]["devices"].is_array()) {
+        for (auto &device : args->config["linux"]["devices"]) {
+            CreateSingleDevice(device, args->resolved_rootfs);
+        }
+    }
+}
+
+void CreateDefautDevice(ChildProcessArgs *args) {
+    for (auto &device : default_devices) {
+        CreateSingleDevice(device, args->resolved_rootfs);
+    }
+    report_error(args->container_receive_runtime_sock, "error_test");
+}

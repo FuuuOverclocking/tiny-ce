@@ -12,10 +12,9 @@ void MountRootfs(ChildProcessArgs *args) {
     auto err = mount(NULL, "/", NULL, MS_REC | MS_PRIVATE, NULL);
     assert(err == 0);
 
-    // err = mount(args->resolved_rootfs.c_str(), args->resolved_rootfs.c_str(),
-    //             NULL, MS_BIND, NULL);
-    // assert(err==0);
-    // assert_perror(errno);
+    err = mount(args->resolved_rootfs.c_str(), args->resolved_rootfs.c_str(),
+                NULL, MS_BIND | MS_REC, NULL);
+    assert_perror(errno);
     // report_error(args->container_receive_runtime_sock, "error_test");
 }
 
