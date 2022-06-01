@@ -67,7 +67,7 @@ void Debug::panic(const char *assertion, const char *file, unsigned int line,
     exit(-1);
 }
 
-extern Debug debug;
+inline Debug debug;
 
 } // namespace Fuu
 #endif
