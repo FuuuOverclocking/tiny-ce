@@ -39,7 +39,7 @@ void _setup_args(const char *config_path, const char *init_lock_path,
     args->pty_socket = pty_socket;
     args->init_lock_sock = -1;
     args->container_sock = -1;
-    RegisterMiddleware();
+    // RegisterMiddleware();
 }
 
 int _child_main() {
