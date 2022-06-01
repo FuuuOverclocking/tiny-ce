@@ -5,8 +5,10 @@
 #include <sched.h>
 #include <sys/mount.h>
 #include <unistd.h>
+#include <string>
 
 using Fuu::debug, Fuu::DebugLevel;
+using std::string;
 
 void MountRootfs(ChildProcessArgs *args) {
     auto err = mount(NULL, "/", NULL, MS_REC | MS_PRIVATE, NULL);
