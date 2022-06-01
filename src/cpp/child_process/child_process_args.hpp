@@ -4,15 +4,12 @@
 #include "vendors/json.hpp"
 #include <string>
 
-using nlohmann::json;
-using std::string;
-
 struct ChildProcessArgs {
-    json config;
+    nlohmann::json config;
     const char *config_path;
     const char *init_lock_path;
     const char *sock_path;
-    string resolved_rootfs;
+    std::string resolved_rootfs;
     int pty_socket;
     int init_lock_sock;
     int container_sock;
