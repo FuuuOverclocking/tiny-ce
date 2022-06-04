@@ -22,6 +22,7 @@ void RegisterMiddleware() {
     // TODO: fix create device operation not permited bug
     //  fn_array.push_back(CreateDefautDevice);
     fn_array.push_back(SymlinkDefault);
+    fn_array.push_back(CheckPivot);
 }
 
 void ExecuteMiddleware(ChildProcessArgs *args) {
