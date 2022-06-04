@@ -31,4 +31,6 @@ void CheckPivot(ChildProcessArgs *args);
 
 void PivotRootfs(ChildProcessArgs *args);
 
+void SetHostName(ChildProcessArgs *args);
+
 #endif

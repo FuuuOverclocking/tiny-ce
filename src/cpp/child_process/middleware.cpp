@@ -20,10 +20,11 @@ void RegisterMiddleware() {
     fn_array.push_back(MountDevice);
     fn_array.push_back(CreateDevice);
     // TODO: fix create device operation not permited bug
-    //  fn_array.push_back(CreateDefautDevice);
+    // fn_array.push_back(CreateDefautDevice);
     fn_array.push_back(SymlinkDefault);
     fn_array.push_back(CheckPivot);
     fn_array.push_back(PivotRootfs);
+    fn_array.push_back(SetHostName);
 }
 
 void ExecuteMiddleware(ChildProcessArgs *args) {
