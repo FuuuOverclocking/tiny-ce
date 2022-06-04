@@ -3,9 +3,9 @@
 
 #include "child_process_args.hpp"
 
-// typedef void (*Middleware)(ChildProcessArgs *args);
+typedef void (*Middleware)(ChildProcessArgs *args);
 
-// void RegisterMiddleware();
+void RegisterMiddleware();
 
 void ExecuteMiddleware(ChildProcessArgs *args);
 
