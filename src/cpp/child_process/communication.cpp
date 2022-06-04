@@ -43,3 +43,20 @@ void CheckPivot(ChildProcessArgs *args) {
            "期望从 container.sock 接收到 ok, 意外接收到 ", buf);
     delete buf;
 }
+
+void GetReady(ChildProcessArgs *args) {
+    const char *ready_msg = "ready";
+    auto write_bytes = write(args->container_receive_runtime_sock, ready_msg,
+                             strlen(ready_msg));
+    assert(write_bytes != -1);
+}
+
+void CheckStart(ChildProcessArgs *args) {
+    char *buf = new char[BUF_LEN];
+    auto read_bytes =
+        read(args->container_receive_runtime_sock, buf, sizeof(buf));
+    assert(read_bytes != -1);
+    expect(strcmp(buf, "start") == 0,
+           "期望从 container.sock 接收到 mapped, 意外接收到 ", buf);
+    delete buf;
+}

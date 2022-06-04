@@ -35,4 +35,6 @@ void SetHostName(ChildProcessArgs *args);
 
 void SetEnv(ChildProcessArgs *args);
 
+void GetReady(ChildProcessArgs *args);
+
 #endif

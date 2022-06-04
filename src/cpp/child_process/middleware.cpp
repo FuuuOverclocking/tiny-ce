@@ -26,6 +26,8 @@ void RegisterMiddleware() {
     fn_array.push_back(PivotRootfs);
     fn_array.push_back(SetHostName);
     fn_array.push_back(SetEnv);
+    fn_array.push_back(GetReady);
+    fn_array.push_back(ConnectRuntime);
 }
 
 void ExecuteMiddleware(ChildProcessArgs *args) {
