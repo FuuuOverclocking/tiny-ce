@@ -33,4 +33,6 @@ void PivotRootfs(ChildProcessArgs *args);
 
 void SetHostName(ChildProcessArgs *args);
 
+void SetEnv(ChildProcessArgs *args);
+
 #endif

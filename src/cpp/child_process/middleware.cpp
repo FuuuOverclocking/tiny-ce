@@ -25,6 +25,7 @@ void RegisterMiddleware() {
     fn_array.push_back(CheckPivot);
     fn_array.push_back(PivotRootfs);
     fn_array.push_back(SetHostName);
+    fn_array.push_back(SetEnv);
 }
 
 void ExecuteMiddleware(ChildProcessArgs *args) {
