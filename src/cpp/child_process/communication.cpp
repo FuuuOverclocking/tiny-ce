@@ -56,7 +56,9 @@ void CheckStart(ChildProcessArgs *args) {
     auto read_bytes =
         read(args->container_receive_runtime_sock, buf, sizeof(buf));
     assert(read_bytes != -1);
+    // debug.info("Len:", strlen(buf), "str:", strlen("start"),
+    //            "test:", int(buf[5]));
     expect(strcmp(buf, "start") == 0,
-           "期望从 container.sock 接收到 mapped, 意外接收到 ", buf);
+           "期望从 container.sock 接收到 start, 意外接收到 ", buf);
     delete buf;
 }

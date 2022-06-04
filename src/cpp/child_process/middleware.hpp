@@ -37,4 +37,8 @@ void SetEnv(ChildProcessArgs *args);
 
 void GetReady(ChildProcessArgs *args);
 
+void CheckStart(ChildProcessArgs *args);
+
+void SetDir(ChildProcessArgs *args);
+
 #endif

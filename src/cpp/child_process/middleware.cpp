@@ -28,6 +28,8 @@ void RegisterMiddleware() {
     fn_array.push_back(SetEnv);
     fn_array.push_back(GetReady);
     fn_array.push_back(ConnectRuntime);
+    fn_array.push_back(CheckStart);
+    fn_array.push_back(SetDir);
 }
 
 void ExecuteMiddleware(ChildProcessArgs *args) {

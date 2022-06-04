@@ -38,3 +38,9 @@ void SetEnv(ChildProcessArgs *args) {
         assert(err == 0);
     }
 }
+
+void SetDir(ChildProcessArgs *args) {
+    auto cwd = args->config["process"]["cwd"].get<string>();
+    auto err = chdir(cwd.c_str());
+    assert(err == 0);
+}
