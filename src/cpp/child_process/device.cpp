@@ -10,6 +10,8 @@
 #include <unistd.h>
 
 using Fuu::debug, Fuu::DebugLevel;
+using nlohmann::json;
+using std::string;
 
 auto default_devices = R"(
     [
@@ -18,6 +20,7 @@ auto default_devices = R"(
             "type":"c",
             "major":1,
             "minor":3,
+            "file_mode":"0666",
             "uid":0,
             "gid":0
         },
@@ -26,6 +29,7 @@ auto default_devices = R"(
             "type":"c",
             "major":1,
             "minor":5,
+            "file_mode":"0666",
             "uid":0,
             "gid":0
         },
@@ -34,6 +38,7 @@ auto default_devices = R"(
             "type":"c",
             "major":1,
             "minor":7,
+            "file_mode":"0666",
             "uid":0,
             "gid":0
         },
@@ -42,6 +47,7 @@ auto default_devices = R"(
             "type":"c",
             "major":1,
             "minor":8,
+            "file_mode":"0444",
             "uid":0,
             "gid":0
         },
@@ -50,6 +56,7 @@ auto default_devices = R"(
             "type":"c",
             "major":1,
             "minor":9,
+            "file_mode":"0444",
             "uid":0,
             "gid":0
         },
@@ -58,6 +65,7 @@ auto default_devices = R"(
             "type":"c",
             "major":5,
             "minor":0,
+            "file_mode":"0666",
             "uid":0,
             "gid":0
         },
@@ -66,6 +74,7 @@ auto default_devices = R"(
             "type":"c",
             "major":5,
             "minor":2,
+            "file_mode":"0666",
             "uid":0,
             "gid":0
         }
@@ -88,10 +97,15 @@ mode_t toDeviceMode(char mode) {
 
 void CreateSingleDevice(json device, string rootfs) {
     auto path = rootfs + device["path"].get<string>();
-    auto mode = toDeviceMode(device["type"].get<string>()[0]);
+    auto mask = device["file_mode"].get<string>();
+    auto mode = toDeviceMode(device["type"].get<string>()[0]) |
+                strtoul(mask.c_str(), NULL, 8);
     dev_t dev =
         makedev(device["major"].get<int64_t>(), device["minor"].get<int64_t>());
     auto err = mknod(path.c_str(), mode, dev);
+    debug.info("path:", path, " mode:", mode);
+    debug.info(device, "err:", errno);
+    assert_perror(errno);
     assert(err == 0);
     if (!device["uid"].is_null()) {
         err = chown(path.c_str(), device["uid"].get<uid_t>(), -1);

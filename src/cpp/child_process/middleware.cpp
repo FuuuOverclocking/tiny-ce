@@ -7,9 +7,9 @@ using std::array;
 
 // static vector<Middleware> fn_array;
 
-array fn_array = {PrepareSocket, ConnectRuntime,     CheckUserMapping,
-                  SetProcessId,  MountRootfs,        MountDevice,
-                  CreateDevice,  CreateDefautDevice, SymlinkDefault};
+array fn_array = {PrepareSocket, ConnectRuntime, CheckUserMapping,
+                  SetProcessId,  MountRootfs,    MountDevice,
+                  CreateDevice,  SymlinkDefault};
 
 // void RegisterMiddleware() {
 //     fn_array.push_back(PrepareSocket);
