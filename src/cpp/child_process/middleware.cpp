@@ -23,6 +23,7 @@ void RegisterMiddleware() {
     //  fn_array.push_back(CreateDefautDevice);
     fn_array.push_back(SymlinkDefault);
     fn_array.push_back(CheckPivot);
+    fn_array.push_back(PivotRootfs);
 }
 
 void ExecuteMiddleware(ChildProcessArgs *args) {

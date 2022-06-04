@@ -5,6 +5,7 @@
 #include <string>
 #include <unistd.h>
 
+using Fuu::debug, Fuu::DebugLevel;
 using nlohmann::json;
 using std::string;
 

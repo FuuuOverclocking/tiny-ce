@@ -29,4 +29,6 @@ void CreateDefautDevice(ChildProcessArgs *args);
 
 void CheckPivot(ChildProcessArgs *args);
 
+void PivotRootfs(ChildProcessArgs *args);
+
 #endif
