@@ -4,6 +4,7 @@
 #include "utils.hpp"
 #include "vendors/json.hpp"
 #include <fcntl.h>
+#include <sys/mount.h>
 #include <sys/stat.h>
 #include <sys/sysmacros.h>
 #include <sys/types.h>
@@ -117,6 +118,15 @@ void CreateSingleDevice(json device, string rootfs) {
     }
 }
 
+void BindSingleDevice(json device, string rootfs) {
+    auto path = rootfs + device["path"].get<string>();
+    auto source = device["path"].get<string>();
+    auto err = mount(source.c_str(), path.c_str(), NULL, MS_BIND, NULL);
+    // debug.info("Source:", source, " Target:", path, " err:", errno);
+    // assert_perror(errno);
+    assert(err == 0);
+}
+
 void CreateDevice(ChildProcessArgs *args) {
     if (args->config["linux"]["devices"].is_array()) {
         for (auto &device : args->config["linux"]["devices"]) {
@@ -127,7 +137,8 @@ void CreateDevice(ChildProcessArgs *args) {
 
 void CreateDefautDevice(ChildProcessArgs *args) {
     for (auto &device : default_devices) {
-        CreateSingleDevice(device, args->resolved_rootfs);
+        // CreateSingleDevice(device, args->resolved_rootfs);
+        BindSingleDevice(device, args->resolved_rootfs);
     }
     // report_error(args->container_receive_runtime_sock, "error_test");
 }
