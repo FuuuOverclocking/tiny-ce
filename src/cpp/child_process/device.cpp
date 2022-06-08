@@ -92,7 +92,7 @@ mode_t toDeviceMode(char mode) {
     case 'p':
         return S_IFIFO;
     default:
-        assert(1);
+        throw std::logic_error("非法的 mode");
     }
 }
 

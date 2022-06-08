@@ -34,6 +34,7 @@ void SymlinkDefault(ChildProcessArgs *args) {
         auto link_path = args->resolved_rootfs + link["linkpath"].get<string>();
         auto target = link["target"].get<string>();
         auto err = symlink(target.c_str(), link_path.c_str());
+        assert_perror(errno);
         assert(err == 0);
     }
 }

@@ -26,7 +26,7 @@ pub fn fork_container(
     }
 
     const STACK_SIZE: usize = 4 * 1024 * 1024; // 4 MB
-    let ref mut stack: [u8; STACK_SIZE] = [0; STACK_SIZE];
+    let stack = Box::leak(Box::new([0; STACK_SIZE]));
 
     let namespaces = config.linux.as_ref().unwrap().namespaces.clone();
     let clone_flags = namespaces

@@ -7,7 +7,7 @@
 
 using Fuu::debug, Fuu::DebugLevel;
 using nlohmann::json;
-using std::string;
+using std::string, std::string_view;
 
 const int BUF_LEN = 200;
 
@@ -56,9 +56,9 @@ void CheckStart(ChildProcessArgs *args) {
     auto read_bytes =
         read(args->container_receive_runtime_sock, buf, sizeof(buf));
     assert(read_bytes != -1);
-    // debug.info("Len:", strlen(buf), "str:", strlen("start"),
-    //            "test:", int(buf[5]));
-    expect(strcmp(buf, "start") == 0,
-           "期望从 container.sock 接收到 start, 意外接收到 ", buf);
+
+    auto str = string_view(buf, read_bytes);
+    expect(str == "start", "期望从 container.sock 接收到 start, 意外接收到 ",
+           buf);
     delete buf;
 }
