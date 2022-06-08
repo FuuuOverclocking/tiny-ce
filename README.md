@@ -32,10 +32,10 @@ cd tiny-ce
 
 ```bash
 # 创建并启动一个容器 (若未满足测试条件, 将打印帮助)
-cargo test create_start -- --nocapture
+cargo run cs
 
 # 删除所有容器
-cargo test delete_all -- --nocapture
+cargo run d
 ```
 
 若要以 Release 模式编译运行测试, 使用以下命令:
