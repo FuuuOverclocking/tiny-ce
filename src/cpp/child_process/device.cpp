@@ -106,7 +106,7 @@ void CreateSingleDevice(json device, string rootfs) {
     auto err = mknod(path.c_str(), mode, dev);
     // debug.info("path:", path, " mode:", mode);
     // debug.info(device, "err:", errno);
-    // assert_perror(errno);
+    assert_perror(errno);
     assert(err == 0);
     if (!device["uid"].is_null()) {
         err = chown(path.c_str(), device["uid"].get<uid_t>(), -1);
@@ -137,8 +137,8 @@ void CreateDevice(ChildProcessArgs *args) {
 
 void CreateDefautDevice(ChildProcessArgs *args) {
     for (auto &device : default_devices) {
-        // CreateSingleDevice(device, args->resolved_rootfs);
-        BindSingleDevice(device, args->resolved_rootfs);
+        CreateSingleDevice(device, args->resolved_rootfs);
+        // BindSingleDevice(device, args->resolved_rootfs);
     }
     // report_error(args->container_receive_runtime_sock, "error_test");
 }

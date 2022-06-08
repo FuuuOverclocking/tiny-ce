@@ -5,51 +5,28 @@
 using std::array;
 using std::vector;
 
-static vector<Middleware> fn_array;
-
 // clang-format off
-// array fn_array = {
-//     PrepareSocket,
-//     ConnectRuntime,
-//     CheckUserMapping,
-//     SetProcessId,
-//     MountRootfs,
-//     MountDevice,
-//     CreateDevice,
-//     // TODO: fix create device operation not permited bug
-//     // CreateDefautDevice,
-//     SymlinkDefault,
-//     CheckPivot,
-//     PivotRootfs,
-//     SetHostName,
-//     SetEnv,
-//     GetReady,
-//     ConnectRuntime,
-//     CheckStart,
-//     SetDir,
-// };
-// clang-format on
-
-void RegisterMiddleware() {
-    fn_array.push_back(PrepareSocket);
-    fn_array.push_back(ConnectRuntime);
-    fn_array.push_back(CheckUserMapping);
-    fn_array.push_back(SetProcessId);
-    fn_array.push_back(MountRootfs);
-    fn_array.push_back(MountDevice);
-    fn_array.push_back(CreateDevice);
+array fn_array = {
+    PrepareSocket,
+    ConnectRuntime,
+    CheckUserMapping,
+    SetProcessId,
+    MountRootfs,
+    MountDevice,
+    CreateDevice,
     // TODO: fix create device operation not permited bug
-    // fn_array.push_back(CreateDefautDevice);
-    fn_array.push_back(SymlinkDefault);
-    fn_array.push_back(CheckPivot);
-    fn_array.push_back(PivotRootfs);
-    fn_array.push_back(SetHostName);
-    fn_array.push_back(SetEnv);
-    fn_array.push_back(GetReady);
-    fn_array.push_back(ConnectRuntime);
-    fn_array.push_back(CheckStart);
-    fn_array.push_back(SetDir);
-}
+    CreateDefautDevice,
+    SymlinkDefault,
+    CheckPivot,
+    PivotRootfs,
+    SetHostName,
+    SetEnv,
+    GetReady,
+    ConnectRuntime,
+    CheckStart,
+    SetDir,
+};
+// clang-format on
 
 void ExecuteMiddleware(ChildProcessArgs *args) {
     for (auto fn : fn_array) {

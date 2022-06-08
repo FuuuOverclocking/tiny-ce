@@ -1,10 +1,9 @@
-use nix::errno::Errno;
-use nix::sys::wait::{waitpid, WaitPidFlag, WaitStatus};
-use nix::unistd::Pid;
-
 use crate::container::{
     fork_container, ipc, userns, ContainerConfig, ContainerState, ContainerStatus,
 };
+use nix::errno::Errno;
+use nix::sys::wait::{waitpid, WaitPidFlag, WaitStatus};
+use nix::unistd::Pid;
 use std::fs;
 use std::path::{Path, PathBuf};
 
