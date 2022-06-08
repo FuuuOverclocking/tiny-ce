@@ -91,11 +91,16 @@ pub fn start(id: &String) {
     let sock_path = format!("{}/container.sock", container_path.display());
     let ipc_channel = ipc::IpcChannel::connect(&sock_path);
     ipc_channel.send(&"start".to_string());
-    ipc_channel.close();
 
     state.status = ContainerStatus::Running;
     println!("容器状态: {:?}", state);
     state.save_to(container_path.as_path());
+
+    let msg = ipc_channel.recv();
+    if msg != "exit" {
+        panic!("期望接收到 exit, 接收到 {}", msg);
+    }
+    ipc_channel.close();
 }
 
 pub fn delete(id: &String) {
