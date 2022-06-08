@@ -62,3 +62,10 @@ void CheckStart(ChildProcessArgs *args) {
            buf);
     delete buf;
 }
+
+void SendExit(ChildProcessArgs *args) {
+    const char *ready_msg = "exit";
+    auto write_bytes = write(args->container_receive_runtime_sock, ready_msg,
+                             strlen(ready_msg));
+    assert(write_bytes != -1);
+}

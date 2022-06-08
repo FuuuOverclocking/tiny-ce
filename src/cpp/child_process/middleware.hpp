@@ -41,4 +41,6 @@ void CheckStart(ChildProcessArgs *args);
 
 void SetDir(ChildProcessArgs *args);
 
+void SendExit(ChildProcessArgs *args);
+
 #endif
