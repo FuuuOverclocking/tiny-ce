@@ -34,7 +34,8 @@
                 "type": "pid"
             },
             {
-                "type": "network"
+                "type": "network",
+                "path": "/var/run/netns/tiny-ce-0"
             },
             {
                 "type": "mount"

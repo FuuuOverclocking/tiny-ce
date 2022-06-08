@@ -7,6 +7,8 @@ typedef void (*Middleware)(ChildProcessArgs *args);
 
 void RegisterMiddleware();
 
+void SetNetworkNamespace(ChildProcessArgs *args);
+
 void ExecuteMiddleware(ChildProcessArgs *args);
 
 void MountRootfs(ChildProcessArgs *args);

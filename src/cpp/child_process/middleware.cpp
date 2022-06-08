@@ -11,10 +11,10 @@ array fn_array = {
     ConnectRuntime,
     CheckUserMapping,
     SetProcessId,
+    SetNetworkNamespace,
     MountRootfs,
     MountDevice,
     CreateDevice,
-    // TODO: fix create device operation not permited bug
     CreateDefautDevice,
     SymlinkDefault,
     CheckPivot,
