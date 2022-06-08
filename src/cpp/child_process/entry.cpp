@@ -2,8 +2,8 @@
 #include "child_process_args.hpp"
 #include "debug.hpp"
 #include "middleware.hpp"
-#include "vendors/json.hpp"
 #include "utils.hpp"
+#include "vendors/json.hpp"
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -20,6 +20,14 @@ using std::filesystem::path;
 
 ChildProcessArgs *args = nullptr;
 
+extern "C" {
+void setup_args(const char *config_path, const char *init_lock_path,
+                const char *sock_path, int pty_socket) {
+    _setup_args(config_path, init_lock_path, sock_path, pty_socket);
+}
+int child_main() { return _child_main(); }
+}
+
 void _setup_args(const char *config_path, const char *init_lock_path,
                  const char *sock_path, int pty_socket) {
     args = new ChildProcessArgs;
@@ -29,9 +37,8 @@ void _setup_args(const char *config_path, const char *init_lock_path,
     args->init_lock_path = init_lock_path;
     args->sock_path = sock_path;
     args->pty_socket = pty_socket;
-    args->init_lock_sock=-1;
-    args->container_sock=-1;
-    RegisterMiddleware();
+    args->init_lock_sock = -1;
+    args->container_sock = -1;
 }
 
 int _child_main() {
@@ -42,6 +49,7 @@ int _child_main() {
 
     auto rootfs = args->config["root"]["path"].get<string>();
     auto resolved_rootfs = resolve_rootfs(args->config_path, rootfs);
+    args->resolved_rootfs = resolved_rootfs;
 
     auto process_cwd = args->config["process"]["cwd"].get<string>();
 

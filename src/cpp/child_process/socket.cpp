@@ -7,7 +7,7 @@
 
 const int QLEN = 10;
 
-void InitSocket(ChildProcessArgs *args) {
+void initSocket(ChildProcessArgs *args) {
     assert(args->init_lock_path != nullptr);
     // init socket
     args->init_lock_sock = socket(AF_UNIX, SOCK_SEQPACKET, 0);
@@ -32,7 +32,7 @@ void InitSocket(ChildProcessArgs *args) {
     assert(err == 0);
 }
 
-void ContainerSocket(ChildProcessArgs *args) {
+void containerSocket(ChildProcessArgs *args) {
     assert(args->sock_path != nullptr);
     // init socket
     args->container_sock = socket(AF_UNIX, SOCK_SEQPACKET, 0);
@@ -53,8 +53,8 @@ void ContainerSocket(ChildProcessArgs *args) {
 }
 
 void PrepareSocket(ChildProcessArgs *args) {
-    InitSocket(args);
-    ContainerSocket(args);
+    initSocket(args);
+    containerSocket(args);
     const char *init_msg = "ok";
     auto write_bytes = write(args->init_lock_sock, init_msg, strlen(init_msg));
     assert(write_bytes != -1);

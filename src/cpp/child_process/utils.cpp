@@ -26,9 +26,8 @@ path get_container_socket_path(const char *sock_path) {
     return runtime_path;
 }
 
-void report_error(ChildProcessArgs *args, string err) {
-    if (args->container_receive_runtime_sock != -1) {
-        write(args->container_receive_runtime_sock, err.c_str(),
-              strlen(err.c_str()));
+void report_error(int sock, string err) {
+    if (sock != -1) {
+        write(sock, err.c_str(), strlen(err.c_str()));
     }
 }
