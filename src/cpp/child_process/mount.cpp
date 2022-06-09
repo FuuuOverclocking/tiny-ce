@@ -36,10 +36,20 @@ void MountDevice(ChildProcessArgs *args) {
             if (entry["type"].get<string>() == "bind") {
                 flag |= MS_BIND;
             }
-            auto err = mount(entry["source"].is_null()
-                                 ? NULL
-                                 : entry["source"].get<string>().c_str(),
-                             dest.c_str(), NULL, flag, NULL);
+            debug.info("mount 参数 = ",
+                       entry["source"].is_null()
+                           ? NULL
+                           : entry["source"].get<string>().c_str(),
+                       ", ", dest.c_str(), ", ", flag);
+            auto source = entry["source"].is_null()
+                              ? NULL
+                              : entry["source"].get<string>().c_str();
+            auto target = dest.c_str();
+            auto fs_type = entry["type"].is_null()
+                               ? NULL
+                               : entry["type"].get<string>().c_str();
+            auto err = mount(source, target, fs_type, flag, NULL);
+            assert_perror(errno);
             assert(err == 0);
         }
     }

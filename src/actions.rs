@@ -18,7 +18,7 @@ pub fn create(id: &String, bundle: &String) {
     let container_path = Path::new(&container_path_str);
 
     let mut state = ContainerState::new(id, bundle);
-    println!("容器状态: {:?}", state);
+    println!("{:?}", state);
     state.save_to(container_path);
 
     // 将启动 container 子进程, 准备 2 个 Unix socket 用于与之通信:
@@ -76,7 +76,7 @@ pub fn create(id: &String, bundle: &String) {
 
     state.status = ContainerStatus::Created;
     state.pid = Some(pid.as_raw() as usize);
-    println!("容器状态: {:?}", state);
+    println!("{:?}", state);
     state.save_to(container_path);
 }
 
@@ -93,7 +93,7 @@ pub fn start(id: &String) {
     ipc_channel.send(&"start".to_string());
 
     state.status = ContainerStatus::Running;
-    println!("容器状态: {:?}", state);
+    println!("{:?}", state);
     state.save_to(container_path.as_path());
 
     let msg = ipc_channel.recv();
@@ -116,7 +116,7 @@ pub fn delete(id: &String) {
     if state.status != ContainerStatus::Stopped {
         panic!("试图 delete 仍在运行的容器.");
     }
-    println!("容器状态: {:?}", state);
+    println!("{:?}", state);
     if std::fs::remove_dir_all(Path::new(CONTAINER_ROOT_PATH).join(id)).is_err() {
         println!("删除容器失败.");
     }

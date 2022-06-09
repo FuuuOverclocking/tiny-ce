@@ -5,24 +5,14 @@
     "process": {
         "cwd": "/",
         "env": [
-            "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-            "TERM=xterm"
+            "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
         ],
-        "args": [
-            "bash"
-        ],
+        "args": ["bash"],
         "user": {
             "uid": 0,
             "gid": 0
         }
     },
-    "mounts": [
-        {
-            "destination": "/proc",
-            "type": "proc",
-            "source": "proc"
-        }
-    ],
     "hostname": "fu-asus",
     "linux": {
         "uidMappings": [
@@ -45,7 +35,7 @@
             },
             {
                 "type": "network",
-                "path": "/var/run/netns/tiny-ce-0"
+                "path": "/var/run/netns/tiny-ce-1"
             },
             {
                 "type": "mount"

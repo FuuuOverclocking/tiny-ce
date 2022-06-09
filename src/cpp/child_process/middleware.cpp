@@ -1,9 +1,7 @@
 #include "middleware.hpp"
-// #include <array>
-#include <vector>
+#include <array>
 
 using std::array;
-using std::vector;
 
 // clang-format off
 array fn_array = {

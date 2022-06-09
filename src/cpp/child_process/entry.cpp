@@ -76,14 +76,16 @@ int _child_main() {
     }
 
     ExecuteMiddleware(args);
+
     auto pid = fork();
+    expect(pid != -1, "fork 失败");
     if (pid == 0) {
         execvp(process_command.c_str(), process_argv);
     } else {
         int status = 0;
-        auto err = waitpid(pid, &status, 0);
+        wait(&status);
+        SendExit(args);
     }
-    SendExit(args);
     // 实际上子进程将被替换, 所以不必 return 0, 也不必 delete 什么.
     return 0; // 仅为了避免 linter 的警告
 }

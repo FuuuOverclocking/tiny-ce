@@ -1,11 +1,23 @@
-rm test/centos/rootfs/dev/stdin
-rm test/centos/rootfs/dev/stderr
-rm test/centos/rootfs/dev/stdout
-rm test/centos/rootfs/dev/null
-rm test/centos/rootfs/dev/zero
-rm test/centos/rootfs/dev/full
-rm test/centos/rootfs/dev/random
-rm test/centos/rootfs/dev/urandom
-rm test/centos/rootfs/dev/tty
-rm test/centos/rootfs/dev/ptmx
+rm -f test/centos/rootfs/dev/stdin
+rm -f test/centos/rootfs/dev/stderr
+rm -f test/centos/rootfs/dev/stdout
+rm -f test/centos/rootfs/dev/null
+rm -f test/centos/rootfs/dev/zero
+rm -f test/centos/rootfs/dev/full
+rm -f test/centos/rootfs/dev/random
+rm -f test/centos/rootfs/dev/urandom
+rm -f test/centos/rootfs/dev/tty
+rm -f test/centos/rootfs/dev/ptmx
 rm -r test/centos/rootfs/dev/fd
+
+rm -f test/centos-2/rootfs/dev/stdin
+rm -f test/centos-2/rootfs/dev/stderr
+rm -f test/centos-2/rootfs/dev/stdout
+rm -f test/centos-2/rootfs/dev/null
+rm -f test/centos-2/rootfs/dev/zero
+rm -f test/centos-2/rootfs/dev/full
+rm -f test/centos-2/rootfs/dev/random
+rm -f test/centos-2/rootfs/dev/urandom
+rm -f test/centos-2/rootfs/dev/tty
+rm -f test/centos-2/rootfs/dev/ptmx
+rm -r test/centos-2/rootfs/dev/fd

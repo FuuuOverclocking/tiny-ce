@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use std::{io::Write, path::Path};
+use std::{io::Write, path::Path, fs};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -36,13 +36,20 @@ impl ContainerState {
     pub fn save_to(&self, container_path: &Path) {
         std::fs::create_dir_all(container_path).unwrap();
 
+        let state_json_path = container_path.join("state.json");
+
+        if state_json_path.exists() {
+            fs::remove_file(&state_json_path).unwrap();
+        }
         let mut state_file = std::fs::OpenOptions::new()
             .write(true)
             .create(true)
-            .open(container_path.join("state.json"))
+            .open(&state_json_path)
             .expect("无法打开 state.json");
+        let json = serde_json::to_string(self).unwrap();
+        let json_bytes = json.as_bytes();
         state_file
-            .write_all(serde_json::to_string(self).unwrap().as_bytes())
+            .write_all(json_bytes)
             .expect("写入 state.json 失败");
     }
 }
