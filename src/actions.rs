@@ -1,25 +1,29 @@
 use crate::container::{
-    fork_container, ipc, userns, ContainerConfig, ContainerState, ContainerStatus,
+    fork_container, ipc, userns, ContainerState, ContainerStatus,
 };
-use nix::errno::Errno;
-use nix::sys::wait::{waitpid, WaitPidFlag, WaitStatus};
-use nix::unistd::Pid;
-use std::fs;
-use std::path::{Path, PathBuf};
+use nix::{
+    errno::Errno,
+    sys::wait::{waitpid, WaitPidFlag, WaitStatus},
+    unistd::Pid,
+};
+use std::{
+    fs,
+    path::{Path, PathBuf},
+};
 
 pub const CONTAINER_ROOT_PATH: &'static str = "/tmp/tiny-ce";
 
-pub fn create(id: &String, bundle: &String) {
-    let bundle_path = fs::canonicalize(Path::new(bundle)).unwrap();
-    let config_path = bundle_path.join("config.json");
-    let config = ContainerConfig::read_to_config(&config_path);
+pub fn create(id: &str, bundle: &Path) {
+    let bundle_path = fs::canonicalize(bundle).unwrap();
+    let spec_path = bundle_path.join("config.json");
+    let container_dir_path = PathBuf::from(format!("{}/{}", CONTAINER_ROOT_PATH, id));
 
-    let container_path_str = format!("{}/{}", CONTAINER_ROOT_PATH, id);
-    let container_path = Path::new(&container_path_str);
+    let spec = oci_spec::runtime::Spec::load(&spec_path)
+        .expect(format!("解析 {} 失败", spec_path.display()).as_str());
 
     let mut state = ContainerState::new(id, bundle);
-    println!("{:?}", state);
-    state.save_to(container_path);
+    println!("{}", state);
+    state.save_to(&container_dir_path);
 
     // 将启动 container 子进程, 准备 2 个 Unix socket 用于与之通信:
     //
@@ -39,14 +43,14 @@ pub fn create(id: &String, bundle: &String) {
     //     - 在 start() 中:
     //         1. runtime -> container: 发送 "start"
 
-    let init_lock_path = format!("{container_path_str}/init.sock");
-    let sock_path = format!("{container_path_str}/container.sock");
+    let init_lock_path = container_dir_path.join("init.sock");
+    let sock_path = container_dir_path.join("container.sock");
 
     let pid = {
         let init_lock = ipc::IpcParent::new(&init_lock_path);
 
         // 通过 clone(2) 启动子进程
-        let pid = fork_container(&config, &config_path, &init_lock_path, &sock_path);
+        let pid = fork_container(&spec, &spec_path, &init_lock_path, &sock_path);
 
         let msg = init_lock.wait();
         if !msg.eq("ok") {
@@ -56,10 +60,24 @@ pub fn create(id: &String, bundle: &String) {
         pid
     };
 
+    // 可使用 youki/libcgroups 管理 CGroups, 例:
+    // let cmanager = libcgroups::v1::manager::Manager::new(PathBuf::from(&id)).unwrap();
+    // cmanager
+    //     .add_task(Pid::from_raw(pid.as_raw()))
+    //     .unwrap();
+    // let resources = spec.linux().as_ref().unwrap().resources().as_ref().unwrap();
+    // let controller_opt = libcgroups::common::ControllerOpt {
+    //     resources: resources,
+    //     freezer_state: None,
+    //     oom_score_adj: None,
+    //     disable_oom_killer: false,
+    // };
+    // cmanager.apply(&controller_opt).unwrap();
+
     let ipc_channel = ipc::IpcChannel::connect(&sock_path);
 
-    if userns::should_setup_mapping(&config) {
-        userns::setup_mapping(&config, &pid);
+    if userns::should_setup_mapping(&spec) {
+        userns::setup_mapping(&spec, &pid);
         ipc_channel.send("mapped");
     }
 
@@ -76,8 +94,8 @@ pub fn create(id: &String, bundle: &String) {
 
     state.status = ContainerStatus::Created;
     state.pid = Some(pid.as_raw() as usize);
-    println!("{:?}", state);
-    state.save_to(container_path);
+    println!("{}", state);
+    state.save_to(&container_dir_path);
 }
 
 pub fn start(id: &String) {
@@ -88,12 +106,12 @@ pub fn start(id: &String) {
         panic!("试图 start 一个状态不是 Created 的容器.");
     }
 
-    let sock_path = format!("{}/container.sock", container_path.display());
+    let sock_path = container_path.join("container.sock");
     let ipc_channel = ipc::IpcChannel::connect(&sock_path);
     ipc_channel.send(&"start".to_string());
 
     state.status = ContainerStatus::Running;
-    println!("{:?}", state);
+    println!("{}", state);
     state.save_to(container_path.as_path());
 
     let msg = ipc_channel.recv();
@@ -116,8 +134,8 @@ pub fn delete(id: &String) {
     if state.status != ContainerStatus::Stopped {
         panic!("试图 delete 仍在运行的容器.");
     }
-    println!("{:?}", state);
-    if std::fs::remove_dir_all(Path::new(CONTAINER_ROOT_PATH).join(id)).is_err() {
+    println!("{}", state);
+    if std::fs::remove_dir_all(&container_path).is_err() {
         println!("删除容器失败.");
     }
 }
@@ -135,7 +153,7 @@ fn check_stopped(state: &mut ContainerState, container_path: &PathBuf) {
             _ => (),
         },
         Err(err) => {
-            if err.as_errno() != Some(Errno::ECHILD) {
+            if err != Errno::ECHILD {
                 panic!("查询进程状态失败: {}", err);
             }
         }

@@ -10,7 +10,7 @@
 2. 已安装 Clang 5.0 及以上版本, 指南: https://rust-lang.github.io/rust-bindgen/requirements.html
 3. 已安装 Rust, 指南: https://www.rust-lang.org/tools/install
 
-```bash
+```sh
 git clone https://github.com/FuuuOverclocking/tiny-ce.git
 cd tiny-ce
 ```
@@ -30,7 +30,7 @@ cd tiny-ce
 
 ⚠️ 需要 root 权限以运行, 将调用 sudo.
 
-```bash
+```sh
 # 创建并启动一个容器 (若未满足测试条件, 将打印帮助)
 cargo run cs
 
@@ -38,16 +38,9 @@ cargo run cs
 cargo run d
 ```
 
-若要以 Release 模式编译运行测试, 使用以下命令:
-
-```bash
-cargo test --release create_start -- --nocapture
-cargo test --release delete_all -- --nocapture
-```
-
 ❔ 发生了什么?
 
-转到 [src/lib.rs](src/lib.rs): `tests::create_start()`, `tests::delete_all()` 查看测试的源码.
+转到 [src/main.rs](src/main.rs): `create_start()`, `delete_all()` 查看测试过程.
 
 ## Tiny CE 的目标
 

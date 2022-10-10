@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>测试</title>
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="./res/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url("data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAfIAAsAAAAADDAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFZW7kosY21hcAAAAYAAAADTAAACjtP6ytBnbHlmAAACVAAAAxgAAAQ4zRtvlGhlYWQAAAVsAAAALwAAADYRwZsnaGhlYQAABZwAAAAcAAAAJAeKAzxobXR4AAAFuAAAABIAAAA8OGQAAGxvY2EAAAXMAAAAIAAAACAG5AfwbWF4cAAABewAAAAfAAAAIAEfAERuYW1lAAAGDAAAAVcAAAKFkAhoC3Bvc3QAAAdkAAAAYgAAAK2vz7wkeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2BkPsQ4gYGVgYOpk+kMAwNDP4RmfM1gxMjBwMDEwMrMgBUEpLmmMDgwVLy4xKzzX4chhrmK4QpQmBEkBwAZygyweJzFkr0NwjAQhZ+TEP6CRUfHBEwRUWaQTICyQbpMwRCskA5RUIONxG0RnnNpKAIV4qzPku/8c353ACYAYrIjCWCuMAh2ptf0/hiL3p/gyPUWa3osqlt0L1zu9r71z8dGrJRykFoauXQd932Lj5vhG+MjxGeYI8MKETObMpslf5EyP8tg+vHun5r539PvlvXzaVhRFVQDTPEWKVQR90KhnnC5Ek67vUKN4VuFasM/ldARj43CCkCsEjpJSoVVgRyU0GVSK6wUpFFCx8lFgX0BiXpRPQB4nE2TTWjcRhTH3xttpDhxN7uxPlp3u/FK7moRPixafRijNosxSw/LUsIwNcaEHPZggo/FmEKMCKWU4kNOOftQSlhE8alnH0Ix9BqWnHooPRrTQ0+mnu2bXTu2pPdGM9LM/6c3fwECTM4gBBMYQNqxzLrZAjqYSlqu2TAHZQA0/DQJH6FtzqGDnvbt4Ggwvzw/nL8EfH8kW0fsuRqhgWXZnY7M1picaUL7Du5BHeDzMIl83dAt016wH1qmvtSMo5R6YRJHTR//FXsff/nj/tc/5K9P5d+nP22+fFK5u7v3K39SW3y+OtDKO3L85vD09PD9z5X17a2N1g4tqk01RlqX7gyoEmnsWQtVr4rtZMmukEaFBZxzefkCn11cyKMLZgshRwgTYNoLNXCBz2ja7HvZG7hDpPSNfoo5vs0knK/9hb+rNpu+8kHPgk/Ao4kK3tWtTpSEtvkA9c+wE6UaUdwieNkaHg55tBEtRiEPw1s0+FtrtTcc9two2lhMknV7PZF/cs6+uUFTmpTGbEx7sQCPSLOttHS3GRltqp7SNzVSKzl6aWnZT/CX5k6/v9N3Hh8fHBwffJVjhrC6OgH5dkIt/tPsq+d/PD5Qz7G7efzq1THFjdZVPe/N6ulQ3JnDWSE5junsFsVIiFwL/htf1S5gJ3BfOcUxfHKLnzqpFpyfZ9cX+/5WB6a+Y0pHpzkNrYNVDwMsikK+y7WuLCRg/oFHkA8VT3rDg5ZnU6ktzzINymV0m74Xd5pfIGXyFeVEQSShkzqG7TBBa2OxVRKitLXv7h3uuftXnXq7lz2tZ/WnWa9dx9dCjDhHzmuVQATlmljr9dZErUydSo2Hbi/b1vXtrOeGCk2/8s3ZlO8+ueJT8BVlw5pGw2oYccdSiHHqx0RlabHqdNR9jAETl6PreJcPBnnfpTLnOQ8C3OV8AmQGzouV1iZdeb5SSIoVc8W8/kcDtksUH5FrU6/aqBqNWcMEzxG4DAQ14qRQhi9mWU0rzepKezbjfgCwQKxVYq5ajRgpRqy45CqwkJydcEkbTkvRz8P5/2ZpDTN4nGNgZGBgAOKb6v+/xvPbfGXgZmEAgeuB2kkI+v8bFgbmKiCXg4EJJAoAPyAKhQB4nGNgZGBg1vmvwxDDwgACQJKRARXwAwAzZQHQeJxjYQCCFAYGFgbSMQAcWACdAAAAAAAAAAwALgBgAIQAmADSAQgBIgE8AVABoAHeAfwCHHicY2BkYGDgZ7BgYGMAASYg5gJCBob/YD4DAA/hAWQAeJxlkbtuwkAURMc88gApQomUJoq0TdIQzEOpUDokKCNR0BuzBiO/tF6QSJcPyHflE9Klyyekz2CuG8cr7547M3d9JQO4xjccnJ57vid2cMHqxDWc40G4Tv1JuEF+Fm6ijRfhM+oz4Ra6eBVu4wZvvMFpXLIa40PYQQefwjVc4Uu4Tv1HuEH+FW7i1mkKn6Hj3Am3sHC6wm08Ou8tpSZGe1av1PKggjSxPd8zJtSGTuinyVGa6/Uu8kxZludCmzxMEzV0B6U004k25W35fj2yNlCBSWM1paujKFWZSbfat+7G2mzc7weiu34aczzFNYGBhgfLfcV6iQP3ACkSaj349AxXSN9IT0j16JepOb01doiKbNWt1ovippz6sVYYwsXgX2rGVFIkq7Pl2PNrI6qW6eOshj0xaSq9mpNEZIWs8LZUfOouNkVXxp/d5woqebeYIf4D2J1ywQB4nG3LOw6AIBAE0B384B+PAkgEa+QwNnYmHt+EpXSal5lkSBBnoP8oCFSo0aCFRIceA0ZMmLFAYSW88rmvtMUjG3RiQ9HvpfusM6zWNmtc5H/iPewha50tOt5PS/QBx2IeSwAA") format("woff");
+}
+
+.admonition {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .2);
+  position: relative;
+  margin: 1.5625em 0;
+  padding: 0 1.2rem;
+  border-left: .4rem solid rgba(68, 138, 255, .8);
+  border-radius: .2rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  overflow: auto;
+}
+
+.admonition>p {
+  margin-top: .8rem;
+}
+
+.admonition>.admonition-title {
+  margin: 0 -1.2rem;
+  padding: .8rem 1.2rem .8rem 3.6rem;
+  border-bottom: 1px solid rgba(68, 138, 255, .2);
+  background-color: rgba(68, 138, 255, .1);
+  font-weight: 700;
+}
+
+.admonition>.admonition-title:before {
+  position: absolute;
+  left: 1.2rem;
+  font-size: 1.5rem;
+  color: rgba(68, 138, 255, .8);
+  content: "\E3C9";
+}
+
+.admonition>.admonition-title:before {
+  font-family: Material Icons;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 2rem;
+  text-transform: none;
+  white-space: nowrap;
+  speak: none;
+  word-wrap: normal;
+  direction: ltr;
+}
+
+.admonition.summary,
+.admonition.abstract,
+.admonition.tldr {
+  border-left-color: rgba(0, 176, 255, .8);
+}
+
+.admonition.summary>.admonition-title,
+.admonition.abstract>.admonition-title,
+.admonition.tldr>.admonition-title {
+  background-color: rgba(0, 176, 255, .1);
+  border-bottom-color: rgba(0, 176, 255, .2);
+}
+
+.admonition.summary>.admonition-title:before,
+.admonition.abstract>.admonition-title:before,
+.admonition.tldr>.admonition-title:before {
+  color: rgba(0, 176, 255, 1);
+  ;
+  content: "\E8D2";
+}
+
+.admonition.hint,
+.admonition.tip {
+  border-left-color: rgba(0, 191, 165, .8);
+}
+
+.admonition.hint>.admonition-title,
+.admonition.tip>.admonition-title {
+  background-color: rgba(0, 191, 165, .1);
+  border-bottom-color: rgba(0, 191, 165, .2);
+}
+
+.admonition.hint>.admonition-title:before,
+.admonition.tip>.admonition-title:before {
+  color: rgba(0, 191, 165, 1);
+  content: "\E80E";
+}
+
+.admonition.info,
+.admonition.todo {
+  border-left-color: rgba(0, 184, 212, .8);
+}
+
+.admonition.info>.admonition-title,
+.admonition.todo>.admonition-title {
+  background-color: rgba(0, 184, 212, .1);
+  border-bottom-color: rgba(0, 184, 212, .2);
+}
+
+.admonition.info>.admonition-title:before,
+.admonition.todo>.admonition-title:before {
+  color: rgba(0, 184, 212, 1);
+  ;
+  content: "\E88E";
+}
+
+.admonition.success,
+.admonition.check,
+.admonition.done {
+  border-left-color: rgba(0, 200, 83, .8);
+}
+
+.admonition.success>.admonition-title,
+.admonition.check>.admonition-title,
+.admonition.done>.admonition-title {
+  background-color: rgba(0, 200, 83, .1);
+  border-bottom-color: rgba(0, 200, 83, .2);
+}
+
+.admonition.success>.admonition-title:before,
+.admonition.check>.admonition-title:before,
+.admonition.done>.admonition-title:before {
+  color: rgba(0, 200, 83, 1);
+  ;
+  content: "\E876";
+}
+
+.admonition.question,
+.admonition.help,
+.admonition.faq {
+  border-left-color: rgba(100, 221, 23, .8);
+}
+
+.admonition.question>.admonition-title,
+.admonition.help>.admonition-title,
+.admonition.faq>.admonition-title {
+  background-color: rgba(100, 221, 23, .1);
+  border-bottom-color: rgba(100, 221, 23, .2);
+}
+
+.admonition.question>.admonition-title:before,
+.admonition.help>.admonition-title:before,
+.admonition.faq>.admonition-title:before {
+  color: rgba(100, 221, 23, 1);
+  ;
+  content: "\E887";
+}
+
+.admonition.warning,
+.admonition.attention,
+.admonition.caution {
+  border-left-color: rgba(255, 145, 0, .8);
+}
+
+.admonition.warning>.admonition-title,
+.admonition.attention>.admonition-title,
+.admonition.caution>.admonition-title {
+  background-color: rgba(255, 145, 0, .1);
+  border-bottom-color: rgba(255, 145, 0, .2);
+}
+
+.admonition.attention>.admonition-title:before {
+  color: rgba(255, 145, 0, 1);
+  content: "\E417";
+}
+
+.admonition.warning>.admonition-title:before,
+.admonition.caution>.admonition-title:before {
+  color: rgba(255, 145, 0, 1);
+  content: "\E002";
+}
+
+.admonition.failure,
+.admonition.fail,
+.admonition.missing {
+  border-left-color: rgba(255, 82, 82, .8);
+}
+
+.admonition.failure>.admonition-title,
+.admonition.fail>.admonition-title,
+.admonition.missing>.admonition-title {
+  background-color: rgba(255, 82, 82, .1);
+  border-bottom-color: rgba(255, 82, 82, .2);
+}
+
+.admonition.failure>.admonition-title:before,
+.admonition.fail>.admonition-title:before,
+.admonition.missing>.admonition-title:before {
+  color: rgba(255, 82, 82, 1);
+  ;
+  content: "\E14C";
+}
+
+.admonition.danger,
+.admonition.error,
+.admonition.bug {
+  border-left-color: rgba(255, 23, 68, .8);
+}
+
+.admonition.danger>.admonition-title,
+.admonition.error>.admonition-title,
+.admonition.bug>.admonition-title {
+  background-color: rgba(255, 23, 68, .1);
+  border-bottom-color: rgba(255, 23, 68, .2);
+}
+
+.admonition.danger>.admonition-title:before {
+  color: rgba(255, 23, 68, 1);
+  content: "\E3E7";
+}
+
+.admonition.error>.admonition-title:before {
+  color: rgba(255, 23, 68, 1);
+  content: "\E14C";
+}
+
+.admonition.bug>.admonition-title:before {
+  color: rgba(255, 23, 68, 1);
+  content: "\E868";
+}
+
+.admonition.example,
+.admonition.snippet {
+  border-left-color: rgba(0, 184, 212, .8);
+}
+
+.admonition.example>.admonition-title,
+.admonition.snippet>.admonition-title {
+  background-color: rgba(0, 184, 212, .1);
+  border-bottom-color: rgba(0, 184, 212, .2);
+}
+
+.admonition.example>.admonition-title:before,
+.admonition.snippet>.admonition-title:before {
+  color: rgba(0, 184, 212, 1);
+  ;
+  content: "\E242";
+}
+
+.admonition.quote,
+.admonition.cite {
+  border-left-color: rgba(158, 158, 158, .8);
+}
+
+.admonition.quote>.admonition-title,
+.admonition.cite>.admonition-title {
+  background-color: rgba(158, 158, 158, .1);
+  border-bottom-color: rgba(158, 158, 158, .2);
+}
+
+.admonition.quote>.admonition-title:before,
+.admonition.cite>.admonition-title:before {
+  color: rgba(158, 158, 158, 1);
+  ;
+  content: "\E244";
+}
+
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+html body {
+  color: #2c2c2e !important;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: '黑体';
+}
+.title-1 {
+  font-size: 44px;
+  line-height: 100%;
+  color: #4472C4;
+  margin-bottom: 3px;
+}
+.title-2 {
+  font-size: 27px;
+  line-height: 100%;
+  margin: 0;
+}
+.me,
+.me * {
+  font-family: '黑体';
+  font-size: 18px;
+  line-height: 100%;
+  margin-top: 16px;
+  margin-bottom: 45px;
+}
+.me span {
+  margin-right: 18px;
+}
+h2 {
+  padding-bottom: 2px !important;
+  font-size: 1.5em !important;
+  border-bottom: 1.4px solid #555;
+}
+h3 {
+  font-size: 20px !important;
+}
+p,
+ul,
+li {
+  font-family: 'Segoe UI', 'Microsoft Yahei';
+}
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="tiny-ce">Tiny CE</h1>
+
+<p>一个使用 Rust 和 C++ 编写, 基于 Linux 系统调用实现的一个容器引擎, 支持 OCI 标准的一个子集.</p>
+<div class="admonition help">
+<p class="admonition-title">为何选用 Rust 与 C++ 开发?</p>
+<p>我们希望尽量减少对环境和第三方工具的依赖, 仅仅通过底层系统调用, 实现一个高效的容器引擎. 从这点来看, Rust 和 C++ 都是非常合适的选项, 它们不仅擅长精确地与 OS 打交道, 而且有着大量零开销抽象的设计, 特别是 Rust 和 C++ 17 的一些现代语言特性, 能让我们以一种更为轻松、富有表达力的方式编写引擎.</p>
+<p>话虽如此, 我们还没有底层到直接用 <code>syscall</code> 或中断来发起系统调用. 在 Rust 和 C++ 中, 我们分别使用了 nix 和 glibc 库, 它们都是对 Linux 系统调用的一层薄薄的封装.</p>
+</div>
+<div class="admonition help">
+<p class="admonition-title">Tiny CE 支持的 OCI 标准子集, 具体是什么?</p>
+<p>在本文后续章节中, 我们测试了 Tiny CE 支持的 OCI 标准子集的大部分特性. 关于这一子集的完整文档, 可以在 <code>tiny-ce-repo/docs/tiny-ce-spec.md</code> 找到.</p>
+</div>
+<div id="tab-browse-labels">
+  <label id="tab-browse-label-1" style="color: rgb(82, 108, 254)">
+    架构速览
+  </label>
+  <label id="tab-browse-label-2" style="color: rgba(0, 0, 0, 0.54)">
+    目录速览
+  </label>
+  <label id="tab-browse-label-3" style="color: rgba(0, 0, 0, 0.54)">
+    API 速览
+  </label>
+  <label id="tab-browse-label-4" style="color: rgba(0, 0, 0, 0.54)">
+    流程速览
+  </label>
+</div>
+<div id="tab-browse-1">
+<div style="text-align:center;">
+<img src="./res/2022-06-10-14-15-12.png" style="width:80%;">
+</div>
+</div>
+<div id="tab-browse-2" style="display: none;">
+<pre data-role="codeBlock" data-info="shell" class="language-shell">tiny-ce/
+├── tiny-ce                           <span class="token comment"># 二进制可执行文件, 编译目标: x86_64-linux-gnu</span>
+├── tiny-ce-repo/                     <span class="token comment"># 项目源码仓库</span>
+│   ├── docs/
+│   │   ├── oci-runtime-spec-1.1-alpha/<span class="token punctuation">..</span>.    <span class="token comment"># OCI 标准 1.1 的中文翻译</span>
+│   │   └── tiny-ce-spec.md                   <span class="token comment"># Tiny CE 的 API 参考 和 OCI 标准子集</span>
+│   ├── src/
+│   │   ├── container/<span class="token punctuation">..</span>.             <span class="token comment"># 容器相关功能</span>
+│   │   ├── cpp/                      <span class="token comment"># C++ 代码均在该目录下</span>
+│   │   │   ├── child_process/<span class="token punctuation">..</span>.     <span class="token comment"># 子进程 - Container 进程</span>
+│   │   │   ├── libcgroups/<span class="token punctuation">..</span>.        <span class="token comment"># cgroups 管理工具</span>
+│   │   │   ├── libnetns/<span class="token punctuation">..</span>.          <span class="token comment"># net namespace 管理工具</span>
+│   │   │   └── exports.hpp           <span class="token comment"># 通过 C ABI, 将 C++ 代码接口暴露给 Rust 代码</span>
+│   │   ├── cpp_exports.rs            <span class="token comment"># 收集暴露的 C++ 接口, 封装为 Rust 模块并导出</span>
+│   │   ├── actions.rs                <span class="token comment"># 实现 create, start, delete 函数</span>
+│   │   ├── lib.rs                    <span class="token comment"># tiny-ce 作为 library 的定义, 包括了单元测试</span>
+│   │   └── main.rs                   <span class="token comment"># tiny-ce 作为 binary executable 的定义 (一个临时的, 便于测试的 CLI 程序)</span>
+│   ├── README.md
+│   └── <span class="token punctuation">..</span>.
+└── test/
+    ├── centos/                       <span class="token comment"># CentOS bundle</span>
+    │   ├── rootfs/<span class="token punctuation">..</span>.                <span class="token comment"># rootfs, 需读者自行准备</span>
+    │   └── config.json
+    └── centos-2/<span class="token punctuation">..</span>.                  <span class="token comment"># 另一个 CentOS bundle, 用于启动第二个容器, 测试容器间网络互联</span>
+</pre></div>
+<div id="tab-browse-3" style="display: none;">
+<p>作为 Library 使用时, Tiny CE 导出了如下 API:</p>
+<pre data-role="codeBlock" data-info="rust" class="language-rust"><span class="token keyword keyword-fn">fn</span> <span class="token function-definition function">create</span><span class="token punctuation">(</span>id<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token class-name">String</span><span class="token punctuation">,</span> bundle<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token class-name">String</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment">// 创建一个容器</span>
+<span class="token keyword keyword-fn">fn</span> <span class="token function-definition function">start</span><span class="token punctuation">(</span>id<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token class-name">String</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                          <span class="token comment">// 启动一个容器</span>
+<span class="token keyword keyword-fn">fn</span> <span class="token function-definition function">delete</span><span class="token punctuation">(</span>id<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token class-name">String</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                         <span class="token comment">// 删除一个容器</span>
+<span class="token keyword keyword-const">const</span> <span class="token constant">CONTAINER_ROOT_PATH</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token lifetime-annotation symbol">'static</span> <span class="token keyword keyword-str">str</span><span class="token punctuation">;</span>        <span class="token comment">// 容器临时文件的根目录</span>
+</pre><p>用例:</p>
+<pre data-role="codeBlock" data-info="rust" class="language-rust"><span class="token keyword keyword-use">use</span> <span class="token namespace">std<span class="token punctuation">::</span></span><span class="token punctuation">{</span>thread<span class="token punctuation">,</span> <span class="token namespace">time<span class="token punctuation">::</span></span><span class="token class-name">Duration</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-use">use</span> <span class="token namespace">tiny_ce<span class="token punctuation">::</span></span><span class="token punctuation">{</span>create<span class="token punctuation">,</span> delete<span class="token punctuation">,</span> start<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-fn">fn</span> <span class="token function-definition function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-let">let</span> container_id <span class="token operator">=</span> <span class="token string">"centos"</span><span class="token punctuation">.</span><span class="token function">to_string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-let">let</span> bundle <span class="token operator">=</span> <span class="token string">"./test/centos"</span><span class="token punctuation">.</span><span class="token function">to_string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">create</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>container_id<span class="token punctuation">,</span> <span class="token operator">&amp;</span>bundle<span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token comment">// 创建容器</span>
+    <span class="token function">start</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>container_id<span class="token punctuation">)</span><span class="token punctuation">;</span>                       <span class="token comment">// 启动容器</span>
+    <span class="token namespace">thread<span class="token punctuation">::</span></span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token class-name">Duration</span><span class="token punctuation">::</span><span class="token function">from_secs</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// 睡眠 5 秒</span>
+    <span class="token function">delete</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>container_id<span class="token punctuation">)</span><span class="token punctuation">;</span>                      <span class="token comment">// 删除容器</span>
+<span class="token punctuation">}</span>
+</pre><p>为便于测试和演示, 我们在这之上添加了一个临时的命令行接口, 编译为二进制可执行文件 (编译目标: x86_64-linux-gnu), 随附在当前文件夹中.</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell">$ ./tiny-ce
+Usage: tiny-ce <span class="token punctuation">[</span>command<span class="token punctuation">]</span>
+
+Commands:
+  cs <span class="token operator">&lt;</span>bundle-path<span class="token operator">&gt;</span>     创建并启动一个容器
+  del                  删除所有容器
+
+Example: 在 test/centos 下制作容器的 rootfs 并启动
+  $ <span class="token builtin class-name">cd</span> ./test/centos <span class="token operator">&amp;&amp;</span> <span class="token function">mkdir</span> rootfs
+  $ docker <span class="token builtin class-name">export</span> <span class="token variable"><span class="token variable">$(</span>docker create centos:centos7.9.2009<span class="token variable">)</span></span> <span class="token operator">|</span> <span class="token function">tar</span> -C rootfs -xvf -
+  $ <span class="token operator">&lt;</span>somewhere<span class="token operator">&gt;</span>/tiny-ce cs ./
+</pre></div>
+<div id="tab-browse-4" style="display: none;">
+<p><img src="./res/2022-06-10-23-27-57.png" alt=""></p>
+</div>
+<h2 class="mume-header" id="%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91">从源码编译</h2>
+
+<p>要从源码编译, 请访问我们托管于 <a href="https://github.com/FuuuOverclocking/tiny-ce">github.com/FuuuOverclocking/tiny-ce</a> 的项目, 遵循 <a href="https://github.com/FuuuOverclocking/tiny-ce#readme">README.md</a> 中的编译指示.</p>
+<h2 class="mume-header" id="%E5%AE%9E%E9%AA%8C">测试</h2>
+
+<p>若要复现测试, 只需在 <code>./test/centos/rootfs</code> 和 <code>./test/centos-2/rootfs</code> 准备 CentOS 容器的根目录.</p>
+<h4 class="mume-header" id="1-%E5%9F%BA%E7%A1%80%E6%B5%8B%E8%AF%95">1. 基础测试</h4>
+
+<pre data-role="codeBlock" data-info="shell" class="language-shell">$ ./test/network_prepare.sh
+$ <span class="token function">sudo</span> ./tiny-ce cs ./test/centos     <span class="token comment"># 启动该 bundle 代表的容器, ./test/centos/config.json 是 bundle 的配置文件</span>
+</pre><img src="./res/exp.1.1.gif">
+<h5 class="mume-header" id="%E6%A3%80%E6%9F%A5-pid-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4">检查 PID 命名空间:</h5>
+
+<img src="./res/exp.1.2.gif">
+<h5 class="mume-header" id="%E6%A3%80%E6%9F%A5-mount-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4">检查 mount 命名空间:</h5>
+
+<img src="./res/exp.1.3.gif">
+<h5 class="mume-header" id="%E6%A3%80%E6%9F%A5-uts-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4">检查 UTS 命名空间:</h5>
+
+<img src="./res/exp.1.4.gif">
+<h5 class="mume-header" id="%E6%A3%80%E6%9F%A5-ipc-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4">检查 IPC 命名空间:</h5>
+
+<img src="./res/exp.1.5.gif">
+<h5 class="mume-header" id="%E5%85%B3%E4%BA%8E-user-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4">关于 user 命名空间</h5>
+
+<div class="admonition info">
+<p class="admonition-title">Rootless 容器</p>
+<p>Rootless 容器是指非特权用户创建, 运行和以其他方式管理容器的能力. 该术语还包括围绕容器的各种工具, 这些工具也可以作为非特权用户运行. Docker 从 19.03 版本开始提供对 Rootless 的部分支持, 从 20.10 版本开始提供全面支持.</p>
+<p>Rootless 在 user namespace 方面, 体现为将容器内的 root (uid = 0) 用户映射到容器外的 non-root 用户.</p>
+</div>
+<p>Rootless 技术由于缺少 root 权限, 在挂载、创建设备以及访问网络方面需要更多工具的配合. 顾虑到其复杂性, 我们未提供对它的支持.</p>
+<p>此外, 由于我们遵照 OCI 标准实现了该引擎, 在容器进程初始化过程中各项系统调用几乎都需要 SYS_CAP_ADMIN 能力, 因此不支持 uid/gid mapping 设置为 <code>0 0 n</code> 以外的值. 简而言之, 在 Tiny CE 中, 你只能将 root 用户映射为 root 用户😂!</p>
+<p>尽管始终为 root 用户, 但容器内外处在不同的 user 命名空间中:</p>
+<p><img src="./res/2022-06-10-19-30-39.png" alt=""></p>
+<p>请注意区分 config.json 的 <code>process.user.uid/gid</code> 与 <code>linux.uidMappings/gidMappings</code>, 尽管仅能将 root 映射到 root, 以 root 用户启动子进程, 但容器仍然能在运行 entry point 之前切换到 <code>process.user</code> 指定的用户.</p>
+<h4 class="mume-header" id="2-%E6%B5%8B%E8%AF%95%E4%B8%A4%E4%B8%AA%E5%AE%B9%E5%99%A8%E4%B9%8B%E9%97%B4%E7%9A%84%E7%BD%91%E7%BB%9C%E8%BF%9E%E9%80%9A%E6%80%A7">2. 测试两个容器之间的网络连通性</h4>
+
+<pre data-role="codeBlock" data-info="shell" class="language-shell"><span class="token comment"># 事先准备好两个网络命名空间后, 在两个终端分别执行</span>
+$ <span class="token function">sudo</span> ./tiny-ce cs ./test/centos
+$ <span class="token function">sudo</span> ./tiny-ce cs ./test/centos-2
+
+$ <span class="token function">ping</span> <span class="token number">10.0</span>.0.2       <span class="token comment"># 在容器 test/centos 执行</span>
+$ <span class="token function">ping</span> <span class="token number">10.0</span>.0.1       <span class="token comment"># 在容器 test/centos-2 执行</span>
+</pre><img src="./res/exp.1.6.gif">
+<h4 class="mume-header" id="3-%E9%80%9A%E8%BF%87-cgroups-%E9%99%90%E5%88%B6%E8%B5%84%E6%BA%90">3. 通过 CGroups 限制资源</h4>
+
+<p>Python 测试脚本, 可以占满服务器的 4 核 CPU:</p>
+<div style="text-align:center">
+<img src="./res/2022-06-10-23-13-25.png" width="400">
+</div>
+<p>两个容器的 <code>cpu.shares</code> 分别被设置为 3072 和 1024:</p>
+<div style="text-align:center">
+<img src="./res/2022-06-10-23-13-57.png" height="300">
+<img src="./res/2022-06-10-23-14-11.png" height="300">
+</div>
+<p>通过 top 命令, 可看到两个容器占用的 CPU 不平等:</p>
+<img src="./res/2022-06-10-23-12-43.png">
+<p>在内存测试上, 我们遇到了一些问题, 这可能与 tiny-ce 没有正确设置 oom killer 有关.</p>
+<h2 class="mume-header" id="%E5%8E%9F%E7%90%86">原理</h2>
+
+<h3 class="mume-header" id="1-%E5%88%9B%E5%BB%BA-network-namespace-%E5%B9%B6%E5%87%86%E5%A4%87%E8%AE%BE%E5%A4%87">1. 创建 network namespace 并准备设备</h3>
+
+<p>OCI 标准并不包括网络相关的设置, 因此我们事先单独执行一个 shell 脚本来准备网络设备和命名空间.</p>
+<p><code>test/network_prepare.sh</code>:</p>
+<ul>
+<li>创建两个 network namespace</li>
+<li>为两个 network namespace 分别准备 veth 对</li>
+<li>在 host 上创建一个 bridge, 并将 veth 放入</li>
+</ul>
+<p>详细如下:</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell"><span class="token function">sudo</span> <span class="token function">ip</span> netns <span class="token function">add</span> tiny-ce-0<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>                                          <span class="token comment"># 添加两个新的 network namespace</span>
+<span class="token function">sudo</span> <span class="token function">ip</span> <span class="token function">link</span> <span class="token function">add</span> tiny-ce-br <span class="token builtin class-name">type</span> bridge                                 <span class="token comment"># 添加 bridge</span>
+<span class="token function">sudo</span> <span class="token function">ip</span> <span class="token function">link</span> <span class="token builtin class-name">set</span> dev tiny-ce-br up                                      <span class="token comment"># 启动 bridge</span>
+<span class="token function">sudo</span> <span class="token function">ip</span> <span class="token function">link</span> <span class="token function">add</span> ce-0<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>-container <span class="token builtin class-name">type</span> veth peer name ce-0<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>-host     <span class="token comment"># 添加两对 veth pair</span>
+<span class="token function">sudo</span> <span class="token function">ip</span> <span class="token function">link</span> <span class="token builtin class-name">set</span> dev ce-0<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>-container netns tiny-ce-0<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>               <span class="token comment"># veth 一侧连接 network namespace</span>
+<span class="token function">sudo</span> <span class="token function">ip</span> netns <span class="token builtin class-name">exec</span> tiny-ce-0<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token function">ip</span> <span class="token function">link</span> <span class="token builtin class-name">set</span> dev ce-0-container name eth0 <span class="token comment"># 对设备命名</span>
+<span class="token function">sudo</span> <span class="token function">ip</span> netns <span class="token builtin class-name">exec</span> tiny-ce-0<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token function">ip</span> addr <span class="token function">add</span> <span class="token number">10.0</span>.0.1<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>/24 dev eth0     <span class="token comment"># 对设备分配 ip</span>
+<span class="token function">sudo</span> <span class="token function">ip</span> netns <span class="token builtin class-name">exec</span> tiny-ce-0<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token function">ip</span> <span class="token function">link</span> <span class="token builtin class-name">set</span> dev eth0 up                 <span class="token comment"># 启动设备</span>
+<span class="token function">sudo</span> <span class="token function">ip</span> <span class="token function">link</span> <span class="token builtin class-name">set</span> dev ce-0<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>-host master tiny-ce-br                     <span class="token comment"># veth 另一侧连接 bridge</span>
+<span class="token function">sudo</span> <span class="token function">ip</span> <span class="token function">link</span> <span class="token builtin class-name">set</span> dev ce-0<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>-host up                                    <span class="token comment"># 启动设备</span>
+<span class="token function">sudo</span> <span class="token function">ip</span> addr <span class="token function">add</span> <span class="token number">10.0</span>.1.0/24 dev tiny-ce-br                             <span class="token comment"># 对 bridge 分配 ip，事先停止 bridge，分配 ip 后重新启动 bridge</span>
+</pre><h3 class="mume-header" id="2-rust-%E9%83%A8%E5%88%86">2. Rust 部分</h3>
+
+<pre data-role="codeBlock" data-info="rust" class="language-rust"><span class="token keyword keyword-fn">fn</span> <span class="token function-definition function">create</span><span class="token punctuation">(</span>id<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token class-name">String</span><span class="token punctuation">,</span> bundle<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token class-name">String</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment">// 创建一个容器</span>
+<span class="token keyword keyword-fn">fn</span> <span class="token function-definition function">start</span><span class="token punctuation">(</span>id<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token class-name">String</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                          <span class="token comment">// 启动一个容器</span>
+<span class="token keyword keyword-fn">fn</span> <span class="token function-definition function">delete</span><span class="token punctuation">(</span>id<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token class-name">String</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                         <span class="token comment">// 删除一个容器</span>
+</pre><h4 class="mume-header" id="21-createid-bundle">2.1 <code>create(id, bundle)</code></h4>
+
+<p>使用目录 bundle 创建一个容器, 并指定其 id.</p>
+<p>总体流程如下:</p>
+<ol>
+<li>读入并解析 <code>{bundle}/config.json</code></li>
+<li>创建该容器的临时文件夹 <code>{CONTAINER_ROOT_PATH}/{容器 id}</code>, 在其下创建 <code>state.json</code> 记录容器的状态</li>
+<li>启动一个 Unix domain socket 并监听, 路径为 <code>{container_path}/init.sock</code></li>
+<li>调用 C++ 函数 <code>setup_args()</code>, 提供子进程运行所需参数</li>
+<li>在堆上分配 4MB 空间, 作为子进程的栈空间</li>
+<li>依据需要隔离的命名空间, 指定 clone_flags, 调用 clone(2), 启动共享内存的子进程</li>
+<li>创建 cgroup, 设置资源限制, 并加入子进程的 pid</li>
+<li>依据父子进程通信内容, 执行不同的动作, 详见 2.3 节</li>
+<li>容器完成创建, 更改 state, 并保存到 <code>state.json</code></li>
+</ol>
+<h4 class="mume-header" id="22-startid-bundle">2.2 <code>start(id, bundle)</code></h4>
+
+<p>启动指定 id 的容器.</p>
+<p>原理为, 通过 <code>{container_path}/container.sock</code>, 向容器发送 <code>"start"</code>.</p>
+<h4 class="mume-header" id="23-%E7%88%B6%E5%AD%90%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B">2.3 父子进程通信过程</h4>
+
+<p>2 个 Unix domain socket 的作用分别是:</p>
+<ul>
+<li><code>{container_path}/init.sock</code>:
+<ul>
+<li>server: runtime 进程, client: container 进程</li>
+<li>当 container 成功启动, 并开始在 <code>{container_path}/container.sock</code> 上监听时, container 发送 <code>"ok"</code></li>
+</ul>
+</li>
+<li><code>{container_path}/container.sock</code>:
+<ul>
+<li>server: container 进程, client: runtime 进程</li>
+<li>container 将 accept 两次, 第一次发生在 <code>create()</code> 中, 第二次发生在 <code>start()</code> 中</li>
+<li>在 <code>create()</code> 中:
+<ol>
+<li>runtime &lt;- container: 若发生错误, 发送 <code>/error:.*/</code></li>
+<li>runtime -&gt; container: 完成 uid/gid mapping 的写入后, 发送 <code>"mapped"</code></li>
+<li>runtime &lt;- container: 在 pivot_root(2) 之前, 发送 <code>"pivot?"</code></li>
+<li>runtime -&gt; container: 收到 <code>"pivot?"</code> 后, 发送 <code>"ok"</code></li>
+<li>runtime &lt;- container: 准备就绪, 可以 start 时, 发送 <code>"ready"</code></li>
+</ol>
+</li>
+<li>在 <code>start()</code> 中:
+<ol>
+<li>runtime -&gt; container: 发送 <code>"start"</code></li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="mume-header" id="24-deleteid-bundle">2.4 <code>delete(id, bundle)</code></h4>
+
+<p>删除指定 id 的容器. 容器进程必须已经结束运行.</p>
+<h3 class="mume-header" id="3-c-%E9%83%A8%E5%88%86">3. C++ 部分</h3>
+
+<p>C++ 相关代码放在 <code>src/cpp/</code> 文件夹下，主要包括三个部分：</p>
+<ul>
+<li><code>libcgroups</code> 实现了一个简单的 cgroup 功能测试</li>
+<li><code>libnetns</code> 实现了一个简单的 network namespace 功能测试</li>
+<li><code>child_process</code> 负责子进程处理的主要流程，包括进入以后的通信、创建各项资源、设置对应环境、运行实际程序等等一系列的操作</li>
+</ul>
+<h4 class="mume-header" id="31-child_process">3.1 child_process</h4>
+
+<h5 class="mume-header" id="%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B">整体流程</h5>
+
+<p>在外层的 Rust 部分与 C++ 部分交互的主要函数在 <code>entry.cpp</code> 文件中，通过 <code>exports.hpp</code> 将对应的函数暴露给 Rust，Rust 会首先调用 <code>entry.cpp</code> 中的 <code>setup_args</code> 设置好对应的参数，包括</p>
+<ul>
+<li><code>config</code>：通过 <a href="https://github.com/nlohmann/json">nlohmann/json</a> 库解析得到的 config 对应 json 文件</li>
+<li><code>config_path</code>：config 文件的路径</li>
+<li><code>init_lock_path</code>：与主进程建立通信用的 sock 路径</li>
+<li><code>sock_path</code>：在创建阶段由子进程创建并监听的 sock 路径，接受包括开始以及切换根目录相关的通信</li>
+<li>其余参数在子进程运行阶段被创建并使用，在这里不多做介绍</li>
+</ul>
+<p>而后 Rust 调用 <code>clone</code> 系统调用创建新的子进程，在子进程中会运行 <code>child_main</code> 函数。</p>
+<p>函数首先根据 config 解析得到将要运行的容器系统的根目录 <code>rootfs</code>，同时解析得到最终容器将要运行的命令、对应参数、以及环境变量等等。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token function">assert</span><span class="token punctuation">(</span>args <span class="token operator">!=</span> <span class="token keyword keyword-nullptr">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// debug.curr_debug_level = DebugLevel::Warn; // 令其只打印 warn, error</span>
+
+debug<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"C++ 子进程开始运行..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-auto">auto</span> rootfs <span class="token operator">=</span> args<span class="token operator">-&gt;</span>config<span class="token punctuation">[</span><span class="token string">"root"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"path"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-auto">auto</span> resolved_rootfs <span class="token operator">=</span> <span class="token function">resolve_rootfs</span><span class="token punctuation">(</span>args<span class="token operator">-&gt;</span>config_path<span class="token punctuation">,</span> rootfs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+args<span class="token operator">-&gt;</span>resolved_rootfs <span class="token operator">=</span> resolved_rootfs<span class="token punctuation">;</span>
+
+<span class="token keyword keyword-auto">auto</span> process_cwd <span class="token operator">=</span> args<span class="token operator">-&gt;</span>config<span class="token punctuation">[</span><span class="token string">"process"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"cwd"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-auto">auto</span> process_env <span class="token operator">=</span> args<span class="token operator">-&gt;</span>config<span class="token punctuation">[</span><span class="token string">"process"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"env"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">assert</span><span class="token punctuation">(</span>process_env<span class="token punctuation">.</span><span class="token function">is_array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-auto">auto</span> process_args <span class="token operator">=</span> args<span class="token operator">-&gt;</span>config<span class="token punctuation">[</span><span class="token string">"process"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"args"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">assert</span><span class="token punctuation">(</span>process_args<span class="token punctuation">.</span><span class="token function">is_array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-auto">auto</span> process_command <span class="token operator">=</span> process_args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-auto">auto</span> process_argv <span class="token operator">=</span> <span class="token function">args_to_argv</span><span class="token punctuation">(</span>process_args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-auto">auto</span> process_argv_len <span class="token operator">=</span> process_args<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>而后运行一系列的中间件，设置好容器运行所需要的所有环境。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token function">ExecuteMiddleware</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>配置好环境后，通过 <code>fork</code> 系统调用，子进程创建自己的子进程，通过 <code>execvp</code> 执行真正要运行的命令，同时子进程会等待客户命令运行结束，并向主进程发送结束信号从而停止容器运行。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-auto">auto</span> pid <span class="token operator">=</span> <span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">expect</span><span class="token punctuation">(</span>pid <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"fork 失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>pid <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">execvp</span><span class="token punctuation">(</span>process_command<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> process_argv<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-int">int</span> status <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token function">wait</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">SendExit</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><h5 class="mume-header" id="middleware">middleware</h5>
+
+<p>运行过程中最主要的部分是不同的中间件的运作，中间件的格式都在 <code>middleware.hpp</code> 中定义，同时在这里声明了所有的中间件。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-typedef">typedef</span> <span class="token keyword keyword-void">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>Middleware<span class="token punctuation">)</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-void">void</span> <span class="token function">ExecuteMiddleware</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>中间件的实现都放到了对应的 cpp 文件中，而实际执行时，在 <code>middleware.cpp</code> 中定义的 <code>fn_array</code> 定义了中间件的实际执行顺序，在 <code>ExecuteMiddleware</code> 中被逐个执行。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-void">void</span> <span class="token function">ExecuteMiddleware</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-auto">auto</span> fn <span class="token operator">:</span> fn_array<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">fn</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>具体执行的每个中间件会按顺序在下文解释。</p>
+<h5 class="mume-header" id="preparesocket">PrepareSocket</h5>
+
+<p>函数在 <code>socket.cpp</code> 文件中定义，主要负责建立与主进程的 IPC 通信过程。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-void">void</span> <span class="token function">PrepareSocket</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">initSocket</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">containerSocket</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span> <span class="token operator">*</span>init_msg <span class="token operator">=</span> <span class="token string">"ok"</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> write_bytes <span class="token operator">=</span> <span class="token function">write</span><span class="token punctuation">(</span>args<span class="token operator">-&gt;</span>init_lock_sock<span class="token punctuation">,</span> init_msg<span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>init_msg<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>write_bytes <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">close</span><span class="token punctuation">(</span>args<span class="token operator">-&gt;</span>init_lock_sock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><p><code>initSocket</code> 函数根据传入的参数建立客户端 socket，在 <code>bind</code> 后 <code>connect</code>，建立与主进程的 socket 通信。</p>
+<p><code>containerSocket</code> 函数根据参数建立新的服务端 socket，在 <code>bind</code> 后 <code>listen</code> 监听，由于在此时不调用 <code>accept</code>，也就不会阻塞。在子进程建立 socket 是由于主进程会经过多个阶段，因此需要子进程作为服务侧，监听不同阶段的主进程连接。</p>
+<p>在 socket 都准备好后，通过调用 <code>write</code> 函数，向 init socket 发送信息 <code>ok</code>，表示 socket 建立过程已经结束，发送成功后关闭 init socket。</p>
+<h5 class="mume-header" id="connectruntime">ConnectRuntime</h5>
+
+<p>函数在 <code>socket.cpp</code> 中定义，负责建立起以子进程为服务侧的 IPC 通信过程</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-void">void</span> <span class="token function">ConnectRuntime</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    sockaddr_un runtime_un<span class="token punctuation">;</span>
+    socklen_t accept_un_size <span class="token operator">=</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span>runtime_un<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    args<span class="token operator">-&gt;</span>container_receive_runtime_sock <span class="token operator">=</span>
+        <span class="token function">accept</span><span class="token punctuation">(</span>args<span class="token operator">-&gt;</span>container_sock<span class="token punctuation">,</span> <span class="token punctuation">(</span>sockaddr <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>runtime_un<span class="token punctuation">,</span> <span class="token operator">&amp;</span>accept_un_size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>args<span class="token operator">-&gt;</span>container_receive_runtime_sock <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><p>通过调用 <code>accept</code>，并将对应的文件描述符存储到 <code>container_receive_runtime_sock</code>，建立起在上一步中子进程监听的 socket 的通信。</p>
+<h5 class="mume-header" id="checkusermapping">CheckUserMapping</h5>
+
+<p>函数在 <code>communication.cpp</code> 中定义，我们约定如果 config 文件中如果存在 namespace 的 user 项并且 path 为空，即有如下形式</p>
+<pre data-role="codeBlock" data-info="json" class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"linux"</span><span class="token operator">:</span><span class="token punctuation">{</span>
+        <span class="token property">"namespaces"</span><span class="token operator">:</span><span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"user"</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>那么主进程会写入对应的 uid/gid mapping，之后发送 <code>mapped</code>。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-void">void</span> <span class="token function">CheckUserMapping</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-auto">auto</span> args_ns <span class="token operator">=</span> args<span class="token operator">-&gt;</span>config<span class="token punctuation">[</span><span class="token string">"linux"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"namespaces"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>args_ns<span class="token punctuation">.</span><span class="token function">is_array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-auto">auto</span> <span class="token operator">&amp;</span>ns <span class="token operator">:</span> args_ns<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>ns<span class="token punctuation">[</span><span class="token string">"type"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">"user"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>ns<span class="token punctuation">[</span><span class="token string">"path"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">is_null</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-char">char</span> <span class="token operator">*</span>buf <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token keyword keyword-char">char</span><span class="token punctuation">[</span>BUF_LEN<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token keyword keyword-auto">auto</span> read_bytes <span class="token operator">=</span> <span class="token function">read</span><span class="token punctuation">(</span>args<span class="token operator">-&gt;</span>container_receive_runtime_sock<span class="token punctuation">,</span>
+                                       buf<span class="token punctuation">,</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">expect</span><span class="token punctuation">(</span>read_bytes <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"read container.sock 时发生错误"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">strcmp</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> <span class="token string">"mapped"</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">,</span>
+                       <span class="token string">"期望从 container.sock 接收到 mapped, 意外接收到 "</span><span class="token punctuation">,</span> buf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword keyword-delete">delete</span> buf<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword keyword-break">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>函数会检查是否存在对应项，如果需要的话等待主进程完成并发送信息。</p>
+<h5 class="mume-header" id="setprocessid">SetProcessId</h5>
+
+<p>函数定义在 <code>process_info.cpp</code> 中，根据 config 文件的 user 项来设定子进程的 uid 以及 gid。</p>
+<pre data-role="codeBlock" data-info="json" class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"process"</span><span class="token operator">:</span><span class="token punctuation">{</span>
+        <span class="token property">"user"</span><span class="token operator">:</span><span class="token punctuation">{</span>
+            <span class="token property">"uid"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+            <span class="token property">"gid"</span><span class="token operator">:</span><span class="token number">0</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>通过调用系统调用 <code>setuid</code> 和 <code>setgid</code> 实现。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-void">void</span> <span class="token function">SetProcessId</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-auto">auto</span> process <span class="token operator">=</span> args<span class="token operator">-&gt;</span>config<span class="token punctuation">[</span><span class="token string">"process"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> user <span class="token operator">=</span> process<span class="token punctuation">[</span><span class="token string">"user"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> uid <span class="token operator">=</span> user<span class="token punctuation">[</span><span class="token string">"uid"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>uid_t<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> gid <span class="token operator">=</span> user<span class="token punctuation">[</span><span class="token string">"gid"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>uid_t<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> err <span class="token operator">=</span> <span class="token function">setuid</span><span class="token punctuation">(</span>uid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    err <span class="token operator">=</span> <span class="token function">setgid</span><span class="token punctuation">(</span>gid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><h5 class="mume-header" id="setnetworknamespace">SetNetworkNamespace</h5>
+
+<p>函数定义在 <code>network.cpp</code> 中，当 config 中的 namespace 的 network 项存在 path 时，表示有指定的 network namespace，需要切换当前子进程的 namespace。</p>
+<pre data-role="codeBlock" data-info="json" class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"linux"</span><span class="token operator">:</span><span class="token punctuation">{</span>
+        <span class="token property">"namespaces"</span><span class="token operator">:</span><span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"network"</span><span class="token punctuation">,</span>
+                <span class="token property">"path"</span><span class="token operator">:</span><span class="token string">"/var/run/netns/tiny-ce-0"</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>通过系统调用 <code>setns</code> 实现切换到指定的 namespace 功能</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-auto">auto</span> <span class="token operator">&amp;</span>ce_namespace <span class="token operator">:</span> namespaces<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>ce_namespace<span class="token punctuation">[</span><span class="token string">"type"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token string">"network"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-continue">continue</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>ce_namespace<span class="token punctuation">[</span><span class="token string">"path"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">is_null</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-auto">auto</span> path <span class="token operator">=</span> ce_namespace<span class="token punctuation">[</span><span class="token string">"path"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> fd <span class="token operator">=</span> <span class="token function">open</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> O_RDONLY <span class="token operator">|</span> O_CLOEXEC<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> err <span class="token operator">=</span> <span class="token function">setns</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> CLONE_NEWNET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><h5 class="mume-header" id="mountrootfs">MountRootfs</h5>
+
+<p>函数定义在 <code>mount.cpp</code> 中，根据 <code>pivot_root</code> 系统调用的<a href="https://man7.org/linux/man-pages/man2/pivot_root.2.html">解释</a>，为了切换根目录，需要提前进行一些操作。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-void">void</span> <span class="token function">MountRootfs</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-auto">auto</span> err <span class="token operator">=</span> <span class="token function">mount</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> MS_REC <span class="token operator">|</span> MS_PRIVATE<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    err <span class="token operator">=</span> <span class="token function">mount</span><span class="token punctuation">(</span>args<span class="token operator">-&gt;</span>resolved_rootfs<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> args<span class="token operator">-&gt;</span>resolved_rootfs<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token constant">NULL</span><span class="token punctuation">,</span> MS_BIND <span class="token operator">|</span> MS_REC<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert_perror</span><span class="token punctuation">(</span>errno<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><p>函数使用了 <code>mount</code> 系统调用，第一个 <code>mount</code> 目的是保证新的根目录和它的父级目录在当前新建的 mount namespace 下都不是 share 的，否则 <code>pivot_root</code> 调用会报错，第二个 <code>mount</code> 目的是保证新的根目录是一个挂载点，否则 <code>pivot_root</code> 同样会报错。</p>
+<h5 class="mume-header" id="mountdevice">MountDevice</h5>
+
+<p>函数定义在 <code>mount.cpp</code> 中，根据 config 文件中的 mounts 项来将每个对应的设备/文件系统等挂载到对应位置。</p>
+<pre data-role="codeBlock" data-info="json" class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"mounts"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">"destination"</span><span class="token operator">:</span> <span class="token string">"/proc"</span><span class="token punctuation">,</span>
+            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"proc"</span><span class="token punctuation">,</span>
+            <span class="token property">"source"</span><span class="token operator">:</span> <span class="token string">"proc"</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</pre><p>函数使用了 <code>mount</code> 系统调用，其中 <code>source</code> 即为配置对应项，<code>target</code> 即为新的根目录地址加上 <code>destination</code> 项，<code>fs_type</code> 即为配置项的 <code>type</code> 项，<code>flag</code> 使用 <code>MS_BIND</code> 表示当前操作为 bind 操作。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-auto">auto</span> dest <span class="token operator">=</span> entry<span class="token punctuation">[</span><span class="token string">"destination"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+dest <span class="token operator">=</span> args<span class="token operator">-&gt;</span>resolved_rootfs <span class="token operator">+</span> dest<span class="token punctuation">;</span>
+<span class="token keyword keyword-unsigned">unsigned</span> <span class="token keyword keyword-long">long</span> flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>entry<span class="token punctuation">[</span><span class="token string">"type"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">"bind"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    flag <span class="token operator">|=</span> MS_BIND<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+debug<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"mount 参数 = "</span><span class="token punctuation">,</span>
+           entry<span class="token punctuation">[</span><span class="token string">"source"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">is_null</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+           <span class="token operator">?</span> <span class="token constant">NULL</span>
+           <span class="token operator">:</span> entry<span class="token punctuation">[</span><span class="token string">"source"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+           <span class="token string">", "</span><span class="token punctuation">,</span> dest<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">", "</span><span class="token punctuation">,</span> flag<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-auto">auto</span> source <span class="token operator">=</span> entry<span class="token punctuation">[</span><span class="token string">"source"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">is_null</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token operator">?</span> <span class="token constant">NULL</span>
+    <span class="token operator">:</span> entry<span class="token punctuation">[</span><span class="token string">"source"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-auto">auto</span> target <span class="token operator">=</span> dest<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-auto">auto</span> fs_type <span class="token operator">=</span> entry<span class="token punctuation">[</span><span class="token string">"type"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">is_null</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token operator">?</span> <span class="token constant">NULL</span>
+    <span class="token operator">:</span> entry<span class="token punctuation">[</span><span class="token string">"type"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-auto">auto</span> err <span class="token operator">=</span> <span class="token function">mount</span><span class="token punctuation">(</span>source<span class="token punctuation">,</span> target<span class="token punctuation">,</span> fs_type<span class="token punctuation">,</span> flag<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">assert_perror</span><span class="token punctuation">(</span>errno<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><h5 class="mume-header" id="createdevice">CreateDevice</h5>
+
+<p>函数定义在 <code>device.cpp</code> 中，根据 config 文件中的 devices 项来创建对应设备，过程使用 <code>mknod</code> 系统调用。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-void">void</span> <span class="token function">CreateDevice</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>args<span class="token operator">-&gt;</span>config<span class="token punctuation">[</span><span class="token string">"linux"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"devices"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">is_array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-auto">auto</span> <span class="token operator">&amp;</span>device <span class="token operator">:</span> args<span class="token operator">-&gt;</span>config<span class="token punctuation">[</span><span class="token string">"linux"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"devices"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">CreateSingleDevice</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> args<span class="token operator">-&gt;</span>resolved_rootfs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>在当前测试中，由于并没有添加额外的设备，因此该中间件没有实际效果。</p>
+<h5 class="mume-header" id="createdefautdevice">CreateDefautDevice</h5>
+
+<p>函数定义在 <code>device.cpp</code> 中，根据 OCI 标准，Linux 容器无论是否创建其他设备，都需要创建默认的设备，包括如下几项：</p>
+<ul>
+<li>/dev/null</li>
+<li>/dev/zero</li>
+<li>/dev/full</li>
+<li>/dev/random</li>
+<li>/dev/urandom</li>
+<li>/dev/tty</li>
+<li>/dev/ptmx</li>
+</ul>
+<p>因此在 <code>device.cpp</code> 中我们定义了 <code>default_devices</code> 项来存储相关默认设备的信息，并通过 <code>mknod</code> 系统调用创建设备。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-void">void</span> <span class="token function">CreateDefautDevice</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-auto">auto</span> <span class="token operator">&amp;</span>device <span class="token operator">:</span> default_devices<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">CreateSingleDevice</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> args<span class="token operator">-&gt;</span>resolved_rootfs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// BindSingleDevice(device, args-&gt;resolved_rootfs);</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>设备的配置项如：</p>
+<pre data-role="codeBlock" data-info="json" class="language-json"><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">"path"</span><span class="token operator">:</span><span class="token string">"/dev/null"</span><span class="token punctuation">,</span>
+        <span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"c"</span><span class="token punctuation">,</span>
+        <span class="token property">"major"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token property">"minor"</span><span class="token operator">:</span><span class="token number">3</span><span class="token punctuation">,</span>
+        <span class="token property">"file_mode"</span><span class="token operator">:</span><span class="token string">"0666"</span><span class="token punctuation">,</span>
+        <span class="token property">"uid"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token property">"gid"</span><span class="token operator">:</span><span class="token number">0</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</pre><p>在 <code>CreateSingleDevice</code> 函数中，函数根据读取到的 <code>path</code> 加上新的根目录路径得到新的 <code>path</code>，根据 <code>type</code> 和 <code>file_mode</code> 得到调用时的 <code>mode</code> 项，并加载好对应信息。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-auto">auto</span> path <span class="token operator">=</span> rootfs <span class="token operator">+</span> device<span class="token punctuation">[</span><span class="token string">"path"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-auto">auto</span> mask <span class="token operator">=</span> device<span class="token punctuation">[</span><span class="token string">"file_mode"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-auto">auto</span> mode <span class="token operator">=</span> <span class="token function">toDeviceMode</span><span class="token punctuation">(</span>device<span class="token punctuation">[</span><span class="token string">"type"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">|</span>
+    <span class="token function">strtoul</span><span class="token punctuation">(</span>mask<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+dev_t dev <span class="token operator">=</span>
+    <span class="token function">makedev</span><span class="token punctuation">(</span>device<span class="token punctuation">[</span><span class="token string">"major"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword keyword-int64_t">int64_t</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> device<span class="token punctuation">[</span><span class="token string">"minor"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword keyword-int64_t">int64_t</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-auto">auto</span> err <span class="token operator">=</span> <span class="token function">mknod</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> mode<span class="token punctuation">,</span> dev<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>之后根据配置项是否给定 <code>uid</code> 和 <code>gid</code>，在分别调用 <code>chown</code> 系统调用改变拥有关系</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>device<span class="token punctuation">[</span><span class="token string">"uid"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">is_null</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    err <span class="token operator">=</span> <span class="token function">chown</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> device<span class="token punctuation">[</span><span class="token string">"uid"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>uid_t<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>device<span class="token punctuation">[</span><span class="token string">"gid"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">is_null</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    err <span class="token operator">=</span> <span class="token function">chown</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> device<span class="token punctuation">[</span><span class="token string">"gid"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>gid_t<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><h5 class="mume-header" id="symlinkdefault">SymlinkDefault</h5>
+
+<p>函数定义在 <code>symlink.cpp</code> 中，根据 OCI 标准，在创建容器时在 mount 后需要创建一系列的符号链接，包括</p>
+<ul>
+<li>/proc/self/fd &gt;&gt; /dev/fd</li>
+<li>/proc/self/fd/0 &gt;&gt; /dev/stdin</li>
+<li>/proc/self/fd/1 &gt;&gt; /dev/stdout</li>
+<li>/proc/self/fd/2 &gt;&gt; /dev/stderr</li>
+</ul>
+<p>同样我们将关系定义在 <code>default_symlinks</code> 中，通过 <code>symlink</code> 系统调用来完成符号链接</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-void">void</span> <span class="token function">SymlinkDefault</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-auto">auto</span> <span class="token operator">&amp;</span>link <span class="token operator">:</span> default_symlinks<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-auto">auto</span> link_path <span class="token operator">=</span> args<span class="token operator">-&gt;</span>resolved_rootfs <span class="token operator">+</span> link<span class="token punctuation">[</span><span class="token string">"linkpath"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-auto">auto</span> target <span class="token operator">=</span> link<span class="token punctuation">[</span><span class="token string">"target"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-auto">auto</span> err <span class="token operator">=</span> <span class="token function">symlink</span><span class="token punctuation">(</span>target<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> link_path<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">assert_perror</span><span class="token punctuation">(</span>errno<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><h5 class="mume-header" id="checkpivot">CheckPivot</h5>
+
+<p>定义在 <code>communication.cpp</code> 中，在切换根目录前，子进程会与主进程通信，子进程发送 <code>pivot?</code> 信息询问，当收到主进程回复的 <code>ok</code> 后开始切换过程</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-void">void</span> <span class="token function">CheckPivot</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span> <span class="token operator">*</span>check_msg <span class="token operator">=</span> <span class="token string">"pivot?"</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> write_bytes <span class="token operator">=</span> <span class="token function">write</span><span class="token punctuation">(</span>args<span class="token operator">-&gt;</span>container_receive_runtime_sock<span class="token punctuation">,</span> check_msg<span class="token punctuation">,</span>
+                             <span class="token function">strlen</span><span class="token punctuation">(</span>check_msg<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>write_bytes <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-char">char</span> <span class="token operator">*</span>buf <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token keyword keyword-char">char</span><span class="token punctuation">[</span>BUF_LEN<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> read_bytes <span class="token operator">=</span>
+        <span class="token function">read</span><span class="token punctuation">(</span>args<span class="token operator">-&gt;</span>container_receive_runtime_sock<span class="token punctuation">,</span> buf<span class="token punctuation">,</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>read_bytes <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">strcmp</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> <span class="token string">"ok"</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token string">"期望从 container.sock 接收到 ok, 意外接收到 "</span><span class="token punctuation">,</span> buf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-delete">delete</span> buf<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><h5 class="mume-header" id="pivotrootfs">PivotRootfs</h5>
+
+<p>定义在 <code>mount.cpp</code> 中，实现真正的切换根目录过程，涉及的系统调用包括 <code>chdir</code>、<code>mkdir</code>、<code>pivot_root</code>、<code>umount2</code>、<code>rmdir</code>。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-static">static</span> <span class="token keyword keyword-int">int</span> <span class="token function">pivot_root</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span> <span class="token operator">*</span>new_root<span class="token punctuation">,</span> <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span> <span class="token operator">*</span>put_old<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-return">return</span> <span class="token function">syscall</span><span class="token punctuation">(</span>SYS_pivot_root<span class="token punctuation">,</span> new_root<span class="token punctuation">,</span> put_old<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-void">void</span> <span class="token function">PivotRootfs</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-auto">auto</span> err <span class="token operator">=</span> <span class="token function">chdir</span><span class="token punctuation">(</span>args<span class="token operator">-&gt;</span>resolved_rootfs<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> old_path <span class="token operator">=</span> args<span class="token operator">-&gt;</span>resolved_rootfs <span class="token operator">+</span> <span class="token string">"/oldrootfs"</span><span class="token punctuation">;</span>
+    err <span class="token operator">=</span> <span class="token function">mkdir</span><span class="token punctuation">(</span>old_path<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0777</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    err <span class="token operator">=</span> <span class="token function">pivot_root</span><span class="token punctuation">(</span>args<span class="token operator">-&gt;</span>resolved_rootfs<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> old_path<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    err <span class="token operator">=</span> <span class="token function">chdir</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    err <span class="token operator">=</span> <span class="token function">umount2</span><span class="token punctuation">(</span><span class="token string">"./oldrootfs"</span><span class="token punctuation">,</span> MNT_DETACH<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    err <span class="token operator">=</span> <span class="token function">rmdir</span><span class="token punctuation">(</span><span class="token string">"./oldrootfs"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><ul>
+<li>切换目录到新的根目录的位置</li>
+<li>创建为了保存旧的挂载点而建立的目录 <code>oldrootfs</code></li>
+<li>调用 <code>pivot_root</code> 真正切换根目录位置</li>
+<li><code>chdir</code> 确保当前工作目录位置</li>
+<li><code>umount2</code> 卸载掉旧的挂载点</li>
+<li><code>rmdir</code> 删除临时目录</li>
+</ul>
+<h5 class="mume-header" id="sethostname">SetHostName</h5>
+
+<p>函数定义在 <code>process_info.cpp</code> 中，通过调用 <code>sethostname</code> 系统调用切换当前的 hostname。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-void">void</span> <span class="token function">SetHostName</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-auto">auto</span> hostname <span class="token operator">=</span> args<span class="token operator">-&gt;</span>config<span class="token punctuation">[</span><span class="token string">"hostname"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> err <span class="token operator">=</span> <span class="token function">sethostname</span><span class="token punctuation">(</span>hostname<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>hostname<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><h5 class="mume-header" id="setenv">SetEnv</h5>
+
+<p>函数定义在 <code>process_info.cpp</code> 中，通过调用 <code>putenv</code> 系统调用来加载 config 配置项中指定的环境变量。</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-void">void</span> <span class="token function">SetEnv</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-auto">auto</span> err <span class="token operator">=</span> <span class="token function">clearenv</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-auto">auto</span> <span class="token operator">&amp;</span>env <span class="token operator">:</span> args<span class="token operator">-&gt;</span>config<span class="token punctuation">[</span><span class="token string">"process"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"env"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-char">char</span> <span class="token operator">*</span>buf <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token keyword keyword-char">char</span><span class="token punctuation">[</span>BUF_SIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token function">strcpy</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> env<span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        err <span class="token operator">=</span> <span class="token function">putenv</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><h5 class="mume-header" id="getready">GetReady</h5>
+
+<p>函数定义在 <code>communication.cpp</code> 中，在完成上述设置后，容器已设置好环境，向主进程发送 <code>ready</code> 表示 create 过程结束，等待主进程进入 start 阶段</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-void">void</span> <span class="token function">GetReady</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span> <span class="token operator">*</span>ready_msg <span class="token operator">=</span> <span class="token string">"ready"</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> write_bytes <span class="token operator">=</span> <span class="token function">write</span><span class="token punctuation">(</span>args<span class="token operator">-&gt;</span>container_receive_runtime_sock<span class="token punctuation">,</span> ready_msg<span class="token punctuation">,</span>
+                             <span class="token function">strlen</span><span class="token punctuation">(</span>ready_msg<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>write_bytes <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><h5 class="mume-header" id="connectruntime-1">ConnectRuntime</h5>
+
+<p>由于主进程需要切换到 start 状态，因此先前建立的连接会关闭，子进程需要重新 <code>accept</code> 与主进程建立连接</p>
+<h5 class="mume-header" id="checkstart">CheckStart</h5>
+
+<p>函数定义在 <code>communication.cpp</code> 中，子进程等待主进程发送 <code>start</code> 消息，主进程发送该消息后表示允许子进程正常开始运行</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-void">void</span> <span class="token function">CheckStart</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-char">char</span> <span class="token operator">*</span>buf <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token keyword keyword-char">char</span><span class="token punctuation">[</span>BUF_LEN<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> read_bytes <span class="token operator">=</span>
+        <span class="token function">read</span><span class="token punctuation">(</span>args<span class="token operator">-&gt;</span>container_receive_runtime_sock<span class="token punctuation">,</span> buf<span class="token punctuation">,</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>read_bytes <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword keyword-auto">auto</span> str <span class="token operator">=</span> <span class="token function">string_view</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> read_bytes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">expect</span><span class="token punctuation">(</span>str <span class="token operator">==</span> <span class="token string">"start"</span><span class="token punctuation">,</span> <span class="token string">"期望从 container.sock 接收到 start, 意外接收到 "</span><span class="token punctuation">,</span>
+           buf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-delete">delete</span> buf<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><h5 class="mume-header" id="setdir">SetDir</h5>
+
+<p>函数定义在 <code>process_info.cpp</code> 中，根据 config 中的 cwd 项来将进程位置切换到对应目录</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword keyword-void">void</span> <span class="token function">SetDir</span><span class="token punctuation">(</span>ChildProcessArgs <span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-auto">auto</span> cwd <span class="token operator">=</span> args<span class="token operator">-&gt;</span>config<span class="token punctuation">[</span><span class="token string">"process"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"cwd"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> err <span class="token operator">=</span> <span class="token function">chdir</span><span class="token punctuation">(</span>cwd<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>err <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><h4 class="mume-header" id="32-libcgroups">3.2 libcgroups</h4>
+
+<p>使用 systemd 作为 cgroup 管理器。通过 systemd 创建服务，并对其进行资源控制。</p>
+<p>cgroup 管理器有 cgroupfs 和 systemd 两种，Docker 和 k8s 都建议使用 systemd 来管理资源。</p>
+<p>cgroupfs 封装了 cgroup 的原生接口，是一种虚拟文件系统，默认挂载在 <code>/sys/fs/cgroup</code> 下。</p>
+<p>systemd 是守护进程，在系统启动时以 pid 1运行，系统上运行的所有进程都是 systemd init 进程的子进程。systemd 同样封装了 cgroup 的接口。<code>systemd-cgls</code> 可以以树的形式递归显示指定 control group 的层次结构。</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash">├─1 /usr/lib/systemd/systemd --switched-root --system --deserialize <span class="token number">20</span>
+├─user.slice
+│ └─user-1000.slice
+│   └─session-1.scope
+│     ├─11459 gdm-session-worker <span class="token punctuation">[</span>pam/gdm-password<span class="token punctuation">]</span>
+│     ├─11471 gnome-session --session gnome-classic
+│     ├─11479 dbus-launch --sh-syntax --exit-with-session
+│     ├─11480 /bin/dbus-daemon --fork --print-pid <span class="token number">4</span> --print-address <span class="token number">6</span> --session
+│     <span class="token punctuation">..</span>.
+│
+└─system.slice
+  ├─systemd-journald.service
+  │ └─422 /usr/lib/systemd/systemd-journald
+  ├─bluetooth.service
+  │ └─11691 /usr/sbin/bluetoothd -n
+  ├─systemd-localed.service
+  │ └─5328 /usr/lib/systemd/systemd-localed
+  ├─colord.service
+  │ └─5001 /usr/libexec/colord
+  ├─sshd.service
+  │ └─1191 /usr/sbin/sshd -D
+  │
+  <span class="token punctuation">..</span>.
+</pre><p>Systemd 提供了三种用于资源控制的 unit 类型：service 服务、scope 范围和 slice 切片，为 cgroup 树提供统一的结构。<br>
+service：一个或一组进程，systemd 基于 unit 配置文件启动 service。服务封装了指定的进程，以便它们可以作为一组启动和停止。</p>
+<p>scope：一组外部创建的进程。scope 封装了由任意通过 fork() 函数启动和停止的进程，然后在运行时由 systemd 注册。例如，用户会话、容器和虚拟机被视为作用域。</p>
+<p>slice：一组分层组织的单元。切片不包含进程，它们组织了一个层次结构，其中放置了 scope 和 service。在这个层次树中，切片单元的每个名称都对应于层次结构中某个位置的路径。</p>
+<p>systemd 会自动在 <code>/sys/fs/cgroup/</code> 目录中挂载重要内核资源控制器的层次结构。systemd 在 <code>/sys/fs/cgroup/systemd</code> 维护自己使用的非 subsystem 的 cgroups 层级结构。</p>
+<p>方案一是直接创建一个 service，当前进程会自动加入 service，在 service 修改 Unit 文件，以完成对该 service 的资源限制。具体实现：</p>
+<p>通过 <code>vim /etc/systemd/system/service_name.service</code> 创建 service，并把要求的配置写入 unit 文件。其中，创建 service 一定需要一个可执行文件用以运行，其对应的参数例如 <code>ConditionFileIsExecutable</code> 和 <code>ExecStart</code> 等。在 systemd 中，资源限制是可选项。如何在 service 中开启呢？unit 中加入 <code>CPUAccounting=yes</code>，就开启了 cgroup 的 cpu 的资源管理统计选项，其他资源类似。需要限制 CPU 的使用时，在 unit 中加入具体限制字段即可，例如 <code>CPUQuota=40%</code>。修改完 unit 配置文件后，重新加载 service 的配置文件 <code>systemctl daemon-reload</code>，重启服务 <code>systemctl restart service_name.service</code>，即可完成对 service 的资源限制。对 cpu 的部分限制可以在 <code>mpstat -P ALL 1 3</code> 观察到效果，对 memory 的部分限制可在 <code>systemctl status service_name</code> 中看到。</p>
+<p>实现上使用 c 语言编写，使用 system 函数，将想要执行的 linux 命令传入，程序跑起来后 linux 读取到对应命令并执行。同时，使用文件操作命令，例如 <code>fopen</code> 等，直接在 linux 对应位置创建文件。</p>
+<p>但由于要求为多个进程进行同一种资源限制，service 仅对一个应用程序进行限制，不符合要求。</p>
+<h4 class="mume-header" id="33-libnetns">3.3 libnetns</h4>
+
+<p>借助 <code>ip</code> 命令来完成对 network namespace 的操作。<code>ip</code> 命令来自于 iproute2安装包。创建 network namespace<code>ip netns add network_namespace_name</code> 对于每个 network namespace，它会有自己独立的网卡、路由表、ARP 表、iptables 等和网络相关的资源。<code>ip netns exec network_namespace_name</code> 命令可以在对应的 network namespace 中执行命令，且不只是与网络相关的。默认情况下，network namespace 是不能与主机，或与其他 network namespace 通信的。</p>
+<p>libnetns 实现了方案一，但是在实际使用过程，由于需要实现容器间通信的功能，在子进程阶段创建 network namespace 会使得对应的 namespace 难以控制，因此我们实际采用方案二作为实际运行方案。</p>
+<p><strong>方案一</strong></p>
+<p>要把<strong>两个</strong>network namespace 网络连接起来，可以使用 <code>veth pair</code>。可以把 <code>veth pair</code> 当做是双向的 pipe（管道），从一个方向发送的网络数据，可以直接被另外一端接收到。使用 <code>ip link add type veth</code> 创建一对 veth pair，也可指定 vetn pair 的名字。把这对 veth pair 分别放到两个 namespace 里面 <code>ip link set DEV netns NAME</code>。最后，给这对 veth pair 配置上 ip 地址，并启用它们。最后，启用这对 veth pair<code>ip netns exec NAME ip link set DEV up</code>，配置上 ip 地址 <code>ip netns exec NAME ip addr add ip_address dev DEV</code> 。</p>
+<p>实现上使用 c 语言编写，使用 system 函数，将想要执行的 linux 命令传入，程序跑起来后 linux 读取到对应命令并执行。</p>
+<p><strong>方案二</strong></p>
+<p>通过在执行程序前运行 <code>prepare_network.sh</code>，提前创建好两个独立的 network namespace 和一个 bridge，每个 network namespace 都通过一对 veth pair 连接到 bridge 上，使得不同的 network namespace 之间能够相互通信，通过在 <code>config</code> 文件中指定要加入的 network namespace，在子进程运行阶段进入对应 namespace。</p>
+<style>
+#tab-browse-labels, #tab-browse-labels * {
+  box-sizing: border-box;
+}
+#tab-browse-labels {
+  position: relative;
+  display: flex;
+  max-width: 100%;
+  overflow: auto;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px -1.1px 0px 0px inset;
+  margin-bottom:10px;
+  --md-indicator-x: 0px;
+  --md-indicator-width: 92px;
+}
+#tab-browse-labels:before {
+  background: rgb(82, 108, 254);
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 0;
+  position: absolute;
+  transform: translateX(var(--md-indicator-x));
+  transition: width 225ms, transform .25s;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  width: var(--md-indicator-width);
+}
+#tab-browse-label-1,#tab-browse-label-2,#tab-browse-label-3,#tab-browse-label-4 {
+  border-bottom: 0.1rem solid transparent;
+  border-radius: 0.1rem 0.1rem 0 0;
+  color: var(--md-default-fg-color--light);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0.78125em 1.25em 0.625em;
+  scroll-margin-inline-start: 1rem;
+  transition: background-color .25s,color .25s;
+  white-space: nowrap;
+  width: 92px;
+}
+</style>
+<script>
+(() => {
+  const d = document;
+  const root = d.getElementById("tab-browse-labels");
+  const labels = [1, 2, 3, 4].map(i => d.getElementById('tab-browse-label-' + i));
+  const divs = [1, 2, 3, 4].map(i => d.getElementById('tab-browse-' + i));
+  let curr = 0;
+  
+  labels.forEach((el, i) => { el.onclick = () => {click(i)} } );
+  function click(i) {
+    divs.forEach(d => d.style.display = "none");
+    divs[i].style.display = "block";
+    labels.forEach(d => d.style.color = "rgba(0, 0, 0, 0.54)");
+    labels[i].style.color = "rgb(82, 108, 254)";
+    root.style.setProperty("--md-indicator-x", 92 * i + "px");
+  }
+})();
+</script>
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  </body></html>

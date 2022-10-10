@@ -4,14 +4,15 @@ use nix::{
     sys::socket::{bind, connect, listen, socket, AddressFamily, SockAddr, SockFlag, SockType},
     unistd::{close, read, write},
 };
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 pub struct IpcParent {
     fd: i32,
-    sock_path: String,
+    sock_path: PathBuf,
 }
+
 impl IpcParent {
-    pub fn new(path: &String) -> IpcParent {
+    pub fn new(path: &Path) -> IpcParent {
         let socket_raw_fd = socket(
             AddressFamily::Unix,
             SockType::SeqPacket,
@@ -19,14 +20,16 @@ impl IpcParent {
             None,
         )
         .unwrap();
-        let sockaddr = SockAddr::new_unix(Path::new(path)).unwrap();
+        let sockaddr = SockAddr::new_unix(path).unwrap();
         bind(socket_raw_fd, &sockaddr).expect("无法创建 UNIX socket");
         listen(socket_raw_fd, 10).unwrap();
+
         IpcParent {
             fd: socket_raw_fd,
-            sock_path: path.clone(),
+            sock_path: path.into(),
         }
     }
+
     pub fn wait(&self) -> String {
         let child_socket = nix::sys::socket::accept(self.fd).unwrap();
         let mut buf = [0; 1024];
@@ -36,6 +39,7 @@ impl IpcParent {
             .trim()
             .to_string()
     }
+
     pub fn close(&self) {
         close(self.fd).unwrap();
         std::fs::remove_file(&self.sock_path).unwrap();
@@ -68,29 +72,12 @@ impl IpcParent {
 
 pub struct IpcChannel {
     fd: i32,
-    sock_path: String,
+    sock_path: PathBuf,
     _client: Option<i32>,
 }
-impl IpcChannel {
-    // pub fn new(path: &String) -> IpcChannel {
-    //     let socket_raw_fd = socket(
-    //         AddressFamily::Unix,
-    //         SockType::SeqPacket,
-    //         SockFlag::SOCK_CLOEXEC,
-    //         None,
-    //     )
-    //     .unwrap();
-    //     let sockaddr = SockAddr::new_unix(Path::new(path)).unwrap();
-    //     bind(socket_raw_fd, &sockaddr).unwrap();
-    //     listen(socket_raw_fd, 10).unwrap();
-    //     IpcChannel {
-    //         fd: socket_raw_fd,
-    //         sock_path: path.clone(),
-    //         _client: None,
-    //     }
-    // }
 
-    pub fn connect(path: &String) -> IpcChannel {
+impl IpcChannel {
+    pub fn connect(path: &Path) -> IpcChannel {
         let socket_raw_fd = socket(
             AddressFamily::Unix,
             SockType::SeqPacket,
@@ -102,15 +89,10 @@ impl IpcChannel {
         connect(socket_raw_fd, &sockaddr).unwrap();
         IpcChannel {
             fd: socket_raw_fd,
-            sock_path: path.clone(),
+            sock_path: path.into(),
             _client: None,
         }
     }
-
-    // pub fn accept(&mut self) {
-    //     let child_socket_fd = nix::sys::socket::accept(self.fd).unwrap();
-    //     self._client = Some(child_socket_fd);
-    // }
 
     pub fn send(&self, msg: &str) {
         let fd = match self._client {
@@ -135,7 +117,6 @@ impl IpcChannel {
             .to_string()
     }
 
-    #[allow(dead_code)]
     pub fn send_recv(&self, msg: &str) -> String {
         self.send(msg);
         self.recv()

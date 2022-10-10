@@ -1,33 +1,36 @@
-use crate::container::{config::Namespace, ContainerConfig};
 use nix::unistd::Pid;
-use std::{path::{PathBuf, Path}, fs};
+use std::{
+    fs,
+    path::{Path, PathBuf},
+};
+use oci_spec::runtime::{Spec, LinuxNamespace, LinuxNamespaceType, LinuxIdMapping};
 
-use super::config::UgidMapping;
-
-fn extract_userns_from_config(config: &ContainerConfig) -> Option<&Namespace> {
-    config
-        .linux
+fn extract_userns_from_config(spec: &Spec) -> Option<&LinuxNamespace> {
+    spec
+        .linux()
         .as_ref()
         .unwrap()
-        .namespaces
+        .namespaces()
+        .as_ref()
+        .unwrap()
         .iter()
-        .filter(|ns| ns.namespace == "user")
+        .filter(|ns| ns.typ() == LinuxNamespaceType::User)
         .next()
 }
 
-pub fn should_setup_mapping(config: &ContainerConfig) -> bool {
+pub fn should_setup_mapping(config: &Spec) -> bool {
     let user_namespace = extract_userns_from_config(config);
-    user_namespace.is_some() && user_namespace.unwrap().path.is_none()
+    matches!(user_namespace, Some(x) if x.path().is_none())
 }
 
-pub fn setup_mapping(config: &ContainerConfig, pid: &Pid) {
-    let config_linux = config.linux.as_ref().unwrap();
-    let uid_mappings = config_linux
-        .uid_mappings
+pub fn setup_mapping(config: &Spec, pid: &Pid) {
+    let spec_linux = config.linux().as_ref().unwrap();
+    let uid_mappings = spec_linux
+        .uid_mappings()
         .as_ref()
         .expect("使用 user namespace (未指定 path), 但 uid mapping 为空.");
-    let gid_mappings = config_linux
-        .gid_mappings
+    let gid_mappings = spec_linux
+        .gid_mappings()
         .as_ref()
         .expect("使用 user namespace (未指定 path), 但 gid mapping 为空.");
     if uid_mappings.len() != 1 {
@@ -44,9 +47,10 @@ pub fn setup_mapping(config: &ContainerConfig, pid: &Pid) {
     write_id_mapping(&gid_path.as_path(), gid_mappings);
 }
 
-fn write_id_mapping(map_path: &Path, mappings: &Vec<UgidMapping>) {
-    let mapping_str = mappings.first().map(|m| {
-        format!("{} {} {}", m.container_id, m.host_id, m.size)
-    }).unwrap();
+fn write_id_mapping(map_path: &Path, mappings: &Vec<LinuxIdMapping>) {
+    let mapping_str = mappings
+        .first()
+        .map(|m| format!("{} {} {}", m.container_id(), m.host_id(), m.size()))
+        .unwrap();
     fs::write(map_path, mapping_str).expect("写入 uid 或 gid mapping 失败");
 }

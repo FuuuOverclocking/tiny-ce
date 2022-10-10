@@ -21,7 +21,8 @@ void CheckUserMapping(ChildProcessArgs *args) {
                 auto read_bytes = read(args->container_receive_runtime_sock,
                                        buf, sizeof(buf));
                 expect(read_bytes != -1, "read container.sock 时发生错误");
-                expect(strcmp(buf, "mapped") == 0,
+                auto str = string_view(buf, read_bytes);
+                expect(str == "mapped",
                        "期望从 container.sock 接收到 mapped, 意外接收到 ", buf);
                 delete buf;
             }
@@ -39,8 +40,9 @@ void CheckPivot(ChildProcessArgs *args) {
     auto read_bytes =
         read(args->container_receive_runtime_sock, buf, sizeof(buf));
     assert(read_bytes != -1);
-    expect(strcmp(buf, "ok") == 0,
-           "期望从 container.sock 接收到 ok, 意外接收到 ", buf);
+    auto str = string_view(buf, read_bytes);
+    expect(str == "ok", "期望从 container.sock 接收到 ok, 意外接收到 ", buf);
+
     delete buf;
 }
 

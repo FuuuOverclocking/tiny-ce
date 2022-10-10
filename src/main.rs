@@ -1,5 +1,5 @@
 use chrono;
-use std::{env, fs};
+use std::{env, fs, path::Path};
 use tiny_ce::{create, delete, start, CONTAINER_ROOT_PATH};
 
 fn main() {
@@ -25,7 +25,7 @@ fn main() {
         "Example: 在 test/centos 下制作容器的 rootfs 并启动",
         "  $ cd ./test/centos && mkdir rootfs",
         "  $ docker export $(docker create centos:centos7.9.2009) | tar -C rootfs -xvf -",
-        "  $ <somewhere>/tiny-ce cs ./",
+        "  $ tiny-ce cs ./",
     ]
     .join("\n");
     println!("{}", help);
@@ -38,13 +38,13 @@ fn create_start_centos(bundle: &String) {
     let container_path = format!("{}/{}", CONTAINER_ROOT_PATH, container_id);
 
     println!("启动和创建容器:");
-    println!("    bundle = {}", bundle);
-    println!("    id = {}", container_id);
-    println!("    容器临时文件路径 = {}", container_path);
+    println!("  · bundle = {}", bundle);
+    println!("  · id = {}", container_id);
+    println!("  · 容器临时文件路径 = {}", container_path);
     println!();
 
     println!("创建中...");
-    create(&container_id, &bundle);
+    create(&container_id, Path::new(bundle.as_str()));
 
     println!("启动中...");
     start(&container_id);
