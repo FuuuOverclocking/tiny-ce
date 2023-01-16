@@ -26,6 +26,8 @@ cd tiny-ce
 
 ## 测试一下
 
+测试报告：https://fuuuoverclocking.github.io/tiny-ce/report.html
+
 我们在 [test/centos/](test/centos/) 下提供了一个测试容器, 运行以下命令可测试.
 
 ⚠️ 需要 root 权限以运行, 将调用 sudo.
